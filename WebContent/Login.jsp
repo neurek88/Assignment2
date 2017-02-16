@@ -35,7 +35,7 @@ function validate(form)
 
 <form action=Login method="post">
 
-User Name: <input type=text name=userName value="${cookie.userName.value}"><br>
+Username: <input type=text name=userName value="${cookie.userName.value}"><br>
 Password: <input type=password name=password><br>
 <input type=submit value=Login onClick="validate(this.form)"> <br> 
 <input type="checkbox" id="cbox" name="cbox" value="userCheckbox"> <label for="cbox">Remember Me:</label>
