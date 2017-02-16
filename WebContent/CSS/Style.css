@@ -1,0 +1,90 @@
+@CHARSET "ISO-8859-1";
+
+h2{color:#000080;
+font-size: 90%;}
+h3{color:#000080;
+font-size: 85%; }
+body {
+    background-color: #acbbec;
+    font-family: ("Arial", Helvetica, sans-serif);
+    
+}
+.a {color:#0000a0; }
+.b {color:lightblue; }
+.c {color:lightblue; 
+	text-align: center;}
+
+table, th, td {
+ border: 1px solid white;
+   
+    
+}
+
+th, td {
+    padding: 9px;
+    text-align: Center;
+    background-color: white;
+}
+tr:hover {background-color: lightblue}
+
+input[type=text], select {
+    padding: 6px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 2px solid Cyan;
+   
+}
+input[type=password], select {
+    padding: 6px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 2px solid #0080ff;
+  
+}
+input[type=submit] {
+     color: White;
+    background-color: #0080ff;
+   
+    padding: 10px 17px;
+ 	 margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type=submit]:hover {
+    background-color: #1d80c9;
+}
+#navigation ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+}
+
+#navigation li {
+    float: left;
+}
+li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+li a.active {
+    color: white;
+    background-color: #1d80c9;
+}
