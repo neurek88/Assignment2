@@ -16,14 +16,13 @@ import java.util.Properties;
 
 public class ProductQA {
 	
-	private String userName;
-	private String password;
+	private int Id;
 	
-	public String getUserName() {
-		return userName;
+	public int getUserId() {
+		return Id;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserId(int Id) {
+		this.Id = Id;
 	}
 	public String getPassword() {
 		return password;

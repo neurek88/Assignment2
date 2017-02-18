@@ -15,15 +15,14 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class CustomerReviews {
+
+	private int Id;
 	
-	private String userName;
-	private String password;
-	
-	public String getUserName() {
-		return userName;
+	public int getUserId() {
+		return Id;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserId(int Id) {
+		this.Id = Id;
 	}
 	public String getPassword() {
 		return password;

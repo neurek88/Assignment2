@@ -18,7 +18,14 @@ public class Users {
 	
 	private String userName;
 	private String password;
+	private int Id;
 	
+	public int getUserId() {
+		return Id;
+	}
+	public void setUserId(int Id) {
+		this.Id = Id;
+	}
 	public String getUserName() {
 		return userName;
 	}
