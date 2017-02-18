@@ -22,7 +22,7 @@ public class CancelOrders extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Register() {
+    public CancelOrders() {
         super();
         // TODO Auto-generated constructor stub
     }

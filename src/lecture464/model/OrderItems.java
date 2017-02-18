@@ -14,7 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Users {
+public class OrderItems {
 	
 	private String userName;
 	private String password;
@@ -31,88 +31,13 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Users(String userName, String password) {
+	public OrderItems(String userName, String password) {
 		super();
 		this.userName = userName;
 		this.password = password;
 	}
 	
-	public void registerUser(Users aUser, String propFilePath) {
-		
-		Properties p = new Properties();
-		FileInputStream fis = null;
-		
-		try {
-			fis = new FileInputStream(propFilePath);
-			p.load(fis);
-			p.setProperty(aUser.getUserName(), aUser.getPassword());
-			p.store(new FileOutputStream(propFilePath), null);
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if(fis!=null) {
-				try {
-					fis.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-	}
 	
-	// validateUser
-	public boolean validateUser(Users aUser, String propFilePath){
-		boolean success = true;
-		Properties p = new Properties();
-		FileInputStream fis = null;
-		
-		try {
-			fis = new FileInputStream(propFilePath);
-			
-			p.load(fis);
-				
-			// Check whether the username exists or not
-			if(!p.containsKey(aUser.getUserName())) {			
-				// Link-redirection
-				success = false;
-			} else { // Check whether the password matches or not
-				String pword = p.getProperty(aUser.getUserName());  
-				if(!pword.equals(aUser.getPassword())) {
-					success = false; // Link-redirection
-				} else {
-					success = true; // Link-redirection
-				}
-				System.out.println(success);
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			success = false;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			success = false;
-		} finally {
-				if(fis!=null) {
-					try {
-						fis.close();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-		}
-		//First check whether the user already exists via methods from Users class
-		 	
-	// removeUser
-	}
-		return success;
-	}
 }
 	
 
