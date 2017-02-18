@@ -28,8 +28,9 @@ public class LogOut extends HttpServlet {
 		// TODO Auto-generated method stub	
 		 HttpSession session = request.getSession();
 		 session.removeAttribute("sessionBean");
+		 session.removeAttribute("UserName");
 		 //session.invalidate();
-		 response.sendRedirect("input.jsp");		 
+		 response.sendRedirect("Login.jsp");		 
 	}
 
 	/**

@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ProductSearchQuery
  */
-public class ProductSearchQuery extends HttpServlet {
+public class ProductSearchResults extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductSearchQuery() {
+    public ProductSearchResults() {
         super();
         // TODO Auto-generated constructor stub
     }
