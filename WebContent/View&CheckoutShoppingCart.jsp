@@ -40,7 +40,7 @@
                 <td>10</td>
                 <td>$10</td>
                 <td>Estimated delivery date</td>
-                <td><a href="delete.java">delete?</a></td>
+                <td><a href="UpdateShoppingCart.java">delete?</a></td>
             	</tr>
             <tr>
             	<td><a href="CustomerTransaction.jsp"> Check Out </a></td>
