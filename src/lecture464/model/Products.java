@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Response;
 
+import lecture.mvcel.BankCustomer;
+import lecture.mvcel.HashMap;
+import lecture.mvcel.String;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,7 +40,24 @@ public class Products {
 		this.password = password;
 	}
 	
-
+	  static {
+		    product = new HashMap<String, BankCustomer>();
+		    product.put("id001",
+		                  new BankCustomer("id001",
+		                                   "John",
+		                                   "Hacker",
+		                                   -3456.78));
+		    product.put("id002",
+		                  new BankCustomer("id002",
+		                                   "Jane",
+		                                   "Hacker",
+		                                   1234.56));
+		    product.put("id003",
+		                  new BankCustomer("id003",
+		                                   "Juan",
+		                                   "Hacker",
+		                                   987654.32));
+		  }
 }
 	
 

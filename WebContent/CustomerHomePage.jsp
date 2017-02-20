@@ -25,7 +25,7 @@
 
 <h2>Please search our secret database</h2><br>
 
-<form action= ContentTypeServlet method="post">
+<form action= ProductSearchQuery method="post">
 Category:
  <select name="input">
     <option value="food">food</option>
