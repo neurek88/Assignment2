@@ -33,6 +33,7 @@ public class Register extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
+		String email = request.getParameter("email");
 		
 		/* The users.properties file is stored in the "WEB-INF" folder.
 		   To access this file, you will need its absolute path. */

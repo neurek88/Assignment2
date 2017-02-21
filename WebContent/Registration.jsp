@@ -19,6 +19,7 @@
 
 User Name: <input type=text name=userName><br>
 Password: <input type=password name=password><br>
+Email: <input type=email name=email><br>
 <input type=submit value=Register> <br> 
 
 </form>

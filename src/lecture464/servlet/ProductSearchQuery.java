@@ -5,6 +5,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import java.sql.*;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
+
 
 /**
  * Servlet implementation class ProductSearchQuery
@@ -25,35 +30,9 @@ public class ProductSearchQuery extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		String pid = request.getParameter("search");
-		
-		response.setHeader("Refresh", "2; URL=ProductSearchResults.jsp");
-		
-        response.setContentType("text/html");
-		
-		PrintWriter out = response.getWriter();
-	    
-	    String docType =
-	    	      "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " +
-	    	      "Transitional//EN\">\n";
-	    	    String title = "Splash Screen";
-	    	    out.println
-	    	      (docType +
-	    	       "<HTML>\n" +
-	    	       "<HEAD><TITLE>" + title + "</TITLE></HEAD>\n" +
-	    	       "<BODY BGCOLOR=\"#FDF5E6\">\n" +
-	    	       "<H1 ALIGN=\"CENTER\">" + title + "</H1>\n");
-	    	    
-	    	        out.println("<H2> Search Results are Being Processed</H2>");
-	    	   
-	    	    out.println("</BODY></HTML>");
-	        
-	    out.close();
-	
+		String pid = request.getParameter("search");	
 	    Connection conn = null;
-        String url = "jdbc:mysql://localhost:8080/";
+        String url = "jdbc:mysql://localhost:8080/WBSW_FixedTables/WEB-INF/CSCE464OnlineShoppingDB.sql";
         String dbName = "dbname";
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
@@ -90,7 +69,7 @@ public class ProductSearchQuery extends HttpServlet {
             }
  
             request.setAttribute("piList", pid_list);
-            RequestDispatcher view = request.getRequestDispatcher("/ProductSearchResults.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("ProductSearchResults.jsp");
             view.forward(request, response);
             conn.close();
             System.out.println("Disconnected!");

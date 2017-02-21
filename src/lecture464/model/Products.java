@@ -29,6 +29,10 @@ public class Products {
 	private int AvailableQuantity;
 	private int EstimatedDeliveryDays;
 	private int SellerId;
+	private String ProductPhotoLinks;
+	private String ProductPhotosLinks;
+	private String ProductVideosLinks;
+	private String ProductThumbnail;
 	
 	public int getUserId() {
 		return Id;
@@ -36,19 +40,13 @@ public class Products {
 	public void setUserId(int Id) {
 		this.Id = Id;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public Products(String userName, String password) {
+
+	public Products() {
 		super();
-		this.userName = userName;
-		this.password = password;
+
 	}
 	
-	  static {
+	/*  static {
 		    product = new HashMap<String, BankCustomer>();
 		    product.put("id001",
 		                  new BankCustomer("id001",
@@ -66,7 +64,7 @@ public class Products {
 		                                   "Hacker",
 		                                   987654.32));
 		  }
-
+*/
 }
 	
 
