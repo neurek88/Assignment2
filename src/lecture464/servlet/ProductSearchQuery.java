@@ -5,6 +5,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import lecture464.model.Products;
+
+import java.io.PrintWriter;
+import java.sql.*;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Servlet implementation class ProductSearchQuery
@@ -25,10 +39,20 @@ public class ProductSearchQuery extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		String productName = request.getParameter("search");
-		
-	}
+		HttpSession session = request.getSession();
+		String pid = request.getParameter("search");	
+		session.setAttribute("search", pid);
+		Products productSearch = new Products();
+        try {
+        	productSearch.SearchProducts(pid);
+        	request.setAttribute("piList", productSearch.getList());
+            RequestDispatcher view = request.getRequestDispatcher("ProductSearchResults.jsp");
+            view.forward(request, response);
+            System.out.println("Disconnected!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

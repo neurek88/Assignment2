@@ -12,11 +12,21 @@ import javax.xml.ws.Response;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Properties;
 
 public class Orders {
-
+	
 	private int Id;
+	private int OrderId;
+	private int SellerId;
+	private int ProductId;
+	private int ProductPrice;
+	private int Quantity;
+	private int ShippingStatus;
+	private int ShippingRefNo;
+	private int Status;
+	
 	
 	public int getUserId() {
 		return Id;
@@ -24,18 +34,39 @@ public class Orders {
 	public void setUserId(int Id) {
 		this.Id = Id;
 	}
-	public String getPassword() {
-		return password;
+	public int getQuantity() {
+		return Quantity;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setQuantity(int qty) {
+		this.Quantity = qty;
 	}
-	public Orders(String userName, String password) {
+	public Orders(int Id, int qty) {
 		super();
-		this.userName = userName;
-		this.password = password;
+		this.Id = Id;
+		this.Quantity = qty;
 	}
+	
+/*	private static HashMap<int, Id> orders;
 
+	  static {
+		  orders = new HashMap<String, Customer>();
+		  orders.put("id001",
+	                  new BankCustomer("id001",
+	                                   "John",
+	                                   "Hacker",
+	                                   -3456.78));
+		  orders.put("id002",
+	                  new BankCustomer("id002",
+	                                   "Jane",
+	                                   "Hacker",
+	                                   1234.56));
+		  orders.put("id003",
+	                  new BankCustomer("id003",
+	                                   "Juan",
+	                                   "Hacker",
+	                                   987654.32));
+	  }
+*/	
 }
 	
 

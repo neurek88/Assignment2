@@ -14,9 +14,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class CreditCards {
+public class Transactions {
 
 	private int Id;
+	private double creditCard;
+	private double creditCardBal;
+	
 	
 	public int getUserId() {
 		return Id;
@@ -24,18 +27,17 @@ public class CreditCards {
 	public void setUserId(int Id) {
 		this.Id = Id;
 	}
-	public String getPassword() {
-		return password;
+	public double getCreditCard() {
+		return creditCard;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setBalance (double balance) {
+		creditCardBal = balance;
 	}
-	public CreditCards(String userName, String password) {
+	public Transactions(int Id, double creditCard) {
 		super();
-		this.userName = userName;
-		this.password = password;
+		this.Id = Id;
+		this.creditCard = creditCard;
 	}
-	
 
 }
 	

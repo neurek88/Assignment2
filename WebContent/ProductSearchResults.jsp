@@ -35,6 +35,10 @@
                 <td><b>View Product</b></td>
                 <td><b>Add to Cart</b></td>
            </tr>
+                <td>${sessionScope.pList.get(0)}</td>
+                <td>${sessionScope.pList.get(1)}</td>
+                <td>${sessionScope.pList.get(2)}</td>
+                <td>${sessionScope.pList.get(3)}</td>
            <tr>
            		<td>Virtual Toast</td>
            		<td>food</td>
