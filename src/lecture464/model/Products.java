@@ -2,16 +2,23 @@ package lecture464.model;
 
 import java.io.FileInputStream;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 	
 import java.io.FileNotFoundException;
@@ -33,6 +40,7 @@ public class Products {
 	private String ProductPhotosLinks;
 	private String ProductVideosLinks;
 	private String ProductThumbnail;
+	private ArrayList pid_list;
 	
 	public int getUserId() {
 		return Id;
@@ -45,7 +53,57 @@ public class Products {
 		super();
 
 	}
+	public void SearchProducts(String pid){
+		Connection conn = null;
+		String url = "jdbc:mysql://cse.unl.edu:3306/neurek";
+		String dbName = "Users";
+		String driver = "com.mysql.jdbc.Driver";
+		String userName = "neurek";
+		String password = "kVT:6R";
+
+    
+    Statement st;
+    try {
+        Class.forName(driver).newInstance();
+        conn = DriverManager.getConnection(url + dbName, userName, password);
+        System.out.println("Connected!");
+
+        ArrayList al = null;
+        ArrayList pid_list = new ArrayList();
+        String query = "select * from Products where ProductName='" + pid + "' ";
+
+        System.out.println("query " + query);
+        st = conn.createStatement();
+        ResultSet rs = st.executeQuery(query);
+
+        while (rs.next()) {
+            al = new ArrayList();
+
+//            out.println(rs.getString(1));
+//            out.println(rs.getString(2));
+//            out.println(rs.getString(3));
+//            out.println(rs.getString(4));
+            al.add(rs.getString(1));
+            al.add(rs.getString(2));
+            al.add(rs.getString(3));
+            al.add(rs.getString(4));
+            
+
+            System.out.println("al :: " + al);
+            pid_list.add(al);
+        }
+        conn.close();
+        System.out.println("Disconnected!");
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+   }
 	
+	 public ArrayList getList()
+	 {
+	     
+	     return pid_list;
+	 }
 	/*  static {
 		    product = new HashMap<String, BankCustomer>();
 		    product.put("id001",
