@@ -20,7 +20,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
-	
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -55,16 +54,16 @@ public class Products {
 	}
 	public void SearchProducts(String pid){
 		Connection conn = null;
-		String url = "jdbc:mysql://cse.unl.edu:3306/neurek";
-		String dbName = "Users";
+		String url = "jdbc:mysql://cse.unl.edu:3306/rhooper";
+		String dbName = "rhooper";
 		String driver = "com.mysql.jdbc.Driver";
-		String userName = "neurek";
-		String password = "kVT:6R";
+		String userName = "rhooper";
+		String password = "An6-vN";
 
     
     Statement st;
     try {
-        Class.forName(driver).newInstance();
+    	Class.forName("com.mysql.jdbc.Driver");	
         conn = DriverManager.getConnection(url + dbName, userName, password);
         System.out.println("Connected!");
 
