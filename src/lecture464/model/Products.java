@@ -54,19 +54,9 @@ public class Products {
 
 	}
 	public void SearchProducts(String pid){
-		Connection conn = null;
-		String url = "jdbc:mysql://cse.unl.edu:3306/neurek";
-		String dbName = "Users";
-		String driver = "com.mysql.jdbc.Driver";
-		String userName = "neurek";
-		String password = "kVT:6R";
-
-    
+	Connection conn = null;
     Statement st;
     try {
-        Class.forName(driver).newInstance();
-        conn = DriverManager.getConnection(url + dbName, userName, password);
-        System.out.println("Connected!");
 
         ArrayList al = null;
         ArrayList pid_list = new ArrayList();

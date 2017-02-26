@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import lecture464.model.Products;
+import lecture464.model.DBAccessClass;
 
 import java.io.PrintWriter;
 import java.sql.*;
@@ -42,12 +43,15 @@ public class ProductSearchQuery extends HttpServlet {
 		HttpSession session = request.getSession();
 		String pid = request.getParameter("search");	
 		session.setAttribute("search", pid);
+		DBAccessClass db = new DBAccessClass();
+		db.connectMeIn();
 		Products productSearch = new Products();
         try {
         	productSearch.SearchProducts(pid);
         	request.setAttribute("piList", productSearch.getList());
             RequestDispatcher view = request.getRequestDispatcher("ProductSearchResults.jsp");
             view.forward(request, response);
+            db.closeConnection();
             System.out.println("Disconnected!");
         } catch (Exception e) {
             e.printStackTrace();
