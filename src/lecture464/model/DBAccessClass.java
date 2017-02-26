@@ -1,7 +1,5 @@
 package lecture464.model;
 
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,13 +16,13 @@ public class DBAccessClass {
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	//static final String DB_URL = "jdbc:mysql://localhost/EMP"; 
-	final String DB_URL = "jdbc:mysql://cse.unl.edu:3306/neurek";
+	final String DB_URL = "jdbc:mysql://cse.unl.edu:3306/rhooper";
 	
 	
 
 	//  Database credentials
-	static final String USER = "neurek"; // Replace with your CSE_LOGIN
-	static final String PASS = "kVT:6R";   // Replace with your CSE MySQL_PASSWORD
+	static final String USER = "rhooper"; // Replace with your CSE_LOGIN
+	static final String PASS = "An6-vN";   // Replace with your CSE MySQL_PASSWORD
 	
 /*	public void createEmployeeTable() {
 		  
