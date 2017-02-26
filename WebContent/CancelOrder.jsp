@@ -43,9 +43,7 @@
             	<td><img src="VirtualToast.jpg" alt="VirtualToast" style="width:25px;height:25px;"></td>
             	<td><a href="ManageOrder.jsp"> No </a></td>
             	<td><a href="CancellationConfirmation.jsp"> Yes </a></td>
-            <%@ page import="java.io.*" %>
-           <%@ page import="java.io.ObjectOutputStream" %>
-           <%@ page import="java.io.FileOutputStream" %>
+
            </tr>
            </table>
            </form>

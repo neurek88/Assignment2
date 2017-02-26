@@ -27,12 +27,14 @@
 
 <form action= ProductSearchQuery method="post">
 Category:
- <select name="input">
+
+ <select name="category">
     <option value="Food">Food</option>
     <option value="Fancy">Fancy</option>
     <option value="Funny">Funny</option>
+
   </select>
-Your Query: <input type=text name=searchQuery><input type=submit value="Search"> <br> 
+Your Query: <input type=text name=search><input type=submit value="search"> <br> 
 
 </form>
 
