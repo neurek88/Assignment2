@@ -94,6 +94,7 @@ public class DBAccessClass {
 		try {
 			 //Open a connection
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			System.out.println("connected to SQL");
 		} catch (SQLException e){
 			e.printStackTrace();
 		}
@@ -121,10 +122,33 @@ public class DBAccessClass {
 	     }
 		 return salary;
 	}
+	public int SearchProductInfo(String pid){
+    String query = "SELECT * FROM Products WHERE ProductName LIKE ?";
+    int ProductId = 0;
+    try {
+    	
+        ps = conn.prepareStatement(query);
+        ps.setString(1, "%" + pid + "%");
+        
+        ResultSet rs = ps.executeQuery();
+        System.out.println("query " + query);
+        
+		  while(rs.next()){
+			    //Retrieve by column name
+				ProductId = rs.getInt("Id");
+		  }
+		  System.out.println(ProductId);
+            
+    } catch (Exception e) {
+        e.printStackTrace();
+    } 
+    return ProductId;
+}
 	
 	public void closeConnection(){
 		try {
 			conn.close();
+			System.out.println("Disconnected from mySQL");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

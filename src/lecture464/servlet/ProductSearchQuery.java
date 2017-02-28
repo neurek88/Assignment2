@@ -43,19 +43,16 @@ public class ProductSearchQuery extends HttpServlet {
 		HttpSession session = request.getSession();
 		String pid = request.getParameter("search");	
 		session.setAttribute("search", pid);
-		DBAccessClass db = new DBAccessClass();
-		db.connectMeIn();
 		Products productSearch = new Products();
         try {
-        	productSearch.SearchProducts(pid);
-        	request.setAttribute("piList", productSearch.getList());
+        	productSearch.setProductId(pid);
+        	request.setAttribute("piList", productSearch.getProductId());
             RequestDispatcher view = request.getRequestDispatcher("ProductSearchResults.jsp");
             view.forward(request, response);
-            db.closeConnection();
-            System.out.println("Disconnected!");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(productSearch.getProductId());
     }
 
 	/**
