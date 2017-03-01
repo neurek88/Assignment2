@@ -1,4 +1,4 @@
-`<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -35,10 +35,15 @@
                 <td><b>View Product</b></td>
                 <td><b>Add to Cart</b></td>
            </tr>
-                <td>${sessionScope.pList.get(0)}</td>
-                <td>${sessionScope.pList.get(1)}</td>
-                <td>${sessionScope.pList.get(2)}</td>
-                <td>${sessionScope.pList.get(3)}</td>
+           <tr>
+                <td>${sessionScope.piList[0].getProductName()}</td>
+                <td>${sessionScope.piList[0].getProductCategory()}</td>
+                <td>${sessionScope.piList[0].getSellerId()}</td>
+                <td>${sessionScope.piList[0].getPrice()}</td>
+                <td>${sessionScope.piList[0].getProductThumbnail()}</td>
+                <td>${sessionScope.piList[0].getPrice()}</td>
+                <td>${sessionScope.piList[0].getPrice()}</td>
+                </tr>
            <tr>
            		<td>Virtual Toast</td>
            		<td>food</td>
@@ -47,37 +52,7 @@
             	<td><img src="VirtualToast.jpg" alt="VirtualToast" style="width:25px;height:25px;"></td>
             	<td><a href="ViewProductDetails.jsp"> Details </a></td>
             	<td><a href="View&CheckoutShoppingCart.jsp"> Add to Cart </a></td>
-            <%@ page import="java.io.*" %>
-           <%@ page import="java.io.ObjectOutputStream" %>
-           <%@ page import="java.io.FileOutputStream" %>
-  <%--         <% 
- String fName = "/WEB-INF/convertcsv";
- String thisLine; 
- int count=0; 
- FileInputStream fis = new FileInputStream(fName);
- DataInputStream myInput = new DataInputStream(fis);
- int i=0; 
-
-while ((thisLine = myInput.readLine()) != null)
-{
-String strar[] = thisLine.split(",");
-%><tr><%
-for(int j=0;j<strar.length;j++)
- {
-if(i!=0) 
- {
-out.print("<td> " +strar[j]+ "</td> ");
- }
-else
-{
-out.print(" <td> <b>" +strar[j]+ "</b> </td> ");
-}
-i++;
-} 
-%></tr><%
-} 
- %>
-    --%>     </table> 
+   </table> 
 </form>
 
 <br>
