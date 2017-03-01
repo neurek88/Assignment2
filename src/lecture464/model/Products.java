@@ -23,7 +23,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
-	
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -90,6 +89,7 @@ public class Products {
 	public void setPrice(double price) {
 		Price = price;
 	}
+
 	public int getAvailableQuantity() {
 		return AvailableQuantity;
 	}
@@ -109,6 +109,9 @@ public class Products {
 		ProductThumbnail = productThumbnail;
 	}
 	public void SearchProductInfo(String pid){
+    
+	public void SearchProducts(String pid){
+  
 	Connection conn = null;
 	PreparedStatement ps = null;
     Statement st;
