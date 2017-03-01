@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import lecture464.model.Users;
+
 
 public class DBAccessClass {	
 	Connection conn = null;
@@ -15,7 +17,6 @@ public class DBAccessClass {
 	
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	//static final String DB_URL = "jdbc:mysql://localhost/EMP"; 
 	final String DB_URL = "jdbc:mysql://cse.unl.edu:3306/rhooper";
 	
 	
@@ -24,45 +25,8 @@ public class DBAccessClass {
 	static final String USER = "rhooper"; // Replace with your CSE_LOGIN
 	static final String PASS = "An6-vN";   // Replace with your CSE MySQL_PASSWORD
 	
-/*	public void createEmployeeTable() {
-		  
-		  try {
-			stmt = conn.createStatement();
-		
-		  String sql;
-		  sql = "DROP TABLE IF EXISTS Employees";
-		  stmt.executeUpdate(sql);
-
-		  sql = "CREATE TABLE Employees " +
-		          "(ID INTEGER not NULL, " +
-		          " First_Name VARCHAR(255), " + 
-		          " Last_Name VARCHAR(255), " + 
-		          " Salary DOUBLE, " + 
-		          " PRIMARY KEY ( ID ))"; 
-
-		  stmt.executeUpdate(sql);
-
-		  sql = "INSERT INTO Employees " +
-		          "VALUES (111, 'Richard', 'Feynman', 1000.00)";
-		  stmt.executeUpdate(sql);
-		  sql = "INSERT INTO Employees " +
-		          "VALUES (112, 'Alan', 'Turing', 5000.00)";
-		  stmt.executeUpdate(sql);
-		  sql = "INSERT INTO Employees " +
-		          "VALUES (113, 'Ada', 'Lovelace', 4000.00)";
-		  stmt.executeUpdate(sql);
-		  sql = "INSERT INTO Employees " +
-		          "VALUES (114, 'Albert', 'Einstein', 2000.00)";
-		  stmt.executeUpdate(sql);
-		  
-		  } catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-		}
-		
-	}*/
 	
-	public void insertData (String firstName, String lastName, int id, double salary) {
+	/*public void insertData (String firstName, String lastName, int id, double salary) {
 		try{
 			stmt = conn.createStatement();
 			
@@ -76,11 +40,106 @@ public class DBAccessClass {
 			        ps.setInt(3, id);
 			        ps.setDouble(4, salary);
 			        ps.executeQuery();
-		*/}
+		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}*/
+	
+	public void addSingleUser(Users aUser) {
+		  
+		try {
+		  stmt = conn.createStatement();
+		  String sql;
+		  
+		  String userName = aUser.getUserName();
+		  String password = aUser.getPassword();
+		  String email = aUser.getEmail();
+		  
+
+		  sql = "INSERT INTO Users (EmailAddress, Username, Password)" +
+		          "VALUES ('" + email + "', '" + userName + 
+				  "', '" + password + "')";
+		  stmt.executeUpdate(sql);
+		  
+		  
+		  } catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		
 	}
+	
+	public boolean findUserByUsername(String aUserName) {
+		boolean userExists = false;
+		String SQL = "SELECT * from Users";
+	    Statement stat;
+		try {
+			stat = conn.createStatement();
+			ResultSet rs = stat.executeQuery(SQL);
+			
+			while (rs.next()){	
+				if(aUserName.equals( rs.getString(14) )) {
+					userExists = true;
+				}    
+		    }
+			
+		    stat.close();
+		        
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return userExists;
+	}
+	public boolean findUserByPassword(String password) {
+		boolean passwordMatches = false;
+		String SQL = "SELECT * from Users";
+	    Statement stat;
+		try {
+			stat = conn.createStatement();
+			ResultSet rs = stat.executeQuery(SQL);
+			
+			while (rs.next()){	
+				if(password.equals( rs.getString(15) )) {
+					passwordMatches = true;
+				}    
+		    }
+			
+		    stat.close();
+		        
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return passwordMatches;
+	}
+	
+	public Users returnUserByUsername(String aUserName) {
+		String SQL = "SELECT Username, Password from Users;";
+	    Statement stat;
+	   
+	    Users aUser = new Users();
+		try {
+			stat = conn.createStatement();
+			ResultSet rs = stat.executeQuery(SQL);
+			
+			while (rs.next()){
+				if(aUserName.equals( rs.getString("Username") )) {
+					aUser.setUserName(rs.getString("Username"));
+					aUser.setPassword(rs.getString("Password"));
+				} 
+		    }
+			
+		    stat.close();
+		        
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return aUser;
+	}
+	
 	public void connectMeIn() {
 		try{
 			//Register the JDBC driver
@@ -97,7 +156,7 @@ public class DBAccessClass {
 		}
 	}
 	
-	public double getSalary(String lastName) {
+	/*public double getSalary(String lastName) {
 		 double salary = -99.0;
 		 String sql = "SELECT * FROM Employees where Last_Name=?";
 		 try {
@@ -118,7 +177,7 @@ public class DBAccessClass {
 				e.printStackTrace();
 	     }
 		 return salary;
-	}
+	}*/
 	
 	public void closeConnection(){
 		try {
