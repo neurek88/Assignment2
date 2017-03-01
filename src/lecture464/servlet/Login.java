@@ -1,9 +1,11 @@
 package lecture464.servlet;
 
+import java.io.IOException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -13,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import lecture464.model.Users;
+import lecture464.model.DBAccessClass;
+
 
 /**
  * Servlet implementation class Login
@@ -35,6 +39,10 @@ public class Login extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		
+		DBAccessClass db = new DBAccessClass();
+		
+		db.connectMeIn();
+		
 		/* The users.properties file is stored in the "WEB-INF" folder.
 		   To access this file, you will need its absolute path. */
 		
@@ -44,46 +52,43 @@ public class Login extends HttpServlet {
 		 
 		/* Following two statements are used to obtain the absolute path 
 		   of the users.properies file from its relative path. */
+		
+		boolean userExists = false;
+		boolean userPasswordMatches = false;
+		
 		ServletContext sc = this.getServletContext();
-		String propFilePath = sc.getRealPath("/WEB-INF/users.properties");
-	
-		boolean myCheckBox = request.getParameter("cbox") != null;
+		
+		/*boolean myCheckBox = request.getParameter("cbox") != null;
 		if(myCheckBox) {
 		Cookie cookie = new Cookie("userName", userName);
 		cookie.setMaxAge(3200);
 		response.addCookie(cookie);
 		System.out.println(cookie);
 		}
-		System.out.println(myCheckBox);
+		System.out.println(myCheckBox);*/
 		
-		/*	
-		Properties p = new Properties();
-	
-
-		FileInputStream fis = null;
+		Users aUser = new Users();
 		
-		try {
-			fis = new FileInputStream(propFilePath);
+		userExists = aUser.validateUserByUsername(userName);
+		userPasswordMatches = aUser.validateUserByPassword(password);
+		
+		if(userExists && userPasswordMatches) {
+			aUser = aUser.getUser(userName);
 			
-			p.load(fis);
-				
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if(fis != null) {
-				fis.close();
-			}
-		}*/
-		Users aUser = new Users(userName, password);
-		if (aUser.validateUser(aUser,propFilePath)) {
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", aUser);
-			session.setAttribute("userName", userName);
-			response.sendRedirect("CustomerHomePage.jsp");
+		    session.setAttribute("userBean", aUser);
+		    
+		    String address = "CustomerHomePage.jsp";
+		    RequestDispatcher dispatcher =
+		      request.getRequestDispatcher(address);
+		    dispatcher.forward(request, response);
+		    db.closeConnection();
+			
 		} else {
 			response.sendRedirect("Registration.jsp");
+			db.closeConnection();
 		}
+		
 		/*
 		 * Instead using servlet methods (above) for user login,
 		 * instantiate a Users object and 

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lecture464.model.DBAccessClass;
 import lecture464.model.Users;
 
 /**
@@ -35,53 +36,26 @@ public class Register extends HttpServlet {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		
-		/* The users.properties file is stored in the "WEB-INF" folder.
-		   To access this file, you will need its absolute path. */
+		DBAccessClass db = new DBAccessClass();
 		
-		/*
-		 * Note: the content of the properties file may not be visible
-		 */
-		 
-		/* Following two statements are used to obtain the absolute path 
-		   of the users.properies file from its relative path. */
+		db.connectMeIn();
+		
+		boolean userExists;
+		
 		ServletContext sc = this.getServletContext();
-		String propFilePath = sc.getRealPath("/WEB-INF/users.properties");
 		
-		/*
-		 * The following section is used to create a properties object,
-		 * then to access the properties file via it,
-		 * store username and password
-		 * This part should commented out to do registration via the User object
-		 */
+		Users aUser = new Users(userName, password, email);
 		
-	/*	Properties p = new Properties();
+		userExists = aUser.validateUserByUsername(userName);
 		
-		FileInputStream fis = null;
-		
-		try {		
-			fis = new FileInputStream(propFilePath);
-			p.load(fis);
-			
-			p.setProperty(userName, password);
-			p.store(new FileOutputStream(propFilePath), null);
-			response.sendRedirect("Welcome.jsp"); // Link-redirection
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (fis != null) {
-				fis.close();
-			}
+		if(userExists == false) {
+			aUser.registerUser(aUser);
 		}
-		*/
 
 		// Registration via the Users object
-		Users aUser = new Users(userName, password);
+		
 		
 		//First check whether the user already exists via methods from Users class
-		
-		// Register the Users object
-		aUser.registerUser(aUser, propFilePath);
 		response.sendRedirect("Login.jsp"); 	
 	}
 

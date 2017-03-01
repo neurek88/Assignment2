@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ContentTypeServlet
  */
-@WebServlet("/ContentTypeServlet")
 public class ContentTypeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
