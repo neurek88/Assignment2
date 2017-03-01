@@ -108,7 +108,6 @@ public class Products {
 	public void setProductThumbnail(String productThumbnail) {
 		ProductThumbnail = productThumbnail;
 	}
-	public void SearchProductInfo(String pid){
     
 	public void SearchProducts(String pid){
   

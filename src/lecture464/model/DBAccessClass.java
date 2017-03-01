@@ -19,7 +19,7 @@ public class DBAccessClass {
 	Statement stmt = null;
 	PreparedStatement ps = null;
 
-	private List<Products> list = new ArrayList<Products>();
+//	private List<Products> list = new ArrayList<Products>();
 	
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
