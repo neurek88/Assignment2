@@ -35,6 +35,7 @@ public class Register extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
+
 		
 		DBAccessClass db = new DBAccessClass();
 		

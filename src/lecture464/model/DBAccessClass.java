@@ -6,6 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import lecture464.model.Products;
 
 import lecture464.model.Users;
 
@@ -14,6 +18,8 @@ public class DBAccessClass {
 	Connection conn = null;
 	Statement stmt = null;
 	PreparedStatement ps = null;
+
+	private List<Products> list = new ArrayList<Products>();
 	
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -151,6 +157,7 @@ public class DBAccessClass {
 		try {
 			 //Open a connection
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			System.out.println("connected to SQL");
 		} catch (SQLException e){
 			e.printStackTrace();
 		}
@@ -177,11 +184,48 @@ public class DBAccessClass {
 				e.printStackTrace();
 	     }
 		 return salary;
+	}
+	public void SearchProductInfo(String pid){
+    String query = "SELECT * FROM Products WHERE ProductName LIKE ?";
+    
+    try {
+    	
+        ps = conn.prepareStatement(query);
+        ps.setString(1, "%" + pid + "%");
+        
+        ResultSet rs = ps.executeQuery();
+        System.out.println("query " + query);
+        
+        
+		  while(rs.next()){
+			    //Retrieve by column name
+			  int Id = rs.getInt("Id");
+			  String ProductName = rs.getString("ProductName");
+			  int ProductCategoryIndex = rs.getInt("ProducCategoryIndex");
+			  String ProductDescription = rs.getString("ProductDescription");
+			  double Price = rs.getInt("Price");
+			  int AvailableQuantity = rs.getInt("AvailableQuantity");
+			  int EstimatedDeliveryDays = rs.getInt("EstimatedDeliveryDays");
+			  Products ProductBean = new Products(Id, ProductName, ProductCategoryIndex, ProductDescription, Price, AvailableQuantity, EstimatedDeliveryDays);
+			  //store Data
+			  list.add(ProductBean);
+		  }
+		  
+		  System.out.println(list);
+            
+    } catch (Exception e) {
+        e.printStackTrace();
+    } 
+}
+	public List<Products> getProductList() {
+		return list;
+	}
 	}*/
 	
 	public void closeConnection(){
 		try {
 			conn.close();
+			System.out.println("Disconnected from mySQL");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
