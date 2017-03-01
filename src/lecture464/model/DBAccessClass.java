@@ -8,12 +8,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import lecture464.model.Products;
 
 
 public class DBAccessClass {	
 	Connection conn = null;
 	Statement stmt = null;
 	PreparedStatement ps = null;
+
+	private List<Products> list = new ArrayList<Products>();
 	
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -122,9 +128,9 @@ public class DBAccessClass {
 	     }
 		 return salary;
 	}
-	public int SearchProductInfo(String pid){
+	public void SearchProductInfo(String pid){
     String query = "SELECT * FROM Products WHERE ProductName LIKE ?";
-    int ProductId = 0;
+    
     try {
     	
         ps = conn.prepareStatement(query);
@@ -133,17 +139,30 @@ public class DBAccessClass {
         ResultSet rs = ps.executeQuery();
         System.out.println("query " + query);
         
+        
 		  while(rs.next()){
 			    //Retrieve by column name
-				ProductId = rs.getInt("Id");
+			  int Id = rs.getInt("Id");
+			  String ProductName = rs.getString("ProductName");
+			  int ProductCategoryIndex = rs.getInt("ProducCategoryIndex");
+			  String ProductDescription = rs.getString("ProductDescription");
+			  double Price = rs.getInt("Price");
+			  int AvailableQuantity = rs.getInt("AvailableQuantity");
+			  int EstimatedDeliveryDays = rs.getInt("EstimatedDeliveryDays");
+			  Products ProductBean = new Products(Id, ProductName, ProductCategoryIndex, ProductDescription, Price, AvailableQuantity, EstimatedDeliveryDays);
+			  //store Data
+			  list.add(ProductBean);
 		  }
-		  System.out.println(ProductId);
+		  
+		  System.out.println(list);
             
     } catch (Exception e) {
         e.printStackTrace();
     } 
-    return ProductId;
 }
+	public List<Products> getProductList() {
+		return list;
+	}
 	
 	public void closeConnection(){
 		try {

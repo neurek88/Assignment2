@@ -20,6 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 /**
  * Servlet implementation class ProductSearchQuery
@@ -43,16 +44,19 @@ public class ProductSearchQuery extends HttpServlet {
 		HttpSession session = request.getSession();
 		String pid = request.getParameter("search");	
 		session.setAttribute("search", pid);
-		Products productSearch = new Products();
+		DBAccessClass db = new DBAccessClass();
+		db.connectMeIn();
+		List<Products> list = new ArrayList<Products>();
+		db.SearchProductInfo(pid);
+		
         try {
-        	productSearch.setProductId(pid);
-        	request.setAttribute("piList", productSearch.getProductId());
+        	request.setAttribute("piList", db.getProductList());
             RequestDispatcher view = request.getRequestDispatcher("ProductSearchResults.jsp");
             view.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(productSearch.getProductId());
+        System.out.println(request.getAttribute("piList"));
     }
 
 	/**

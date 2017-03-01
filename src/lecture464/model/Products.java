@@ -44,27 +44,31 @@ public class Products {
 	private String ProductVideosLinks;
 	private String ProductThumbnail;
 	
+	
 	public int getProductId() {
 		return Id;
 	}
-	public void setProductId(String anId) {
-		DBAccessClass db = new DBAccessClass();
-		db.connectMeIn();
-		
-		Id = db.SearchProductInfo(anId);
-	}
+	public void setProductId(int Id) {
+		this.Id = Id;
+		}
 
-	public Products() {
+	public Products (int Id, String ProductName, int ProductCategoryIndex, String ProductDescription, double Price, int AvailableQuantity, int EstimatedDeliveryDays) {
 		super();
-
-	}
+	  	this.Id = Id;
+	    this.ProductName =  ProductName;
+		this.ProductCategoryIndex = ProductCategoryIndex;
+		this.ProductDescription = ProductDescription;
+		this.Price = Price;
+		this.AvailableQuantity = AvailableQuantity;
+		this.EstimatedDeliveryDays = EstimatedDeliveryDays;
+	    } 
+	    
 	
 	public String getProductName() {
 		return ProductName;
 	}
 	public void setProductName(String productName) {
-		DBAccessClass db = new DBAccessClass();
-		db.connectMeIn();
+		ProductName = productName;
 		
 		//ProductName = db.SearchProductInfo(ProductName);
 	}
