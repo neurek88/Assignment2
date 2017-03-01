@@ -40,11 +40,17 @@ public class Orders {
 	public void setQuantity(int qty) {
 		this.Quantity = qty;
 	}
+	
+	
+	
 	public Orders(int Id, int qty) {
 		super();
 		this.Id = Id;
 		this.Quantity = qty;
 	}
+	
+	
+	
 	
 /*	private static HashMap<int, Id> orders;
 
