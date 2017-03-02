@@ -18,8 +18,7 @@ public class DBAccessClass {
 	Connection conn = null;
 	Statement stmt = null;
 	PreparedStatement ps = null;
-
-//	private List<Products> list = new ArrayList<Products>();
+	private ArrayList<Products> list = new ArrayList<Products>();
 	
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -184,7 +183,7 @@ public class DBAccessClass {
 				e.printStackTrace();
 	     }
 		 return salary;
-	}
+	}*/
 	public void SearchProductInfo(String pid){
     String query = "SELECT * FROM Products WHERE ProductName LIKE ?";
     
@@ -211,16 +210,15 @@ public class DBAccessClass {
 			  list.add(ProductBean);
 		  }
 		  
-		  System.out.println(list);
+		  System.out.println(list.get(0).getProductName());
             
     } catch (Exception e) {
         e.printStackTrace();
     } 
 }
-	public List<Products> getProductList() {
+	public ArrayList<Products> getProductList() {
 		return list;
 	}
-	}*/
 	
 	public void closeConnection(){
 		try {

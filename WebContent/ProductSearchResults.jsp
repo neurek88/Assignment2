@@ -1,5 +1,6 @@
  <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,15 +36,18 @@
                 <td><b>View Product</b></td>
                 <td><b>Add to Cart</b></td>
            </tr>
+         <c:forEach items="${piList}" var="list">
            <tr>
-                <td>${sessionScope.piList[0].getProductName()}</td>
-                <td>${sessionScope.piList[0].getProductCategory()}</td>
-                <td>${sessionScope.piList[0].getSellerId()}</td>
-                <td>${sessionScope.piList[0].getPrice()}</td>
-                <td>${sessionScope.piList[0].getProductThumbnail()}</td>
-                <td>${sessionScope.piList[0].getPrice()}</td>
-                <td>${sessionScope.piList[0].getPrice()}</td>
+                <td>${list.getProductName()}</td>
+                <td>${list.getProductCategoryIndex()}</td>
+                <td>${list.getPrice()}</td>
+                <td>${list.getPrice()}</td>
+                <td>${list.getProductName()}</td>
+                <td>${sessionScope.list.getPrice()}</td>
+                <td>${sessionScope.list.getProductCategory()}</td>
                 </tr>
+           </c:forEach> 
+
            <tr>
            		<td>Virtual Toast</td>
            		<td>food</td>
