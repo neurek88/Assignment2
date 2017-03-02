@@ -205,7 +205,10 @@ public class DBAccessClass {
 			  double Price = rs.getInt("Price");
 			  int AvailableQuantity = rs.getInt("AvailableQuantity");
 			  int EstimatedDeliveryDays = rs.getInt("EstimatedDeliveryDays");
-			  Products ProductBean = new Products(Id, ProductName, ProductCategoryIndex, ProductDescription, Price, AvailableQuantity, EstimatedDeliveryDays);
+			  int SellerId = rs.getInt("SellerId");
+			  String ProductPhotosLinks = rs.getString("ProductPhotosLinks");
+			  String ProductThumbnail = rs.getString("ProductThumbnail");
+			  Products ProductBean = new Products(Id, ProductName, ProductCategoryIndex, ProductDescription, Price, AvailableQuantity, EstimatedDeliveryDays, SellerId, ProductPhotosLinks, ProductThumbnail);
 			  //store Data
 			  list.add(ProductBean);
 		  }

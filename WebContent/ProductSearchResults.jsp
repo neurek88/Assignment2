@@ -19,7 +19,6 @@
 <h1> World's Best Shopping Website</h1><br>
 <h2>Your search results are:</h2><br><br>
 <h3>Virtual Toast</h3>
-<form action="addtocart">
 <table width="700px"
                style="border:1px solid #000000;">
             <tr>
@@ -40,24 +39,14 @@
            <tr>
                 <td>${list.getProductName()}</td>
                 <td>${list.getProductCategoryIndex()}</td>
+                <td>${list.getSellerId()}</td>
                 <td>${list.getPrice()}</td>
-                <td>${list.getPrice()}</td>
-                <td>${list.getProductName()}</td>
-                <td>${sessionScope.list.getPrice()}</td>
-                <td>${sessionScope.list.getProductCategory()}</td>
+                <td><img src="${list.getProductThumbnail()}" alt="${list.getProductName()}" style="width:35px;height:35px;"></td>
+                <td><form action=ProductSearchResults method="post"><button name="order" type="submit" value="${list.getProductName()}">view order</button></form></td>
+                <td><form action=UpdateShoppingCart method="get"><button name="cart" type="submit" value="${list}">add to cart</button></form></td>
                 </tr>
            </c:forEach> 
-
-           <tr>
-           		<td>Virtual Toast</td>
-           		<td>food</td>
-           		<td>ebay</td>
-            	<td>$10</td>
-            	<td><img src="VirtualToast.jpg" alt="VirtualToast" style="width:25px;height:25px;"></td>
-            	<td><a href="ViewProductDetails.jsp"> Details </a></td>
-            	<td><a href="View&CheckoutShoppingCart.jsp"> Add to Cart </a></td>
    </table> 
-</form>
 
 <br>
 

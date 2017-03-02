@@ -67,4 +67,14 @@
     <servlet-name>ProductSearchQuery</servlet-name>
     <url-pattern>/ProductSearchQuery</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>ProductSearchResults</display-name>
+    <servlet-name>ProductSearchResults</servlet-name>
+    <servlet-class>lecture464.servlet.ProductSearchResults</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductSearchResults</servlet-name>
+    <url-pattern>/ProductSearchResults</url-pattern>
+  </servlet-mapping>
 </web-app>
