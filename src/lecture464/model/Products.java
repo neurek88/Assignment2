@@ -38,7 +38,6 @@ public class Products {
 	private int AvailableQuantity;
 	private int EstimatedDeliveryDays;
 	private int SellerId;
-	private String ProductPhotoLinks;
 	private String ProductPhotosLinks;
 	private String ProductVideosLinks;
 	private String ProductThumbnail;
@@ -51,7 +50,19 @@ public class Products {
 		this.Id = Id;
 		}
 
-	public Products (int Id, String ProductName, int ProductCategoryIndex, String ProductDescription, double Price, int AvailableQuantity, int EstimatedDeliveryDays) {
+	public int getEstimatedDeliveryDays() {
+		return EstimatedDeliveryDays;
+	}
+	public void setEstimatedDeliveryDays(int estimatedDeliveryDays) {
+		EstimatedDeliveryDays = estimatedDeliveryDays;
+	}
+	public int getSellerId() {
+		return SellerId;
+	}
+	public void setSellerId(int sellerId) {
+		SellerId = sellerId;
+	}
+	public Products (int Id, String ProductName, int ProductCategoryIndex, String ProductDescription, double Price, int AvailableQuantity, int EstimatedDeliveryDays, int SellerId, String ProductPhotosLinks, String ProductThumbnail) {
 		super();
 	  	this.Id = Id;
 	    this.ProductName =  ProductName;
@@ -60,6 +71,9 @@ public class Products {
 		this.Price = Price;
 		this.AvailableQuantity = AvailableQuantity;
 		this.EstimatedDeliveryDays = EstimatedDeliveryDays;
+		this.SellerId = SellerId;
+		this.ProductPhotosLinks = ProductPhotosLinks;
+		this.ProductThumbnail = ProductThumbnail;
 	    } 
 	    
 	
@@ -71,8 +85,14 @@ public class Products {
 		
 		//ProductName = db.SearchProductInfo(ProductName);
 	}
-	public int getProductCategoryIndex() {
-		return ProductCategoryIndex;
+	public String getProductCategoryIndex() {
+		if(ProductCategoryIndex == 1) {
+			return "Food";
+		} else if (ProductCategoryIndex == 2 ) {
+			return "Fun";
+		} else  {
+			return "Fancy";
+		}
 	}
 	public void setProductCategoryIndex(int productCategoryIndex) {
 		ProductCategoryIndex = productCategoryIndex;
