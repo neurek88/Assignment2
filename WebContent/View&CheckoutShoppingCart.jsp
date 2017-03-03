@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,7 +18,7 @@
 <h1> World's Best Shopping Website</h1><br>
 <h2>Your Shopping Cart</h2>
 <h2>Here are the items in your cart:</h2>
-<table width="700px"
+<table width="700px" id="countit"
                style="border:1px solid #000000;">
             <tr>
                 <td colspan=7 align="center"
@@ -34,27 +35,32 @@
                 <td><b>delete?</b></td>
             </tr>
             <tr> 
-            	<td>Toast</td>
-                <td><img src="VirtualToast.jpg" alt="VirtualToast" style="width:25px;height:25px;"></td>
-                <td>Mike</td>
-                <td>10</td>
-                <td>$10</td>
-                <td>Estimated delivery date</td>
-                <td><a href="UpdateShoppingCart.java">delete?</a></td>
+ <c:forEach items="${piList}" var="list">
+           <tr>
+                <td>${list.getProductName()}</td>
+                <td><img src="${list.getProductThumbnail()}" alt="${list.getProductName()}" style="width:35px;height:35px;"></td>
+                <td>${list.getSellerId()}</td>
+                <td>${list.getAvailableQuantity()}</td>
+                <td class="count-me"> ${list.getPrice()}</td>
+                <td>${list.getEstimatedDeliveryDays()}</td>
+                <td><form action=UpdateShoppingCart method="post"><button name="cart" type="submit" value="${list}">add to cart</button></form></td>
+                </tr>
+           </c:forEach> 
             	</tr>
-            <tr>
-            	<td><a href="CustomerTransaction.jsp"> Check Out </a></td>
-            	<td></td>
-            	<td></td>
-            	<td colspan=2>Total Cost</td>	
-            	<td>$100</td>
-            	<td></td>
-            	
-</table>
+           </table>
+           <script language="javascript" type="text/javascript">
+            var tds = document.getElementById('countit').getElementsByTagName('td');
+            var sum = 0;
+            for(var i = 0; i < tds.length; i ++) {
+                if(tds[i].className == 'count-me') {
+                    sum += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+                }
+            }
+            document.getElementById('countit').innerHTML += '<tr><td><a href="CustomerTransaction.jsp"> Check Out </a></td><td></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><td><td></td></td></tr>';
+        </script>	
 
 <br>
 <br>
-
 
 </body>
 </html>

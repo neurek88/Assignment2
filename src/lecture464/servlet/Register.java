@@ -36,27 +36,11 @@ public class Register extends HttpServlet {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 
-		
-		DBAccessClass db = new DBAccessClass();
-		
-		db.connectMeIn();
-		
-		boolean userExists;
-		
-		ServletContext sc = this.getServletContext();
-		
+	
 		Users aUser = new Users(userName, password, email);
-		
-		userExists = aUser.validateUserByUsername(userName);
-		
-		if(userExists == false) {
-			aUser.registerUser(aUser);
-		}
 
-		// Registration via the Users object
-		
-		
-		//First check whether the user already exists via methods from Users class
+			aUser.registerUser(aUser);
+
 		response.sendRedirect("Login.jsp"); 	
 	}
 
