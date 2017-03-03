@@ -19,7 +19,7 @@ public class DBAccessClass {
 	Statement stmt = null;
 	PreparedStatement ps = null;
 
-//	private List<Products> list = new ArrayList<Products>();
+private List<Products> list = new ArrayList<Products>();
 	
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -146,6 +146,30 @@ public class DBAccessClass {
 		return aUser;
 	}
 	
+	public Users returnUserIDbyUsername (String aUserName) {
+		String SQL = "SELECT Username, Id from Users;";
+	    Statement stat;
+	   
+	    Users aUser = new Users();
+		try {
+			stat = conn.createStatement();
+			ResultSet rs = stat.executeQuery(SQL);
+			
+			while (rs.next()){
+				if(aUserName.equals( rs.getString("Username") )) {
+					aUser.setUserId(rs.getInt("Id"));
+				} 
+		    }
+			
+		    stat.close();
+		        
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return aUser;
+	}
+	
 	public void connectMeIn() {
 		try{
 			//Register the JDBC driver
@@ -184,7 +208,7 @@ public class DBAccessClass {
 				e.printStackTrace();
 	     }
 		 return salary;
-	}
+	}*/
 	public void SearchProductInfo(String pid){
     String query = "SELECT * FROM Products WHERE ProductName LIKE ?";
     
@@ -220,7 +244,6 @@ public class DBAccessClass {
 	public List<Products> getProductList() {
 		return list;
 	}
-	}*/
 	
 	public void closeConnection(){
 		try {
