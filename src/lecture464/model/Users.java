@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
+//import javax.xml.ws.Response;
 
 import lecture464.model.DBAccessClass;
 
@@ -27,7 +27,7 @@ public class Users {
 	private String email;
 	private int Id;
 	
-	public Users() {
+	public Users () {
 		super();
 	}
 	
@@ -100,6 +100,14 @@ public class Users {
 	   	db.closeConnection();
 	   	
 	   	return aUser;
+    }
+    
+    public Users getUserID(String aUserName) {
+    	DBAccessClass db = new DBAccessClass();
+	   	db.connectMeIn();
+	   	Users aUser = db.returnUserIDbyUsername(aUserName);
+	   	db.closeConnection();
+    	return aUser;
     }
     
 	
