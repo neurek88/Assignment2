@@ -162,28 +162,6 @@ public class DBAccessClass {
 		}
 	}
 	
-	/*public double getSalary(String lastName) {
-		 double salary = -99.0;
-		 String sql = "SELECT * FROM Employees where Last_Name=?";
-		 try {
-			 ps = conn.prepareStatement(sql);
-		
-			 ps.setString(1, lastName);
-			  
-			 ResultSet rs = ps.executeQuery();
-			  
-			  //Extract data from result set
-			  while(rs.next()){
-				    //Retrieve by column name
-				    salary = rs.getInt("Salary");
-			  }
-		  
-		 } catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-	     }
-		 return salary;
-	}*/
 	public void SearchProductInfo(String pid){
     String query = "SELECT * FROM Products WHERE ProductName LIKE ?";
     
