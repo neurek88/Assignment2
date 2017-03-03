@@ -18,8 +18,8 @@ public class DBAccessClass {
 	Connection conn = null;
 	Statement stmt = null;
 	PreparedStatement ps = null;
-
-private List<Products> list = new ArrayList<Products>();
+  
+	private ArrayList<Products> list = new ArrayList<Products>();
 	
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -186,29 +186,7 @@ private List<Products> list = new ArrayList<Products>();
 			e.printStackTrace();
 		}
 	}
-	
-	/*public double getSalary(String lastName) {
-		 double salary = -99.0;
-		 String sql = "SELECT * FROM Employees where Last_Name=?";
-		 try {
-			 ps = conn.prepareStatement(sql);
-		
-			 ps.setString(1, lastName);
-			  
-			 ResultSet rs = ps.executeQuery();
-			  
-			  //Extract data from result set
-			  while(rs.next()){
-				    //Retrieve by column name
-				    salary = rs.getInt("Salary");
-			  }
-		  
-		 } catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-	     }
-		 return salary;
-	}*/
+  
 	public void SearchProductInfo(String pid){
     String query = "SELECT * FROM Products WHERE ProductName LIKE ?";
     
@@ -230,18 +208,21 @@ private List<Products> list = new ArrayList<Products>();
 			  double Price = rs.getInt("Price");
 			  int AvailableQuantity = rs.getInt("AvailableQuantity");
 			  int EstimatedDeliveryDays = rs.getInt("EstimatedDeliveryDays");
-			  Products ProductBean = new Products(Id, ProductName, ProductCategoryIndex, ProductDescription, Price, AvailableQuantity, EstimatedDeliveryDays);
+			  int SellerId = rs.getInt("SellerId");
+			  String ProductPhotosLinks = rs.getString("ProductPhotosLinks");
+			  String ProductThumbnail = rs.getString("ProductThumbnail");
+			  Products ProductBean = new Products(Id, ProductName, ProductCategoryIndex, ProductDescription, Price, AvailableQuantity, EstimatedDeliveryDays, SellerId, ProductPhotosLinks, ProductThumbnail);
 			  //store Data
 			  list.add(ProductBean);
 		  }
 		  
-		  System.out.println(list);
+		  System.out.println(list.get(0).getProductName());
             
     } catch (Exception e) {
         e.printStackTrace();
     } 
 }
-	public List<Products> getProductList() {
+	public ArrayList<Products> getProductList() {
 		return list;
 	}
 	

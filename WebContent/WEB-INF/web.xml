@@ -32,13 +32,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>addCart</display-name>
-    <servlet-name>addCart</servlet-name>
-    <servlet-class>lecture464.servlet.addCart</servlet-class>
+    <display-name>UpdateShoppingCart</display-name>
+    <servlet-name>UpdateShoppingCart</servlet-name>
+    <servlet-class>lecture464.servlet.UpdateShoppingCart</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>addCart</servlet-name>
-    <url-pattern>/addCart</url-pattern>
+    <servlet-name>UpdateShoppingCart</servlet-name>
+    <url-pattern>/UpdateShoppingCart</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -66,5 +66,15 @@
   <servlet-mapping>
     <servlet-name>ProductSearchQuery</servlet-name>
     <url-pattern>/ProductSearchQuery</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>ProductSearchResults</display-name>
+    <servlet-name>ProductSearchResults</servlet-name>
+    <servlet-class>lecture464.servlet.ProductSearchResults</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductSearchResults</servlet-name>
+    <url-pattern>/ProductSearchResults</url-pattern>
   </servlet-mapping>
 </web-app>

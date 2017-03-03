@@ -1,16 +1,18 @@
 package lecture464.servlet;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 
-import javax.servlet.ServletContext;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import lecture464.model.DBAccessClass;
+import lecture464.model.Products;
 import lecture464.model.Users;
 
 /**
@@ -31,7 +33,15 @@ public class UpdateShoppingCart extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
+        HttpSession session = request.getSession();
+        ArrayList<Products> shoppingCart = (ArrayList<Products>)request.getAttribute("piList");
+        if(shoppingCart == null){
+          shoppingCart = new ArrayList<Products>();
+          session.setAttribute("cart", shoppingCart);
+        } 
+     //   shoppingCart.add(Products);
+        RequestDispatcher view = request.getRequestDispatcher("View&CheckoutShoppingCart.jsp");
+        view.forward(request, response);
 	}
 
 	/**

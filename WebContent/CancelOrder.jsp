@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id=navigation><ul>
-<li><a href="userName.jsp">userName</a></li>
+<li><a href="#">${sessionScope.userName}</a></li>
 <li><a href="CustomerHomePage.jsp"> Home Page </a></li>
 <li><a href="Login.jsp"> Login out </a></li>
 <li><a href="ManageOrder.jsp"> Manage Orders </a></li>

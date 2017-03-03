@@ -56,16 +56,15 @@ public class Login extends HttpServlet {
 		boolean userExists = false;
 		boolean userPasswordMatches = false;
 		
-		ServletContext sc = this.getServletContext();
 		
-		/*boolean myCheckBox = request.getParameter("cbox") != null;
+		boolean myCheckBox = request.getParameter("cbox") != null;
 		if(myCheckBox) {
 		Cookie cookie = new Cookie("userName", userName);
 		cookie.setMaxAge(3200);
 		response.addCookie(cookie);
 		System.out.println(cookie);
 		}
-		System.out.println(myCheckBox);*/
+		System.out.println(myCheckBox);
 		
 		Users aUser = new Users();
 		
@@ -77,6 +76,7 @@ public class Login extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 		    session.setAttribute("userBean", aUser);
+		    session.setAttribute("userName", userName);
 		    
 		    String address = "CustomerHomePage.jsp";
 		    RequestDispatcher dispatcher =

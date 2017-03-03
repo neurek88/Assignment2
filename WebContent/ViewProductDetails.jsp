@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,13 +39,17 @@
                 <td><b>Product description</b></td>
             </tr>
             <tr>
-            	<td>Virtual Toast</td>
-            	<td>$10</td>
-            	<td>Vitual Toast</td>
-            	<td>3929</td>
-            	<td>Never</td>
-            	<td><img src="VirtualToast.jpg" alt="VirtualToast" style="width:100px;height:100px;"></td>
-            	<td>Virtual Toast. what else do you need to know</td>
+		
+           <tr>
+                <td>${itemList[0].getProductName()}</td>
+                <td>${itemList[0].getPrice()}</td>
+                <td>${itemList[0].getSellerId()}</td>
+                <td>${itemList[0].getAvailableQuantity()}</td>
+                <td>${itemList[0].getEstimatedDeliveryDays()}</td>
+                <td><img src="${itemList[0].getProductThumbnail()}" alt="${itemList[0].getProductName()}" style="width:100px;height:100px;"></td>
+                <td>${itemList[0].getProductDescription()}</td>
+                </tr>
+            
 </table>
 <h3>Customer Questions and Answers</h3><br>
 <b>Question</b> <p> How does it taste?</p><br>
@@ -65,12 +70,14 @@
                 <td><b>Rating out of 5 stars</b></td>
                 <td><b>Customer Review</b></td>
             </tr>
+        <c:forEach items="${itemList}" var="list">
             <tr>
             	<td>Fred</td>
             	<td>8/8/2004</td>
             	<td>4.5</td>
             	<td>This toast is awesome. Tastes great but not filling</td>
             </tr>
+            </c:forEach>
 </table>
 <br>
 

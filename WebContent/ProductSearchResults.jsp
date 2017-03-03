@@ -1,5 +1,6 @@
  <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +19,6 @@
 <h1> World's Best Shopping Website</h1><br>
 <h2>Your search results are:</h2><br><br>
 <h3>Virtual Toast</h3>
-<form action="addtocart">
 <table width="700px"
                style="border:1px solid #000000;">
             <tr>
@@ -35,25 +35,18 @@
                 <td><b>View Product</b></td>
                 <td><b>Add to Cart</b></td>
            </tr>
+         <c:forEach items="${piList}" var="list">
            <tr>
-                <td>${sessionScope.piList[0].getProductName()}</td>
-                <td>${sessionScope.piList[0].getProductCategory()}</td>
-                <td>${sessionScope.piList[0].getSellerId()}</td>
-                <td>${sessionScope.piList[0].getPrice()}</td>
-                <td>${sessionScope.piList[0].getProductThumbnail()}</td>
-                <td>${sessionScope.piList[0].getPrice()}</td>
-                <td>${sessionScope.piList[0].getPrice()}</td>
+                <td>${list.getProductName()}</td>
+                <td>${list.getProductCategoryIndex()}</td>
+                <td>${list.getSellerId()}</td>
+                <td>${list.getPrice()}</td>
+                <td><img src="${list.getProductThumbnail()}" alt="${list.getProductName()}" style="width:35px;height:35px;"></td>
+                <td><form action=ProductSearchResults method="post"><button name="order" type="submit" value="${list.getProductName()}">view order</button></form></td>
+                <td><form action=UpdateShoppingCart method="post"><button name="cart" type="submit" value="${list}">add to cart</button></form></td>
                 </tr>
-           <tr>
-           		<td>Virtual Toast</td>
-           		<td>food</td>
-           		<td>ebay</td>
-            	<td>$10</td>
-            	<td><img src="VirtualToast.jpg" alt="VirtualToast" style="width:25px;height:25px;"></td>
-            	<td><a href="ViewProductDetails.jsp"> Details </a></td>
-            	<td><a href="View&CheckoutShoppingCart.jsp"> Add to Cart </a></td>
+           </c:forEach> 
    </table> 
-</form>
 
 <br>
 
