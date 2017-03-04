@@ -77,4 +77,14 @@
     <servlet-name>ProductSearchResults</servlet-name>
     <url-pattern>/ProductSearchResults</url-pattern>
   </servlet-mapping>
+      <servlet>
+    <description></description>
+    <display-name>ViewOrders</display-name>
+    <servlet-name>ViewOrders</servlet-name>
+    <servlet-class>lecture464.servlet.ViewOrders</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewOrders</servlet-name>
+    <url-pattern>/ViewOrders</url-pattern>
+  </servlet-mapping>
 </web-app>
