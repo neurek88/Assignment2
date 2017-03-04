@@ -1,7 +1,5 @@
 package lecture464.model;
 
-
-
 public class Products {
 	
 	private int Id;

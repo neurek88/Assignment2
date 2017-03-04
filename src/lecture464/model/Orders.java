@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
+//import javax.xml.ws.Response;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -17,8 +17,9 @@ import java.util.Properties;
 
 public class Orders {
 	
-	private int Id;
+	private int CustomerId;
 	private int OrderId;
+	private int OrderCost;
 	private int SellerId;
 	private int ProductId;
 	private int ProductPrice;
@@ -29,10 +30,10 @@ public class Orders {
 	
 	
 	public int getUserId() {
-		return Id;
+		return CustomerId;
 	}
-	public void setUserId(int Id) {
-		this.Id = Id;
+	public void setUserId(int customerId) {
+		this.CustomerId = customerId;
 	}
 	public int getQuantity() {
 		return Quantity;
@@ -41,13 +42,22 @@ public class Orders {
 		this.Quantity = qty;
 	}
 	
-	
-	
-	public Orders(int Id, int qty) {
-		super();
-		this.Id = Id;
-		this.Quantity = qty;
+	public int getOrderCost() {
+		return OrderCost;
 	}
+	public void setOrderCost(int orderCost) {
+		this.OrderCost = orderCost;
+	}
+	
+	
+	
+	public Orders(int Id, int qty, int orderCost) {
+		super();
+		this.CustomerId = Id;
+		this.Quantity = qty;
+		this.OrderCost = orderCost;
+	}
+	
 	
 	
 	

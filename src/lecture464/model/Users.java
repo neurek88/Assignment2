@@ -5,7 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
+//import javax.xml.ws.Response;
 
 import lecture464.model.DBAccessClass;
 
@@ -26,21 +26,6 @@ public class Users {
 	private String shippingAddress;
 	private String billAddress;
 	
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
 
 	public String getShippingAddress() {
 		return shippingAddress;
@@ -59,11 +44,14 @@ public class Users {
 	}
 
 	public Users() {
+
 		super();
 	}
 	
-	public Users(String userName, String password, String email) {
+	public Users(String firstName, String lastName, String userName, String password, String email) {
 		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.userName = userName;
 		this.password = password;
 		this.email = email;
@@ -93,6 +81,20 @@ public class Users {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	
@@ -131,6 +133,14 @@ public class Users {
 	   	db.closeConnection();
 	   	
 	   	return aUser;
+    }
+    
+    public int getUserID(String aUserName) {
+    	DBAccessClass db = new DBAccessClass();
+	   	db.connectMeIn();
+	   	int userId = db.returnUserIDbyUsername(aUserName);
+	   	db.closeConnection();
+    	return userId;
     }
     
 	
