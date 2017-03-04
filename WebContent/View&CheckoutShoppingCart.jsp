@@ -13,6 +13,7 @@
 <li><a href="#">${sessionScope.userName}</a></li>
 <li><a href="CustomerHomePage.jsp"> Home Page </a></li>
 <li><a href="Login.jsp"> Login out </a></li>
+<li><a href="ProductSearchResults.jsp"> Back to Search </a></li>
 </ul> </div>
 
 <h1> World's Best Shopping Website</h1><br>
@@ -33,9 +34,8 @@
                 <td><b>Price</b></td>
                 <td><b>Estimated delivery date</b></td>
                 <td><b>delete?</b></td>
-            </tr>
-            <tr> 
- <c:forEach items="${piList}" var="list">
+            </tr> 
+ <c:forEach items="${cart}" var="list">
            <tr>
                 <td>${list.getProductName()}</td>
                 <td><img src="${list.getProductThumbnail()}" alt="${list.getProductName()}" style="width:35px;height:35px;"></td>
@@ -43,10 +43,9 @@
                 <td>${list.getAvailableQuantity()}</td>
                 <td class="count-me"> ${list.getPrice()}</td>
                 <td>${list.getEstimatedDeliveryDays()}</td>
-                <td><form action=UpdateShoppingCart method="post"><button name="cart" type="submit" value="${list}">add to cart</button></form></td>
+                <td><form action=UpdateShoppingCart method="post"><button name="delete" type="submit" value="${list.getProductName()}">delete?</button></form></td>
                 </tr>
            </c:forEach> 
-            	</tr>
            </table>
            <script language="javascript" type="text/javascript">
             var tds = document.getElementById('countit').getElementsByTagName('td');

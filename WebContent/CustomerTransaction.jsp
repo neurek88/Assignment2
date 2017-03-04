@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,32 +32,39 @@
                 <td><b>Quantity</b></td>
                 <td><b>Price</b></td>
             </tr>
-            <tr> 
-            	<td>Toast</td>
-                <td>Mike</td>
-                <td>10</td>
-                <td>$10</td>
-            	</tr>
-            <tr>
-            	<td><a href="CustomerTransactionConfirmation.jsp"> Check Out </a></td>
-            	<td></td>
-            	<td>Total Cost</td>
-            	<td>$100</td>	
-</table>
+ <c:forEach items="${cart}" var="list">
+           <tr>
+                <td>${list.getProductName()}</td>
+                <td>${list.getSellerId()}</td>
+                <td>${list.getAvailableQuantity()}</td>
+                <td class="count-me"> ${list.getPrice()}</td>
+            </tr>
+           </c:forEach> 
+           </table>
+           <script language="javascript" type="text/javascript">
+            var tds = document.getElementById('countit').getElementsByTagName('td');
+            var sum = 0;
+            for(var i = 0; i < tds.length; i ++) {
+                if(tds[i].className == 'count-me') {
+                    sum += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
+                }
+            }
+            document.getElementById('countit').innerHTML += '<tr><td></td><td colspan=2>Total Cost:</td><td>' + sum + '</td></tr>';
+        </script>	
 <br>
-<form action=CustomerTransactionConfirmation.jsp>
-First Name:<input type=text name=fName><br>
-Last Name:<input type=text name=lName><br>
-Shipping Address:<input type=text name=sAddress><br>
-Billing Address:<input type=text name=bAddress><br>
- <select name="credit">
+<form action=CustomerTransactionConfirmation method=post>
+First Name:<input type=text name=firstName><br>
+Last Name:<input type=text name=lastName><br>
+Shipping Address:<input type=text name=shippingAddress><br>
+Billing Address:<input type=text name=billAddress><br>
+ <select name="creditBrand">
     <option value="AMEX">AMEX</option>
     <option value="Visa">Visa</option>
     <option value="MasterCard">Master Card</option>
   </select>
-Card Number: <input type=text name=cardNum><br>
-Security Code: <input type=text name=cardCode><br>
-Expiration Date: <select name="expiration">
+Card Number: <input type=text name=cardNumber><br>
+Security Code: <input type=text name=CVV><br>
+Expiration Date: <select name="expirationDate">
    <%
    int number = 1;
    for(int i=0;i<13;i++)
@@ -73,7 +81,8 @@ out.println("<option value=" + (year + i) + ">" + (year+i) + "</option> ");
  } %></select>
 <input type=submit value="Submit"> <br> 
 </form>
-<a href="View&CheckoutShoppingCart.jsp">Cancel</a>
+<form action=CancelOrders method="post"><button type="submit" value="cancel">Cancel</button>
+</form>
 <br>
 <br>
 
