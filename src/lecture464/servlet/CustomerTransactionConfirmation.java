@@ -22,6 +22,12 @@ import lecture464.model.DBAccessClass;
 public class CustomerTransactionConfirmation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private Users getProfile(HttpServletRequest request) {
+	     HttpSession session = request.getSession();
+	     Users profile = (Users) session.getAttribute("userBean");
+	     return profile;
+	}
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,14 +40,14 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Users aUser = (Users)session.getAttribute("userBean");
+		Users profile = getProfile(request);
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		String userName = "firstName";
+		String userName = firstName;
 		int creditNumber = Integer.parseInt(request.getParameter("creditNumber"));
 		String creditBrand = request.getParameter("creditBrand");
-		int userId = 154;
+		int userId = profile.getUserId();
+		double balance = 32.00;
 		int CVV = Integer.parseInt(request.getParameter("CVV"));
 		int expirationDate = Integer.parseInt(request.getParameter("expirationDate"));
 		String shippingAddress = request.getParameter("shippingAddress");
@@ -50,14 +56,14 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
 		if (userName !=null || creditNumber!=0 || creditBrand!=null || userId!=0 || CVV!=0 || expirationDate!=0) {
-		db.insertCreditData( userName, creditNumber, creditBrand, userId, CVV, expirationDate);
+		db.insertOrderData( userId, balance , shippingAddress, billAddress, creditNumber);
         RequestDispatcher view = request.getRequestDispatcher("CustomerTranscationConfirmation.jsp");
         view.forward(request, response);
 		} else {
             RequestDispatcher view = request.getRequestDispatcher("CustomerTranscation.jsp");
             view.forward(request, response);
 		}
-		System.out.println(userName);
+		System.out.println(userId);
 	}
 
 	/**

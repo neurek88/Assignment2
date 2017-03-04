@@ -19,8 +19,8 @@
 <h1> World's Best Shopping Website</h1><br>
 <h2>Your Shopping Cart</h2>
 <h2>Here are the items in your cart:</h2>
-<table width="700px" align="center"
-               style="border:1px solid #000000;">
+<table width="700px" align="center" id='countit'
+               style="border:1px solid #000000;" >
             <tr>
                 <td colspan=4 align="center"
                     style="background-color:teal">
