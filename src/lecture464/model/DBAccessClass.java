@@ -32,15 +32,12 @@ public class DBAccessClass {
 		try{
 			stmt = conn.createStatement();
 			
-<<<<<<< HEAD
-		String sql = "INSERT INTO Orders (CardHolderName, CreditCardNumber, CardType, UserId, CVV, ExpirationDate)" +
-				"VALUES ("+ userName +","+ creditNumber + "," + creditBrand +","+ userId +"," + CVV +","+expirationDate+ ")";
-=======
+
 		String sql = "INSERT INTO CreditCards (CardHolderName, CreditCardNumber, Balance, CardType, UserId, CVV, ExpirationDate)" +
 				"VALUES ("+ userName +","+ creditNumber + "," + creditBrand +","+ ccLimit +"," + userId +"," + CVV +","+expirationDate+ ")";
->>>>>>> branch 'master' of https://github.com/neurek88/Assignment2
+
 		stmt.executeUpdate(sql);
-<<<<<<< HEAD
+
 
 /*			      PreparedStatement ps = conn.prepareStatement(sql);
 			        ps.setString(2, userName);
@@ -77,8 +74,6 @@ public class DBAccessClass {
 			        ps.executeQuery();
 			        System.out.println(ps);
 			       */
-=======
->>>>>>> branch 'master' of https://github.com/neurek88/Assignment2
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
