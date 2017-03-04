@@ -20,6 +20,7 @@ public class DBAccessClass {
 	PreparedStatement ps = null;
   
 	private ArrayList<Products> list = new ArrayList<Products>();
+	private Products ProductBean;
 	
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -32,25 +33,29 @@ public class DBAccessClass {
 	static final String PASS = "An6-vN";   // Replace with your CSE MySQL_PASSWORD
 	
 	
-	/*public void insertData (String firstName, String lastName, int id, double salary) {
+	public void insertCreditData ( String userName, int creditNumber, String creditBrand, int userId, int CVV, int expirationDate) {
 		try{
 			stmt = conn.createStatement();
 			
-		String sql = "INSERT INTO Employees" +
-				"VALUES ("+firstName+","+ lastName+","+ id+","+ salary+")";
+		String sql = "INSERT INTO CreditCards (Id, CardHolderName, CreditCardNumber, Balance, CardType, UserId, CVV, ExpirationDate)" +
+				"VALUES ("+ userName +","+ creditNumber + "," + creditBrand +","+ userId +"," + CVV +","+expirationDate+ ")";
 		stmt.executeUpdate(sql);
 
-			   /*     PreparedStatement ps = conn.prepareStatement(sql);
-			        ps.setString(1, firstName);
-			        ps.setString(2, lastName);
-			        ps.setInt(3, id);
-			        ps.setDouble(4, salary);
+			      PreparedStatement ps = conn.prepareStatement(sql);
+			        ps.setString(1, userName);
+			        ps.setInt(2, creditNumber);
+			        ps.setString(3, creditBrand);
+			        ps.setInt(4, userId);
+			        ps.setInt(5, CVV);
+			        ps.setInt(6, expirationDate);
+			        
 			        ps.executeQuery();
+			        System.out.println(ps);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 	
 	public void addSingleUser(Users aUser) {
 		  
@@ -184,9 +189,45 @@ public class DBAccessClass {
 			System.out.println("connected to SQL");
 		} catch (SQLException e){
 			e.printStackTrace();
-		}
+   }
+	public void SearchProduct(int pid){
+	    String query = "SELECT * FROM Products WHERE Id LIKE ?";
+	    
+	    try {
+	    	
+	        ps = conn.prepareStatement(query);
+	        ps.setInt(1, pid);
+	        
+	        ResultSet rs = ps.executeQuery();
+	        System.out.println("query " + query);
+	        
+	        
+			  while(rs.next()){
+				    //Retrieve by column name
+				  int Id = rs.getInt("Id");
+				  String ProductName = rs.getString("ProductName");
+				  int ProductCategoryIndex = rs.getInt("ProducCategoryIndex");
+				  String ProductDescription = rs.getString("ProductDescription");
+				  double Price = rs.getInt("Price");
+				  int AvailableQuantity = rs.getInt("AvailableQuantity");
+				  int EstimatedDeliveryDays = rs.getInt("EstimatedDeliveryDays");
+				  int SellerId = rs.getInt("SellerId");
+				  String ProductPhotosLinks = rs.getString("ProductPhotosLinks");
+				  String ProductThumbnail = rs.getString("ProductThumbnail");
+				  ProductBean = new Products(Id, ProductName, ProductCategoryIndex, ProductDescription, Price, AvailableQuantity, EstimatedDeliveryDays, SellerId, ProductPhotosLinks, ProductThumbnail);
+			  }
+			  
+			  System.out.println(ProductBean.getProductName());
+	            
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } 
 	}
-  
+	
+	public Object getProduct() {
+		return ProductBean;
+	}
+	
 	public void SearchProductInfo(String pid){
     String query = "SELECT * FROM Products WHERE ProductName LIKE ?";
     

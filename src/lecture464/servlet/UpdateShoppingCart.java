@@ -34,12 +34,17 @@ public class UpdateShoppingCart extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ArrayList<Products> shoppingCart = (ArrayList<Products>)request.getAttribute("piList");
+        int pid = Integer.parseInt(request.getParameter("cart"));
+        System.out.println(pid);
+        DBAccessClass db = new DBAccessClass();
+		db.connectMeIn();
+		db.SearchProduct(pid);
+        ArrayList<Products> shoppingCart = (ArrayList<Products>)session.getAttribute("cart");
         if(shoppingCart == null){
           shoppingCart = new ArrayList<Products>();
           session.setAttribute("cart", shoppingCart);
         } 
-     //   shoppingCart.add(Products);
+        shoppingCart.add((Products)db.getProduct());
         RequestDispatcher view = request.getRequestDispatcher("View&CheckoutShoppingCart.jsp");
         view.forward(request, response);
 	}

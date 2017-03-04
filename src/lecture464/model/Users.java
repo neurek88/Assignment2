@@ -1,7 +1,5 @@
 package lecture464.model;
 
-import java.io.FileInputStream;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,9 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import lecture464.model.DBAccessClass;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -26,8 +21,46 @@ public class Users {
 	private String password;
 	private String email;
 	private int Id;
+	private String firstName;
+	private String lastName;
+	private String shippingAddress;
+	private String billAddress;
 	
-	public Users () {
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(String shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+
+	public String getBillAddress() {
+		return billAddress;
+	}
+
+	public void setBillAddress(String billAddress) {
+		this.billAddress = billAddress;
+	}
+
+	public Users() {
+
 		super();
 	}
 	

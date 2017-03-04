@@ -1,43 +1,66 @@
 package lecture464.model;
 
-import java.io.FileInputStream;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-//import javax.xml.ws.Response;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Properties;
-
 public class Transactions {
 
 	private int Id;
-	private double creditCard;
-	private double creditCardBal;
+	private String CardHolderName;
+	private int CreditCardNumber;
+	private double Balance; 
+	private String CardType;
+	private int UserId;
+	private int CVV;
+	private int ExpirationDate;
 	
-	
-	public int getUserId() {
+	public int getId() {
 		return Id;
 	}
-	public void setUserId(int Id) {
-		this.Id = Id;
+	public void setId(int id) {
+		Id = id;
 	}
-	public double getCreditCard() {
-		return creditCard;
+	public String getCardHolderName() {
+		return CardHolderName;
 	}
-	public void setBalance (double balance) {
-		creditCardBal = balance;
+	public void setCardHolderName(String cardHolderName) {
+		CardHolderName = cardHolderName;
 	}
-	public Transactions(int Id, double creditCard) {
-		super();
-		this.Id = Id;
-		this.creditCard = creditCard;
+	public int getCreditCardNumber() {
+		return CreditCardNumber;
 	}
+	public void setCreditCardNumber(int creditCardNumber) {
+		CreditCardNumber = creditCardNumber;
+	}
+	public double getBalance() {
+		return Balance;
+	}
+	public void setBalance(double balance) {
+		Balance = balance;
+	}
+	public String getCardType() {
+		return CardType;
+	}
+	public void setCardType(String cardType) {
+		CardType = cardType;
+	}
+	public int getUserId() {
+		return UserId;
+	}
+	public void setUserId(int userId) {
+		UserId = userId;
+	}
+	public int getCVV() {
+		return CVV;
+	}
+	public void setCVV(int cVV) {
+		CVV = cVV;
+	}
+	public int getExpirationDate() {
+		return ExpirationDate;
+	}
+	public void setExpirationDate(int expirationDate) {
+		ExpirationDate = expirationDate;
+	}
+	
+	
 
 }
 	
