@@ -33,11 +33,13 @@ public class Register extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName = request.getParameter("userName");
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 
 	
-		Users aUser = new Users(userName, password, email);
+		Users aUser = new Users(firstName, lastName, userName, password, email);
 
 			aUser.registerUser(aUser);
 

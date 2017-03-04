@@ -62,9 +62,7 @@ public class Login extends HttpServlet {
 		Cookie cookie = new Cookie("userName", userName);
 		cookie.setMaxAge(3200);
 		response.addCookie(cookie);
-		System.out.println(cookie);
 		}
-		System.out.println(myCheckBox);
 		
 		Users aUser = new Users();
 		
@@ -73,10 +71,12 @@ public class Login extends HttpServlet {
 		
 		if(userExists && userPasswordMatches) {
 			aUser = aUser.getUser(userName);
-			
+			int userID = aUser.getUserID(userName);
 			HttpSession session = request.getSession();
 		    session.setAttribute("userBean", aUser);
 		    session.setAttribute("userName", userName);
+		    
+		    System.out.println(userID);
 		    
 		    String address = "CustomerHomePage.jsp";
 		    RequestDispatcher dispatcher =

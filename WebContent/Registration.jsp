@@ -18,8 +18,10 @@
 <form action=Register method="post">
 
 User Name: <input type=text name=userName><br>
+First Name: <input type=text name=firstName><br>
+Last Name: <input type=text name=lastName><br>
 Password: <input type=password name=password><br>
-Email: <input type=email name=email><br>
+Email: <input type=text name=email><br>
 <input type=submit value=Register> <br> 
 
 </form>

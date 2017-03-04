@@ -21,7 +21,7 @@ public class DBAccessClass {
   
 	private ArrayList<Products> list = new ArrayList<Products>();
 	private Products ProductBean;
-	
+    private int userId;
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	final String DB_URL = "jdbc:mysql://cse.unl.edu:3306/rhooper";
@@ -32,25 +32,14 @@ public class DBAccessClass {
 	static final String USER = "rhooper"; // Replace with your CSE_LOGIN
 	static final String PASS = "An6-vN";   // Replace with your CSE MySQL_PASSWORD
 	
-	
-	public void insertCreditData ( String userName, int creditNumber, String creditBrand, int userId, int CVV, int expirationDate) {
+	public void insertCreditData (String userName, int creditNumber, String creditBrand, int userId, int CVV, int expirationDate) {
+		int ccLimit = 1000;
 		try{
 			stmt = conn.createStatement();
 			
-		String sql = "INSERT INTO CreditCards (Id, CardHolderName, CreditCardNumber, Balance, CardType, UserId, CVV, ExpirationDate)" +
-				"VALUES ("+ userName +","+ creditNumber + "," + creditBrand +","+ userId +"," + CVV +","+expirationDate+ ")";
+		String sql = "INSERT INTO CreditCards (CardHolderName, CreditCardNumber, Balance, CardType, UserId, CVV, ExpirationDate)" +
+				"VALUES ("+ userName +","+ creditNumber + "," + creditBrand +","+ ccLimit +"," + userId +"," + CVV +","+expirationDate+ ")";
 		stmt.executeUpdate(sql);
-
-			      PreparedStatement ps = conn.prepareStatement(sql);
-			        ps.setString(1, userName);
-			        ps.setInt(2, creditNumber);
-			        ps.setString(3, creditBrand);
-			        ps.setInt(4, userId);
-			        ps.setInt(5, CVV);
-			        ps.setInt(6, expirationDate);
-			        
-			        ps.executeQuery();
-			        System.out.println(ps);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -64,13 +53,14 @@ public class DBAccessClass {
 		  String sql;
 		  
 		  String userName = aUser.getUserName();
+		  String firstName = aUser.getFirstName();
+		  String lastName = aUser.getLastName();
 		  String password = aUser.getPassword();
 		  String email = aUser.getEmail();
 		  
 
-		  sql = "INSERT INTO Users (EmailAddress, Username, Password)" +
-		          "VALUES ('" + email + "', '" + userName + 
-				  "', '" + password + "')";
+		  sql = "INSERT INTO Users (FirstName, LastName, EmailAddress, Username, Password)" +
+		          "VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', '" + userName + "', '" + password + "')";
 		  stmt.executeUpdate(sql);
 		  
 		  
@@ -151,18 +141,18 @@ public class DBAccessClass {
 		return aUser;
 	}
 	
-	public Users returnUserIDbyUsername (String aUserName) {
+	public int returnUserIDbyUsername (String aUserName) {
 		String SQL = "SELECT Username, Id from Users;";
 	    Statement stat;
 	   
-	    Users aUser = new Users();
+	
 		try {
 			stat = conn.createStatement();
 			ResultSet rs = stat.executeQuery(SQL);
 			
 			while (rs.next()){
 				if(aUserName.equals( rs.getString("Username") )) {
-					aUser.setUserId(rs.getInt("Id"));
+					userId = rs.getInt("Id");
 				} 
 		    }
 			
@@ -171,8 +161,8 @@ public class DBAccessClass {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		return aUser;
+		System.out.println(userId);
+		return userId;
 	}
 	
 	public void connectMeIn() {
@@ -186,9 +176,9 @@ public class DBAccessClass {
 		try {
 			 //Open a connection
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-			System.out.println("connected to SQL");
 		} catch (SQLException e){
 			e.printStackTrace();
+		}
    }
 	public void SearchProduct(int pid){
 	    String query = "SELECT * FROM Products WHERE Id LIKE ?";
@@ -270,7 +260,6 @@ public class DBAccessClass {
 	public void closeConnection(){
 		try {
 			conn.close();
-			System.out.println("Disconnected from mySQL");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
