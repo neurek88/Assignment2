@@ -1,11 +1,6 @@
 package lecture464.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +32,48 @@ public class DBAccessClass {
 		try{
 			stmt = conn.createStatement();
 			
+
 		String sql = "INSERT INTO CreditCards (CardHolderName, CreditCardNumber, Balance, CardType, UserId, CVV, ExpirationDate)" +
 				"VALUES ("+ userName +","+ creditNumber + "," + creditBrand +","+ ccLimit +"," + userId +"," + CVV +","+expirationDate+ ")";
+
 		stmt.executeUpdate(sql);
+
+
+/*			      PreparedStatement ps = conn.prepareStatement(sql);
+			        ps.setString(2, userName);
+			        ps.setInt(3, creditNumber);
+			        ps.setString(5, creditBrand);
+			        ps.setInt(6, userId);
+			        ps.setInt(7, CVV);
+			        ps.setInt(8, expirationDate);
+			        
+			        ps.executeQuery();
+			        System.out.println(ps);
+			       */
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void insertOrderData ( int customerId, double totalCost, String shippingAddress, String billAddress, int creditNumber) {
+		try{
+			stmt = conn.createStatement();
+			
+		String sql = "INSERT INTO Orders ( `CustomerId`, `TotalCost`, `OrderDate`, `ShippingAddress`, `BillingAddress`, `CreditCardNumber`)" +
+				"VALUES (" + customerId + ", " + totalCost + ", CURRENT_DATE(), '" + shippingAddress + "', '" + billAddress + "', '" + creditNumber +"' )";
+		stmt.executeUpdate(sql);
+
+/*			      PreparedStatement ps = conn.prepareStatement(sql);
+			        ps.setString(2, userName);
+			        ps.setInt(3, creditNumber);
+			        ps.setString(5, creditBrand);
+			        ps.setInt(6, userId);
+			        ps.setInt(7, CVV);
+			        ps.setInt(8, expirationDate);
+			        
+			        ps.executeQuery();
+			        System.out.println(ps);
+			       */
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
