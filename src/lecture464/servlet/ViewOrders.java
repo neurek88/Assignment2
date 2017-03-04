@@ -10,7 +10,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import lecture464.model.DBAccessClass;
 import lecture464.model.Users;
 
 /**
@@ -19,6 +21,12 @@ import lecture464.model.Users;
 public class ViewOrders extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private Users getProfile(HttpServletRequest request) {
+	     HttpSession session = request.getSession();
+	     Users profile = (Users) session.getAttribute("userBean");
+	     return profile;
+	}
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -31,6 +39,13 @@ public class ViewOrders extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Users profile = getProfile(request);
+		int userId = profile.getUserId();
+		DBAccessClass db = new DBAccessClass();
+		db.connectMeIn();
+		db.findOrdersById(userId);
+		db.closeConnection();
+		System.out.println(userId);
 		
 	}
 

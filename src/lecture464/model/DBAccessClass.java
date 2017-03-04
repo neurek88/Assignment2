@@ -15,6 +15,8 @@ public class DBAccessClass {
 	PreparedStatement ps = null;
   
 	private ArrayList<Products> list = new ArrayList<Products>();
+	private ArrayList<Integer> orderList = new ArrayList<Integer>();
+	private Orders OrderBean;
 	private Products ProductBean;
     private int userId;
 	// JDBC driver name and database URL
@@ -242,6 +244,29 @@ public class DBAccessClass {
 			  }
 			  
 			  System.out.println(ProductBean.getProductName());
+	            
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } 
+	}
+	
+	public void findOrdersById(int customerID){
+	    String query = "SELECT Id, CustomerId FROM Orders WHERE CustomerId LIKE ?";
+	    
+	    try {
+	    	
+	        ps = conn.prepareStatement(query);
+	        ps.setInt(1, customerID);
+	        
+	        ResultSet rs = ps.executeQuery();
+	        System.out.println("query " + query);
+	        
+			  while(rs.next()){
+				 int orderID = rs.getInt("Id");
+				 orderList.add(orderID);
+				 }
+			 
+			 System.out.println(orderList);
 	            
 	    } catch (Exception e) {
 	        e.printStackTrace();
