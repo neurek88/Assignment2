@@ -18,6 +18,7 @@ public class DBAccessClass {
 	Connection conn = null;
 	Statement stmt = null;
 	PreparedStatement ps = null;
+  
 	private ArrayList<Products> list = new ArrayList<Products>();
 	private Products ProductBean;
 	
@@ -150,6 +151,30 @@ public class DBAccessClass {
 		return aUser;
 	}
 	
+	public Users returnUserIDbyUsername (String aUserName) {
+		String SQL = "SELECT Username, Id from Users;";
+	    Statement stat;
+	   
+	    Users aUser = new Users();
+		try {
+			stat = conn.createStatement();
+			ResultSet rs = stat.executeQuery(SQL);
+			
+			while (rs.next()){
+				if(aUserName.equals( rs.getString("Username") )) {
+					aUser.setUserId(rs.getInt("Id"));
+				} 
+		    }
+			
+		    stat.close();
+		        
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return aUser;
+	}
+	
 	public void connectMeIn() {
 		try{
 			//Register the JDBC driver
@@ -164,8 +189,7 @@ public class DBAccessClass {
 			System.out.println("connected to SQL");
 		} catch (SQLException e){
 			e.printStackTrace();
-		}
-	}
+   }
 	public void SearchProduct(int pid){
 	    String query = "SELECT * FROM Products WHERE Id LIKE ?";
 	    
