@@ -62,7 +62,7 @@ Billing Address:<input type=text name=billAddress><br>
     <option value="Visa">Visa</option>
     <option value="MasterCard">Master Card</option>
   </select>
-Card Number: <input type=text name=cardNumber><br>
+Card Number: <input type=text name=creditNumber><br>
 Security Code: <input type=text name=CVV><br>
 Expiration Date: <select name="expirationDate">
    <%

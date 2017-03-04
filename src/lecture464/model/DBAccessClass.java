@@ -32,23 +32,21 @@ public class DBAccessClass {
 	static final String PASS = "An6-vN";   // Replace with your CSE MySQL_PASSWORD
 	
 	
-	public void insertCreditData (int creditId, String userName, int creditNumber, double balance, String creditBrand, int userId, int CVV, int expirationDate) {
+	public void insertCreditData ( String userName, int creditNumber, String creditBrand, int userId, int CVV, int expirationDate) {
 		try{
 			stmt = conn.createStatement();
 			
 		String sql = "INSERT INTO CreditCards (Id, CardHolderName, CreditCardNumber, Balance, CardType, UserId, CVV, ExpirationDate)" +
-				"VALUES (" + creditId + "," + userName +","+ creditNumber+ ","+ balance +"," + creditBrand +","+ userId +"," + CVV +","+expirationDate+ ")";
+				"VALUES ("+ userName +","+ creditNumber + "," + creditBrand +","+ userId +"," + CVV +","+expirationDate+ ")";
 		stmt.executeUpdate(sql);
 
 			      PreparedStatement ps = conn.prepareStatement(sql);
-			        ps.setInt(1, creditId);
-			        ps.setString(2, userName);
-			        ps.setInt(3, creditNumber);
-			        ps.setDouble(4, balance);
-			        ps.setString(5, creditBrand);
-			        ps.setInt(6, userId);
-			        ps.setInt(7, CVV);
-			        ps.setInt(8, expirationDate);
+			        ps.setString(1, userName);
+			        ps.setInt(2, creditNumber);
+			        ps.setString(3, creditBrand);
+			        ps.setInt(4, userId);
+			        ps.setInt(5, CVV);
+			        ps.setInt(6, expirationDate);
 			        
 			        ps.executeQuery();
 			        System.out.println(ps);
