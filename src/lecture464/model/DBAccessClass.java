@@ -55,7 +55,7 @@ public class DBAccessClass {
 			e.printStackTrace();
 		}
 	}
-	public void insertOrderData ( int customerId, double totalCost, String shippingAddress, String billAddress, int creditNumber) {
+	public void insertOrderData ( int customerId, double totalCost, String shippingAddress, String billAddress, double creditNumber) {
 		try{
 			stmt = conn.createStatement();
 			
@@ -163,6 +163,8 @@ public class DBAccessClass {
 				if(aUserName.equals( rs.getString("Username") )) {
 					aUser.setUserName(rs.getString("Username"));
 					aUser.setPassword(rs.getString("Password"));
+					aUser.setFirstName(rs.getString("FirstName"));
+					aUser.setLastName(rs.getString("LastName"));
 				} 
 		    }
 			
@@ -289,6 +291,28 @@ public class DBAccessClass {
 }
 	public ArrayList<Products> getProductList() {
 		return list;
+	}
+	
+	public boolean checkCreditCard(double creditNumber, String creditBrand, int CVV) {
+		boolean cardMatches = false;
+		String SQL = "SELECT * from CreditCards";
+	    Statement stat;
+		try {
+			stat = conn.createStatement();
+			ResultSet rs = stat.executeQuery(SQL);
+			
+			while (rs.next()){	
+				if(creditNumber == ( rs.getDouble(3)) && creditBrand.equals(rs.getString(4)) && CVV == (rs.getInt(5))) {
+					cardMatches = true;
+				}
+			}
+			
+		    stat.close();
+		        
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cardMatches;
 	}
 	
 	public void closeConnection(){

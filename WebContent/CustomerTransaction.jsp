@@ -41,6 +41,7 @@
             </tr>
            </c:forEach> 
            </table>
+<form action=CustomerTransactionConfirmation method=post>
            <script language="javascript" type="text/javascript">
             var tds = document.getElementById('countit').getElementsByTagName('td');
             var sum = 0;
@@ -49,12 +50,11 @@
                     sum += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
                 }
             }
-            document.getElementById('countit').innerHTML += '<tr><td></td><td colspan=2>Total Cost:</td><td>' + sum + '</td></tr>';
+            document.getElementById('countit').innerHTML += '<tr><td></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><input type=hidden name=total value='+ sum +'></tr>';
         </script>	
 <br>
-<form action=CustomerTransactionConfirmation method=post>
-First Name:<input type=text name=firstName><br>
-Last Name:<input type=text name=lastName><br>
+First Name:<input type=text name=firstName value="${aUser.getFirstName()}"><br>
+Last Name:<input type=text name=lastName value="${aUser.getLastName()}"><br>
 Shipping Address:<input type=text name=shippingAddress><br>
 Billing Address:<input type=text name=billAddress><br>
  <select name="creditBrand">

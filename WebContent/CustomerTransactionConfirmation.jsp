@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,6 +19,65 @@
 
 <h2>Your order has been placed!</h2>
 <h2>Thanks for shopping on the World's Best Shopping Website!</h2>
+
+<table width="700px" id="countit"
+               style="border:1px solid #000000;">
+            <tr>
+                <td colspan=8 align="center"
+                    style="background-color:teal">
+                    <b>Confirmation</b></td>
+            </tr>
+            <tr style="background-color:lightgrey;">
+            	<td><b>Product ID</b></td>
+            	<td><b>Product Name</b></td>
+                <td><b>Requested Quantity</b></td>
+                <td><b>Product thumbnail</b></td>
+                <td><b>Seller Name</b></td>
+                <td><b>Available Quantity</b></td>
+                <td><b>Price</b></td>
+                <td><b>Estimated delivery date</b></td>
+            </tr> 
+ <c:forEach items="${cart}" var="list" varStatus="i">
+           <tr>
+           		<td>${list.getProductId()}</td>
+           		<td>${list.getProductName()}</td>
+                <td>${quantity}</td>
+                <td><img src="${list.getProductThumbnail()}" alt="${list.getProductName()}" style="width:35px;height:35px;"></td>
+                <td>${list.getSellerId()}</td>
+                <td>${list.getAvailableQuantity()}</td>
+                <td class="count-me"> ${list.getPrice()}</td>
+                <td>${list.getEstimatedDeliveryDays()}</td>
+             </tr>
+           </c:forEach> 
+           </table>
+  <table width="700px"
+               style="border:1px solid #000000;">
+            <tr>
+                <td colspan=8 align="center"
+                    style="background-color:teal">
+                    <b>Confirmation Name</b></td>
+          </tr>
+            <tr style="background-color:lightgrey;">
+            	<td><b>First Name</b></td>
+            	<td><b>Last Name</b></td>
+                <td><b>Shippping Address</b></td>
+                <td><b>Billing Address</b></td>
+                <td><b>Credit Card</b></td>
+                <td><b>Credit Card Type</b></td>
+                <td><b>CVV</b></td>
+                <td><b>Expiration Date</b></td>
+             </tr>
+            <tr>
+           		<td>${orderUser.getFirstName()}</td>
+           		<td>${orderUser.getFirstName()}</td>
+                <td>${orderUser.getFirstName()}</td>
+                <td>${orderUser.getFirstName()}</td>
+                <td>${newCreditCard.getCreditCardNumber()}</td>
+                <td>${newCreditCard.setCardType()}</td>
+                <td>${newCreditCard.setCVV()}</td>
+                <td>${newCreditCard.setExpirationDate()}</td>
+             </tr>
+	</table>
 
 <br>
 

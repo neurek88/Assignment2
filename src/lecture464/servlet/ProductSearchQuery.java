@@ -55,7 +55,6 @@ public class ProductSearchQuery extends HttpServlet {
         	session.setAttribute("piList", ListName);
             RequestDispatcher view = request.getRequestDispatcher("ProductSearchResults.jsp");
             view.forward(request, response);
-            System.out.print(aUser.getUserId);
         } catch (Exception e) {
             e.printStackTrace();
         }

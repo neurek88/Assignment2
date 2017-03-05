@@ -20,7 +20,7 @@
 <h2>This product is available for purchase and use</h2>
 <h3>details</h3>
 <br>
-<a href="View&CheckoutShoppingCart.jsp"> Add to Cart </a> <br>
+<form action=UpdateShoppingCart method="post"><input type=text name="quantity"> Quantity Requested  <button name="cart" type="submit" value="${itemList[0].getProductId()}">add to cart</button></form> <br>
 <br>
 <table width="700px" align="center"
                style="border:1px solid #000000;">

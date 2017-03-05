@@ -57,32 +57,55 @@ public class Orders {
 		this.Quantity = qty;
 		this.OrderCost = orderCost;
 	}
+	public int getCustomerId() {
+		return CustomerId;
+	}
+	public void setCustomerId(int customerId) {
+		CustomerId = customerId;
+	}
+	public int getOrderId() {
+		return OrderId;
+	}
+	public void setOrderId(int orderId) {
+		OrderId = orderId;
+	}
+	public int getSellerId() {
+		return SellerId;
+	}
+	public void setSellerId(int sellerId) {
+		SellerId = sellerId;
+	}
+	public int getProductId() {
+		return ProductId;
+	}
+	public void setProductId(int productId) {
+		ProductId = productId;
+	}
+	public int getProductPrice() {
+		return ProductPrice;
+	}
+	public void setProductPrice(int productPrice) {
+		ProductPrice = productPrice;
+	}
+	public int getShippingStatus() {
+		return ShippingStatus;
+	}
+	public void setShippingStatus(int shippingStatus) {
+		ShippingStatus = shippingStatus;
+	}
+	public int getShippingRefNo() {
+		return ShippingRefNo;
+	}
+	public void setShippingRefNo(int shippingRefNo) {
+		ShippingRefNo = shippingRefNo;
+	}
+	public int getStatus() {
+		return Status;
+	}
+	public void setStatus(int status) {
+		Status = status;
+	}
 	
-	
-	
-	
-	
-/*	private static HashMap<int, Id> orders;
-
-	  static {
-		  orders = new HashMap<String, Customer>();
-		  orders.put("id001",
-	                  new BankCustomer("id001",
-	                                   "John",
-	                                   "Hacker",
-	                                   -3456.78));
-		  orders.put("id002",
-	                  new BankCustomer("id002",
-	                                   "Jane",
-	                                   "Hacker",
-	                                   1234.56));
-		  orders.put("id003",
-	                  new BankCustomer("id003",
-	                                   "Juan",
-	                                   "Hacker",
-	                                   987654.32));
-	  }
-*/	
 }
 	
 

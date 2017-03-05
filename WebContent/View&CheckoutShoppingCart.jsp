@@ -22,28 +22,32 @@
 <table width="700px" id="countit"
                style="border:1px solid #000000;">
             <tr>
-                <td colspan=7 align="center"
+                <td colspan=9 align="center"
                     style="background-color:teal">
                     <b>Shopping Cart</b></td>
             </tr>
             <tr style="background-color:lightgrey;">
-                <td><b>Product Name</b></td>
+            	<td><b>Product ID</b></td>
+            	<td><b>Product Name</b></td>
+                <td><b>Requested Quantity</b></td>
                 <td><b>Product thumbnail</b></td>
                 <td><b>Seller Name</b></td>
-                <td><b>Quantity</b></td>
+                <td><b>Available Quantity</b></td>
                 <td><b>Price</b></td>
                 <td><b>Estimated delivery date</b></td>
                 <td><b>delete?</b></td>
             </tr> 
- <c:forEach items="${cart}" var="list">
+ <c:forEach items="${cart}" var="list" varStatus="i">
            <tr>
-                <td>${list.getProductName()}</td>
+           		<td>${list.getProductId()}</td>
+           		<td>${list.getProductName()}</td>
+                <td>${quantity}</td>
                 <td><img src="${list.getProductThumbnail()}" alt="${list.getProductName()}" style="width:35px;height:35px;"></td>
                 <td>${list.getSellerId()}</td>
                 <td>${list.getAvailableQuantity()}</td>
                 <td class="count-me"> ${list.getPrice()}</td>
                 <td>${list.getEstimatedDeliveryDays()}</td>
-                <td><form action=UpdateShoppingCart method="post"><button name="delete" type="submit" value="${list.getProductName()}">delete?</button></form></td>
+                <td><form action=UpdateShoppingCart method="post"><button name="delete" type="submit" value="${i.index}">delete?</button></form></td>
                 </tr>
            </c:forEach> 
            </table>
@@ -55,7 +59,7 @@
                     sum += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
                 }
             }
-            document.getElementById('countit').innerHTML += '<tr><td><a href="CustomerTransaction.jsp"> Check Out </a></td><td></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><td><td></td></td></tr>';
+            document.getElementById('countit').innerHTML += '<tr><td><a href="CustomerTransaction.jsp"> Check Out </a></td><td colspan=3></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><td colspan=2></td></tr>';
         </script>	
 
 <br>

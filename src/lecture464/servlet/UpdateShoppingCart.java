@@ -20,7 +20,12 @@ import lecture464.model.Users;
  */
 public class UpdateShoppingCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
+	private Products getCart(HttpServletRequest request) {
+	     HttpSession session = request.getSession();
+	     Products cart = (Products) session.getAttribute("cart");
+	     return cart;
+	}
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,18 +39,28 @@ public class UpdateShoppingCart extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        int pid = Integer.parseInt(request.getParameter("cart"));
-        System.out.println(pid);
         DBAccessClass db = new DBAccessClass();
-		db.connectMeIn();
-		db.SearchProduct(pid);
+		db.connectMeIn();		
         ArrayList<Products> shoppingCart = (ArrayList<Products>)session.getAttribute("cart");
+        if (request.getParameter("cart") != null) {
+        	Integer pid = Integer.parseInt(request.getParameter("cart"));
+        	db.SearchProduct(pid);
         if(shoppingCart == null){
           shoppingCart = new ArrayList<Products>();
           session.setAttribute("cart", shoppingCart);
         } 
         shoppingCart.add((Products)db.getProduct());
-        RequestDispatcher view = request.getRequestDispatcher("View&CheckoutShoppingCart.jsp");
+        }
+        else if (request.getParameter("cart") == null) {
+        	int delete = Integer.parseInt(request.getParameter("delete"));
+        	shoppingCart.remove(delete);
+        	session.setAttribute("cart", shoppingCart);
+        //} else if (request.getParameter("cart") != null && request.getParameter("quantity") != null) {
+        	
+        }
+        	
+        
+    	RequestDispatcher view = request.getRequestDispatcher("View&CheckoutShoppingCart.jsp");
         view.forward(request, response);
 	}
 
