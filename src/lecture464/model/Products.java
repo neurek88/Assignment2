@@ -11,6 +11,7 @@ public class Products {
 	private int EstimatedDeliveryDays;
 	private int SellerId;
 	private String ProductPhotosLinks;
+	private String ProductCategory;
 	//private String ProductVideosLinks;
 	private String ProductThumbnail;
 	
@@ -46,6 +47,7 @@ public class Products {
 		this.SellerId = SellerId;
 		this.ProductPhotosLinks = ProductPhotosLinks;
 		this.ProductThumbnail = ProductThumbnail;
+		//this.ProductCategory = getProductCategoryIndex(ProductCategoryIndex);
 	    } 
 	    
 	
