@@ -46,7 +46,7 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String userName = firstName;
-		double creditNumber = Double.parseDouble(request.getParameter("creditNumber"));
+		int creditNumber = Integer.parseInt(request.getParameter("creditNumber"));
 		String creditBrand = request.getParameter("creditBrand");
 		int userId = profile.getUserId();
 		//double sum = Double.parseDouble(request.getParameter("total"));
@@ -55,36 +55,46 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		int expirationDate = Integer.parseInt(request.getParameter("expirationDate"));
 		String shippingAddress = request.getParameter("shippingAddress");
 		String billAddress = request.getParameter("billAddress");
+		System.out.println(creditBrand);
+		System.out.println(firstName);
+		System.out.println(creditNumber);
+		System.out.println(userId);
+		System.out.println(CVV);
+		//System.out.println(sum);
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
-		if (userName !=null || creditNumber!=0 || creditBrand!=null || userId!=0 || CVV!=0) {
-		if (db.checkCreditCard(creditNumber, creditBrand, CVV)) {
-	//		System.out.println(sum);
 		HttpSession session = request.getSession();
 		Users orderUser = new Users();
+		Transactions newCreditCard = new Transactions();
+		//if (firstName !=null || shippingAddress != null || creditNumber!=0 || creditBrand!=null || userId!=0 || CVV!=0) {
+		if (firstName !=null || lastName !=null || shippingAddress != null || shippingAddress != null) {
 			orderUser.setFirstName(firstName);
 			orderUser.setLastName(lastName);
 			orderUser.setShippingAddress(shippingAddress);
 			orderUser.setBillAddress(billAddress);
-		session.setAttribute("orderUser", orderUser);
-		
-		Transactions newCreditCard = new Transactions();
-			newCreditCard.setCardType(creditBrand);
-			newCreditCard.setCVV(CVV);
-			newCreditCard.setCreditCardNumber(creditNumber);
-			newCreditCard.setExpirationDate(expirationDate);
-	//		newCreditCard.setNewBalance(sum);
-		session.setAttribute("newCreditCard", newCreditCard);
-		
-		db.insertOrderData( userId, balance , shippingAddress, billAddress, creditNumber);
-		
+			session.setAttribute("orderUser", orderUser);
+				if (db.checkCreditCard(creditNumber, creditBrand, CVV)) {
+			//		newCreditCard.setCardType(creditBrand);
+					newCreditCard.setCVV(CVV);
+					newCreditCard.setCreditCardNumber(creditNumber);
+					newCreditCard.setExpirationDate(expirationDate);
+		//			newCreditCard.setNewBalance(sum);
+					session.setAttribute("newCreditCard", newCreditCard);
+					session.removeAttribute("cart");
+					db.insertOrderData( userId, balance , shippingAddress, billAddress, creditNumber);
+					
+			} else {
+				newCreditCard.setCardType("Incorrect Credit Card Information");
+				session.setAttribute("newCreditCard", newCreditCard);
+			}
+			
+
+		} else {
+			orderUser.setFirstName("Missing User Info");
+			session.setAttribute("orderUser", orderUser);
+		}	
         RequestDispatcher view = request.getRequestDispatcher("CustomerTransactionConfirmation.jsp");
         view.forward(request, response);
-			}
-		}else {
-            RequestDispatcher view = request.getRequestDispatcher("CustomerTransaction.jsp");
-            view.forward(request, response);
-		}
 		
 	}
 

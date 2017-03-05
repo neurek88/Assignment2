@@ -17,7 +17,7 @@
 </ul> </div>
 <h1> World's Best Shopping Website</h1><br>
 
-<h2>Your order has been placed!</h2>
+<h2>Your order Status</h2>
 <h2>Thanks for shopping on the World's Best Shopping Website!</h2>
 
 <table width="700px" id="countit"
@@ -69,9 +69,9 @@
              </tr>
             <tr>
            		<td>${orderUser.getFirstName()}</td>
-           		<td>${orderUser.getFirstName()}</td>
-                <td>${orderUser.getFirstName()}</td>
-                <td>${orderUser.getFirstName()}</td>
+           		<td>${orderUser.getLastName()}</td>
+                <td>${orderUser.getShippingAddress()}</td>
+                <td>${orderUser.getBillAddress()}</td>
                 <td>${newCreditCard.getCreditCardNumber()}</td>
                 <td>${newCreditCard.setCardType()}</td>
                 <td>${newCreditCard.setCVV()}</td>

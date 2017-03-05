@@ -79,6 +79,7 @@ public class Login extends HttpServlet {
 		    session.setAttribute("userName", userName);
 		    
 		    System.out.println(userID);
+		    System.out.println(aUser.getFirstName());
 		    
 		    String address = "CustomerHomePage.jsp";
 		    RequestDispatcher dispatcher =

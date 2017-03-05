@@ -57,7 +57,7 @@ public class DBAccessClass {
 			e.printStackTrace();
 		}
 	}
-	public void insertOrderData ( int customerId, double totalCost, String shippingAddress, String billAddress, double creditNumber) {
+	public void insertOrderData ( int customerId, double totalCost, String shippingAddress, String billAddress, int creditNumber) {
 		try{
 			stmt = conn.createStatement();
 			
@@ -153,7 +153,7 @@ public class DBAccessClass {
 	}
 	
 	public Users returnUserByUsername(String aUserName) {
-		String SQL = "SELECT Username, Password from Users;";
+		String SQL = "SELECT Username, Password, FirstName, LastName from Users;";
 	    Statement stat;
 	   
 	    Users aUser = new Users();
@@ -318,7 +318,7 @@ public class DBAccessClass {
 		return list;
 	}
 	
-	public boolean checkCreditCard(double creditNumber, String creditBrand, int CVV) {
+	public boolean checkCreditCard(int creditNumber, String creditBrand, int CVV) {
 		boolean cardMatches = false;
 		String SQL = "SELECT * from CreditCards";
 	    Statement stat;
@@ -327,7 +327,7 @@ public class DBAccessClass {
 			ResultSet rs = stat.executeQuery(SQL);
 			
 			while (rs.next()){	
-				if(creditNumber == ( rs.getDouble(3)) && creditBrand.equals(rs.getString(4)) && CVV == (rs.getInt(5))) {
+				if(creditNumber == ( rs.getDouble(3)) && creditBrand.equals(rs.getString(5)) && CVV == (rs.getInt(7))) {
 					cardMatches = true;
 				}
 			}
