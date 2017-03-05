@@ -15,11 +15,13 @@ public class DBAccessClass {
 	PreparedStatement ps = null;
   
 	private ArrayList<Products> list = new ArrayList<Products>();
+	private ArrayList<Products> orderProducts = new ArrayList<Products>();
+	private ArrayList<ArrayList<Products>> completeOrderProducts = new ArrayList<ArrayList<Products>>();
 	private ArrayList<Integer> orderList = new ArrayList<Integer>();
 	private ArrayList<Orders> orderProductList = new ArrayList<Orders>();
-	
 	private ArrayList<ArrayList<Orders>> completeOrderArray = new ArrayList<ArrayList<Orders>>();
 	private Orders OrderBean;
+	private Products OrderProductBean;
 	private Products ProductBean;
     private int userId;
     private int orderId;
@@ -288,6 +290,60 @@ public class DBAccessClass {
 		return orderId;
 	}
 	
+	//public void SearchOrderProducts(ArrayList<ArrayList<Orders>> orderList){
+	public void SearchOrderProducts(Orders aOrder){
+	    String query = "SELECT * FROM Products WHERE Id LIKE ?";
+	    
+	    	try {
+		    	int thisID = aOrder.getProductId();
+		        ps = conn.prepareStatement(query);
+		        ps.setInt(1, thisID);
+		        
+		        ResultSet rs = ps.executeQuery();
+		        System.out.println("query " + query);
+		        
+		        
+				  while(rs.next()){   }
+		            
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    } 
+	    
+	    }
+	public Products   getOrderProduct() {
+		return OrderProductBean;
+	}
+	    
+	    
+	
+	public void findNewestOrderIdById(int customerID){
+	    String query = "SELECT Id, CustomerId FROM Orders WHERE CustomerId LIKE ?";
+	    
+	    int recentOrderID = 0;
+	    try {
+	    	
+	        ps = conn.prepareStatement(query);
+	        ps.setInt(1, customerID);
+	        
+	        ResultSet rs = ps.executeQuery();
+	        System.out.println("query " + query);
+	        
+			  while(rs.next()){
+				  
+				 
+				 int orderID = rs.getInt("Id");
+				 if (orderID > recentOrderID) {
+					 recentOrderID = orderID;
+				 }
+				 }
+			 
+			 System.out.println(recentOrderID);
+	            
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } 
+	}
+	
 	public void findOrdersById(int customerID){
 	    String query = "SELECT Id, CustomerId FROM Orders WHERE CustomerId LIKE ?";
 	    
@@ -331,17 +387,18 @@ public class DBAccessClass {
 					 Orders objt = new Orders(productID, orderID);
 					 orderProductList.add(objt);
 					 }
-				  completeOrderArray.add(orderProductList);
+				  completeOrderArray.add(i, orderProductList);
 				 // completeOrderArray.get(i).add(orderProductList);
 				  
 				  
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    } 	
+	    	orderProductList.clear();
 	    	
 	    }
-	    System.out.println(orderProductList);
-	    System.out.println(completeOrderArray);
+	    //System.out.println(orderProductList);
+	    //System.out.println(completeOrderArray);
 	    
 	    
 	}
