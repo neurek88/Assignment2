@@ -71,9 +71,17 @@ public class Login extends HttpServlet {
 		
 		if(userExists && userPasswordMatches) {
 			aUser = aUser.getUser(userName);
+<<<<<<< HEAD
 
+=======
+			
+>>>>>>> branch 'master' of https://github.com/neurek88/Assignment2
 			int userID = aUser.getUserID(userName);
 			aUser.setUserId(userID);
+<<<<<<< HEAD
+=======
+			
+>>>>>>> branch 'master' of https://github.com/neurek88/Assignment2
 			HttpSession session = request.getSession();
 		    session.setAttribute("userBean", aUser);
 		    session.setAttribute("userName", userName);
