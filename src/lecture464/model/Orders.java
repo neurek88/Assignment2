@@ -51,12 +51,10 @@ public class Orders {
 	
 	
 	
-	public Orders(int CustomerId, int OrderId) {
+	public Orders(int ProductId, int OrderId) {
 		super();
-		this.CustomerId = CustomerId;
+		this.ProductId = ProductId;
 		this.OrderId = OrderId;
-		
-		
 		/*this.Quantity = qty;
 		this.OrderCost = orderCost;*/
 	}

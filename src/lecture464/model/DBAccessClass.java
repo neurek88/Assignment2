@@ -16,6 +16,9 @@ public class DBAccessClass {
   
 	private ArrayList<Products> list = new ArrayList<Products>();
 	private ArrayList<Integer> orderList = new ArrayList<Integer>();
+	private ArrayList<Orders> orderProductList = new ArrayList<Orders>();
+	
+	private ArrayList<ArrayList<Orders>> completeOrderArray = new ArrayList<ArrayList<Orders>>();
 	private Orders OrderBean;
 	private Products ProductBean;
     private int userId;
@@ -27,7 +30,7 @@ public class DBAccessClass {
 
 	//  Database credentials
 	static final String USER = "rhooper"; // Replace with your CSE_LOGIN
-	static final String PASS = "An6-vN";   // Replace with your CSE MySQL_PASSWORD
+	static final String PASS = "An6-vN";   // Replace with your CSE MySQL_PASSWORD0
 	
 	public void insertCreditData (String userName, int creditNumber, String creditBrand, int userId, int CVV, int expirationDate) {
 		int ccLimit = 1000;
@@ -275,6 +278,48 @@ public class DBAccessClass {
 	    } 
 	}
 	
+	public void findProductsOrderedByOrderID(ArrayList<Integer> orderArray){
+	    String query = "SELECT ProductId, OrderId FROM OrderItems WHERE OrderId LIKE ?";
+	    
+	    
+	    for ( int i = 0; i < orderArray.size(); i++) {
+	    	
+	    	try {
+		    	
+		        ps = conn.prepareStatement(query);
+		        ps.setInt(1, orderArray.get(i) );
+		        
+		        ResultSet rs = ps.executeQuery();
+		        
+				  while(rs.next()){
+					 
+					 int orderID = rs.getInt("OrderId");
+					 int productID = rs.getInt("ProductId");
+					 Orders objt = new Orders(productID, orderID);
+					 orderProductList.add(objt);
+					 }
+				  completeOrderArray.add(orderProductList);
+				 // completeOrderArray.get(i).add(orderProductList);
+				  
+				  
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    } 	
+	    	
+	    }
+	    System.out.println(orderProductList);
+	    System.out.println(completeOrderArray);
+	    
+	    
+	}
+	
+	public ArrayList getCompleteOrderList() {
+		return completeOrderArray;
+	}
+	
+	public ArrayList getOrderbyId() {
+		return orderList;
+	}
 	public Object getProduct() {
 		return ProductBean;
 	}
