@@ -19,6 +19,7 @@
 <h1> World's Best Shopping Website</h1><br>
 <h2>Your Shopping Cart</h2>
 <h2>Here are the items in your cart:</h2>
+<form action=CustomerTransactionConfirmation method=post>
 <table width="700px" align="center" id='countit'
                style="border:1px solid #000000;" >
             <tr>
@@ -32,16 +33,19 @@
                 <td><b>Quantity</b></td>
                 <td><b>Price</b></td>
             </tr>
+      
  <c:forEach items="${cart}" var="list">
+           <input type="hidden" name="productId" value="${cart[0].getProductId()}">
            <tr>
                 <td>${list.getProductName()}</td>
                 <td>${list.getSellerId()}</td>
                 <td>${list.getAvailableQuantity()}</td>
                 <td class="count-me"> ${list.getPrice()}</td>
+                
             </tr>
            </c:forEach> 
            </table>
-<form action=CustomerTransactionConfirmation method=post>
+ 
            <script language="javascript" type="text/javascript">
             var tds = document.getElementById('countit').getElementsByTagName('td');
             var sum = 0;
@@ -50,7 +54,7 @@
                     sum += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
                 }
             }
-            document.getElementById('countit').innerHTML += '<tr><td></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><input type=hidden name=total value='+ sum +'></tr>';
+            document.getElementById('countit').innerHTML += '<tr><td></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><input type="hidden" name="total" value="'+ sum +'"></tr>';
         </script>	
 <br>
 First Name:<input type=text name=firstName value="${aUser.getFirstName()}"><br>

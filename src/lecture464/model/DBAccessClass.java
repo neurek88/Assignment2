@@ -22,6 +22,7 @@ public class DBAccessClass {
 	private Orders OrderBean;
 	private Products ProductBean;
     private int userId;
+    private int orderId;
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	final String DB_URL = "jdbc:mysql://cse.unl.edu:3306/rhooper";
@@ -253,6 +254,38 @@ public class DBAccessClass {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    } 
+	}
+	
+	public void findNewestOrderIdById(int customerID){
+	     String query = "SELECT Id, CustomerId FROM Orders WHERE CustomerId LIKE ?";
+	     
+	     int recentOrderID = 0;
+	     try {
+	      
+	         ps = conn.prepareStatement(query);
+	         ps.setInt(1, customerID);
+	         
+	         ResultSet rs = ps.executeQuery();
+	         System.out.println("query " + query);
+	         
+	     while(rs.next()){
+	      
+	     
+	     orderId = rs.getInt("Id");
+	     if (orderId > recentOrderID) {
+	      recentOrderID = orderId;
+	     }
+	     }
+	    
+	    System.out.println(recentOrderID);
+	             
+	     } catch (Exception e) {
+	         e.printStackTrace();
+	     } 
+	 }
+	
+	public int getNewestOrderId() {
+		return orderId;
 	}
 	
 	public void findOrdersById(int customerID){

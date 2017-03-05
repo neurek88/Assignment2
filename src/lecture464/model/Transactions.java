@@ -8,7 +8,7 @@ public class Transactions {
 
 	private int Id;
 	private String CardHolderName;
-	private double CreditCardNumber;
+	private int CreditCardNumber;
 	private double Balance; 
 	private String CardType;
 	private int UserId;
@@ -30,7 +30,7 @@ public class Transactions {
 	public double getCreditCardNumber() {
 		return CreditCardNumber;
 	}
-	public void setCreditCardNumber(double creditCardNumber) {
+	public void setCreditCardNumber(int creditCardNumber) {
 		CreditCardNumber = creditCardNumber;
 	}
 	public double getBalance() {
@@ -47,9 +47,11 @@ public class Transactions {
 	public String getCardType() {
 		return CardType;
 	}
+	
 	public void setCardType(String cardType) {
 		CardType = cardType;
 	}
+	
 	public int getUserId() {
 		return UserId;
 	}

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import lecture464.model.Users;
 import lecture464.model.DBAccessClass;
+import lecture464.model.Orders;
 import lecture464.model.Products;
 import lecture464.model.Transactions;
 
@@ -45,11 +46,11 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		Users profile = getProfile(request);
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		String userName = firstName;
 		int creditNumber = Integer.parseInt(request.getParameter("creditNumber"));
 		String creditBrand = request.getParameter("creditBrand");
 		int userId = profile.getUserId();
-		//double sum = Double.parseDouble(request.getParameter("total"));
+		int productId = Integer.parseInt(request.getParameter("productId"));
+		int sum = Integer.parseInt(request.getParameter("total"));
 		double balance = 32.00;
 		int CVV = Integer.parseInt(request.getParameter("CVV"));
 		int expirationDate = Integer.parseInt(request.getParameter("expirationDate"));
@@ -60,7 +61,8 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		System.out.println(creditNumber);
 		System.out.println(userId);
 		System.out.println(CVV);
-		//System.out.println(sum);
+		System.out.println(sum);
+		System.out.println(productId);
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
 		HttpSession session = request.getSession();
@@ -74,7 +76,7 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 			orderUser.setBillAddress(billAddress);
 			session.setAttribute("orderUser", orderUser);
 				if (db.checkCreditCard(creditNumber, creditBrand, CVV)) {
-			//		newCreditCard.setCardType(creditBrand);
+					newCreditCard.setCardType(creditBrand);
 					newCreditCard.setCVV(CVV);
 					newCreditCard.setCreditCardNumber(creditNumber);
 					newCreditCard.setExpirationDate(expirationDate);
@@ -82,6 +84,12 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 					session.setAttribute("newCreditCard", newCreditCard);
 					session.removeAttribute("cart");
 					db.insertOrderData( userId, balance , shippingAddress, billAddress, creditNumber);
+					db.findNewestOrderIdById(userId);
+					int orderId = db.getNewestOrderId();
+					db.SearchProduct(productId);
+					Orders orderInfo = new Orders(orderId, productId);
+					orderInfo.setOrderId(orderId);
+					session.setAttribute("OrderItems", orderInfo);
 					
 			} else {
 				newCreditCard.setCardType("Incorrect Credit Card Information");

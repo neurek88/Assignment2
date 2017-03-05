@@ -25,38 +25,8 @@
             <tr>
                 <td colspan=8 align="center"
                     style="background-color:teal">
-                    <b>Confirmation</b></td>
+                    <b>Confirmation Order Number: ${orderItems.getOrderId()} </b></td>
             </tr>
-            <tr style="background-color:lightgrey;">
-            	<td><b>Product ID</b></td>
-            	<td><b>Product Name</b></td>
-                <td><b>Requested Quantity</b></td>
-                <td><b>Product thumbnail</b></td>
-                <td><b>Seller Name</b></td>
-                <td><b>Available Quantity</b></td>
-                <td><b>Price</b></td>
-                <td><b>Estimated delivery date</b></td>
-            </tr> 
- <c:forEach items="${cart}" var="list" varStatus="i">
-           <tr>
-           		<td>${list.getProductId()}</td>
-           		<td>${list.getProductName()}</td>
-                <td>${quantity}</td>
-                <td><img src="${list.getProductThumbnail()}" alt="${list.getProductName()}" style="width:35px;height:35px;"></td>
-                <td>${list.getSellerId()}</td>
-                <td>${list.getAvailableQuantity()}</td>
-                <td class="count-me"> ${list.getPrice()}</td>
-                <td>${list.getEstimatedDeliveryDays()}</td>
-             </tr>
-           </c:forEach> 
-           </table>
-  <table width="700px"
-               style="border:1px solid #000000;">
-            <tr>
-                <td colspan=8 align="center"
-                    style="background-color:teal">
-                    <b>Confirmation Name</b></td>
-          </tr>
             <tr style="background-color:lightgrey;">
             	<td><b>First Name</b></td>
             	<td><b>Last Name</b></td>
@@ -73,9 +43,9 @@
                 <td>${orderUser.getShippingAddress()}</td>
                 <td>${orderUser.getBillAddress()}</td>
                 <td>${newCreditCard.getCreditCardNumber()}</td>
-                <td>${newCreditCard.setCardType()}</td>
-                <td>${newCreditCard.setCVV()}</td>
-                <td>${newCreditCard.setExpirationDate()}</td>
+                <td>AMEX</td>
+                <td>${newCreditCard.getCVV()}</td>
+                <td>${newCreditCard.getExpirationDate()}</td>
              </tr>
 	</table>
 
