@@ -35,18 +35,19 @@
                 <td><b>View Product</b></td>
                 <td><b>Action</b></td>
            </tr>
+ <c:forEach items="${OrderArray}" var="list" varStatus="i">
            <tr>
-           		<td>Virtual Toast</td>
-           		<td>food</td>
-           		<td>ebay</td>
-            	<td>$10</td>
-            	<td><img src="VirtualToast.jpg" alt="VirtualToast" style="width:25px;height:25px;"></td>
-            	<td><a href="ViewProductDetails.jsp"> Details </a></td>
-            	<td><a href="ManageOrder.jsp"> Manage Order </a></td>
-            <%@ page import="java.io.*" %>
-           <%@ page import="java.io.ObjectOutputStream" %>
-           <%@ page import="java.io.FileOutputStream" %>
-           </tr>
+           		<td>${list.getProductName()}</td>
+           		<td>${list.getProductCategory()}</td>
+                <td>${quantity}</td>
+                <td><img src="${list.getProductThumbnail()}" alt="${list.getProductName()}" style="width:35px;height:35px;"></td>
+                <td>${list.getSellerId()}</td>
+                <td>${list.getAvailableQuantity()}</td>
+                <td class="count-me"> ${list.getPrice()}</td>
+                <td>${list.getEstimatedDeliveryDays()}</td>
+                <td><form action=UpdateShoppingCart method="post"><button name="delete" type="submit" value="${i.index}">delete?</button></form></td>
+                </tr>
+           </c:forEach>
            <tr>
                	<td>Virtual Toast</td>
            		<td>food</td>
