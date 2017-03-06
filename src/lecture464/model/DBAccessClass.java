@@ -351,28 +351,31 @@ public class DBAccessClass {
 	
 	public void findProductsOrderedByOrderID(ArrayList<Integer> orderArray){
 	    String query = "SELECT ProductId, OrderId FROM OrderItems WHERE OrderId LIKE ?";
+	    int k = 0;
 	    
-	    
-	    for ( int i = 0; i < orderArray.size(); i++) {
+	    while( k < orderArray.size()){                                   
 	    	
 	    	try {
 		    	
 		        ps = conn.prepareStatement(query);
-		        ps.setInt(1, orderArray.get(i) );
+		        ps.setInt(1, orderArray.get(k) );
 		        
 		        ResultSet rs = ps.executeQuery();
-		        
+		        Orders objt = null;
 				  while(rs.next()){
 					 
 					 int orderID = rs.getInt("OrderId");
 					 int productID = rs.getInt("ProductId");
-					 Orders objt = new Orders(productID, orderID);
+					 objt = new Orders(productID, orderID);
+				  }
+				  if (objt!=null) {
 					 orderProductList.add(objt);
-					 }
-				  completeOrderArray.add(i, orderProductList);
+				  }
+					 System.out.println("Objt: " + objt);
+				  System.out.println("OrderProductorderProductList: " + orderProductList);
 				 // completeOrderArray.get(i).add(orderProductList);
 				  
-				  
+				  k = k+1;
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    } 	
@@ -384,8 +387,8 @@ public class DBAccessClass {
 	    
 	}
 	
-	public ArrayList<ArrayList<Orders>> getCompleteOrderList() {
-		return completeOrderArray;
+	public ArrayList<Orders> getCompleteOrderList() {
+		return orderProductList;
 	}
 	
 	public ArrayList getOrderbyId() {

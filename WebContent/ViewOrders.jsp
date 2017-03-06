@@ -39,17 +39,13 @@
            </tr>
  	<c:forEach items="${Orders}" var="ProductList" varStatus="i">
            <tr>
-           		<td><c:out value="${Productlist.getProductName()}"/></td>
-           		<td><c:out value="${Productlist.getProductCategoryIndex()}"/></td>
+           		<td>${Productlist.getProductName()}</td>
+           		<td><c:out value="${Productlist[i].getProductCategoryIndex()}"/></td>
            		<td><c:out value="${Productlist.getPrice()}"/></td>
            		<td><img src="${Productlist.getProductThumbnail()}" alt="${Productlist.ProductName}" style="width:35px;height:35px;"></td>
            		 <td>${Productlist.getProductCategory()}</td>
                 <td>${Productlist.getSellerId()}</td>
-                <td><img src="${Productlist.getProductThumbnail()}" alt="${list.getProductName()}" style="width:35px;height:35px;"></td>
-                <td>${Productlist.getSellerId()}</td>
-                <td>${Productlist.getAvailableQuantity()}</td>
-                <td> ${Productlist.getPrice()}</td>
-                <td>${Productlist.getEstimatedDeliveryDays()}</td>
+
                 </tr>
            </c:forEach>
        
