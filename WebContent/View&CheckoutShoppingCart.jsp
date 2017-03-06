@@ -41,7 +41,7 @@
            <tr>
            		<td>${list.getProductId()}</td>
            		<td>${list.getProductName()}</td>
-                <td>${quantity}</td>
+                <td>1</td>
                 <td><img src="${list.getProductThumbnail()}" alt="${list.getProductName()}" style="width:35px;height:35px;"></td>
                 <td>${list.getSellerId()}</td>
                 <td>${list.getAvailableQuantity()}</td>

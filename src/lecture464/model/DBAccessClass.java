@@ -25,6 +25,7 @@ public class DBAccessClass {
 	private Products ProductBean;
     private int userId;
     private int orderId;
+    private int NewestOrderID;
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	final String DB_URL = "jdbc:mysql://cse.unl.edu:3306/rhooper";
@@ -257,9 +258,7 @@ public class DBAccessClass {
 	    } 
 	}
 	
-	public int getNewestOrderId() {
-		return orderId;
-	}
+
 	
 	//public void SearchOrderProducts(ArrayList<ArrayList<Orders>> orderList){
 	public void SearchOrderProducts(Orders aOrder){
@@ -294,7 +293,22 @@ public class DBAccessClass {
 	public Products   getOrderProduct() {
 		return OrderProductBean;
 	}
-	    
+	
+	public void insertOrderItemInfo(int OrderId, int ProductId, double ProductPrice, int Quantity, int ShippingStatus, int Status) {
+		try{
+			stmt = conn.createStatement();
+			
+		String sql = "INSERT INTO OrderItems ( `OrderId`, `ProductId`, `ProductPrice`, `Quantity`, 'ShippingStatus', 'Status')" +
+				"VALUES ('" + OrderId + "', '" + ProductId + "', '" + ProductPrice +"' , '" + Quantity +"', '" + ShippingStatus +"', '" + Status + "')";
+		stmt.executeUpdate(sql);
+
+
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	    
 	
 	public void findNewestOrderIdById(int customerID){
@@ -312,17 +326,23 @@ public class DBAccessClass {
 			  while(rs.next()){
 				  
 				 
-				 int orderID = rs.getInt("Id");
-				 if (orderID > recentOrderID) {
-					 recentOrderID = orderID;
+				 NewestOrderID = rs.getInt("Id");
+				 if (NewestOrderID > recentOrderID) {
+					 recentOrderID = NewestOrderID;
 				 }
 				 }
 			 
-			 System.out.println(recentOrderID);
+			 System.out.println("recentOrderID:"+NewestOrderID);
 	            
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    } 
+	}
+	
+	public int getNewestOrderId() {
+		System.out.println("NewestOrderId: "+ NewestOrderID);
+		return NewestOrderID;
+		
 	}
 	
 	public void findOrdersById(int customerID){

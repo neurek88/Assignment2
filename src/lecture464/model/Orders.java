@@ -118,6 +118,13 @@ public class Orders {
 public ArrayList<Integer> getArrayOrderIdfromUser() {
 	return ArrayOrderId;
 }
+
+/*public void insertOrderItemInfo(){
+	DBAccessClass db = new DBAccessClass();
+	db.connectMeIn();
+	db.insertOrderItemInfo(OrderId, ProductId, OrderCost, Quantity);
+	db.closeConnection();
+}*/
 	/*public void findProductsbyOrderId(ArrayList<Integer> ArrayOrderId) {
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();

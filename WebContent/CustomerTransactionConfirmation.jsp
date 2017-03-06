@@ -17,7 +17,7 @@
 </ul> </div>
 <h1> World's Best Shopping Website</h1><br>
 
-<h2>Your order Status</h2>
+<h2>Your order Status: <c:out value="${SuccessBean}"/></h2>
 <h2>Thanks for shopping on the World's Best Shopping Website!</h2>
 
 <table width="700px" id="countit"
@@ -25,7 +25,7 @@
             <tr>
                 <td colspan=8 align="center"
                     style="background-color:teal">
-                    <b>Confirmation Order Number:<c:out value="${orderItems.getOrderId()}"/> </b></td>
+                    <b>Confirmation Order Number:<c:out value="${OrderItems.getOrderId()}"/> </b></td>
             </tr>
             <tr style="background-color:lightgrey;">
             	<td><b>First Name</b></td>
@@ -50,7 +50,7 @@
 	</table>
 
 <br>
-
+<input type="submit" value="print for your records" onClick="window.print()"/> 
 <br>
 
 

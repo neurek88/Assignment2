@@ -68,39 +68,46 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		HttpSession session = request.getSession();
 		Users orderUser = new Users();
 		Transactions newCreditCard = new Transactions();
-		//if (firstName !=null || shippingAddress != null || creditNumber!=0 || creditBrand!=null || userId!=0 || CVV!=0) {
-		if (firstName !=null || lastName !=null || shippingAddress != null || shippingAddress != null) {
+		Object successBean = new Object();
+		if (firstName !=null || lastName !=null || shippingAddress != null || shippingAddress != null || request.getParameter("creditNumber") != null || request.getParameter("creditBrand") != null || request.getParameter("CVV") !=null || request.getParameter("expirationDate") !=null) {
 			orderUser.setFirstName(firstName);
 			orderUser.setLastName(lastName);
 			orderUser.setShippingAddress(shippingAddress);
 			orderUser.setBillAddress(billAddress);
 			session.setAttribute("orderUser", orderUser);
+			successBean = "Success!";
+			session.setAttribute("SuccessBean", successBean);
 				if (db.checkCreditCard(creditNumber, creditBrand, CVV)) {
 					newCreditCard.setCardType(creditBrand);
 					newCreditCard.setCVV(CVV);
 					newCreditCard.setCreditCardNumber(creditNumber);
 					newCreditCard.setExpirationDate(expirationDate);
-		//			newCreditCard.setNewBalance(sum);
+					newCreditCard.setNewBalance(sum);
 					session.setAttribute("newCreditCard", newCreditCard);
 					session.removeAttribute("cart");
 					db.insertOrderData( userId, balance , shippingAddress, billAddress, creditNumber);
 					db.findNewestOrderIdById(userId);
-					int orderId = db.getNewestOrderId();
-					db.SearchProduct(productId);
-					Orders orderInfo = new Orders(orderId, productId);
-					orderInfo.setOrderId(orderId);
+					int neworderId = db.getNewestOrderId();
+					db.insertOrderItemInfo(neworderId, productId, sum, 1, 1, 1);
+					Orders orderInfo = new Orders(productId, neworderId);
 					session.setAttribute("OrderItems", orderInfo);
-					
+					successBean = "Success!";
+					session.setAttribute("SuccessBean", successBean);
 			} else {
 				newCreditCard.setCardType("Incorrect Credit Card Information");
 				session.setAttribute("newCreditCard", newCreditCard);
+				successBean = "Transaction Failed";
+				session.setAttribute("SuccessBean", successBean);
 			}
 			
 
 		} else {
 			orderUser.setFirstName("Missing User Info");
 			session.setAttribute("orderUser", orderUser);
-		}	
+			successBean = "Transaction Failed";
+			session.setAttribute("SuccessBean", successBean);
+		}
+		db.closeConnection();
         RequestDispatcher view = request.getRequestDispatcher("CustomerTransactionConfirmation.jsp");
         view.forward(request, response);
 		
