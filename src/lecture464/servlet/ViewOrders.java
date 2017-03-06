@@ -62,6 +62,7 @@ public class ViewOrders extends HttpServlet {
 		session.setAttribute("OrderIDList", orderIDList);
 		
 		System.out.println("OrderIDList:" + orderIDList);
+		session.setAttribute("orderIdList", orderIDList);
 		for (int k = 0; k < orderIDList.size(); k++) {
 			db.findProductsOrderedByOrderID(orderIDList.get(k));
 			completeOrderArray = db.getCompleteOrderList();
@@ -89,7 +90,6 @@ public class ViewOrders extends HttpServlet {
 			}
 			completeOrderProducts.add(new ArrayList<Products>());
 			completeOrderProducts.get(i).addAll(orderProducts);
-			System.out.println("Order Products coming in : " + orderProducts.get(i).getProductName());
 		}
 		
 		System.out.println(completeOrderProducts);
