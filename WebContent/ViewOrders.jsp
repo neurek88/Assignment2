@@ -20,7 +20,7 @@
 <h2>Here are your previous orders</h2><br><br>
 
 <form action="ManageOrder">
- <c:forEach items="${OrderArray}" var="Orderlist" varStatus="i">
+ <c:forEach items="${OrderArray}" var="Orders" varStatus="i">
 <table width="700px"
                style="border:1px solid #000000;">
             <tr>
@@ -28,6 +28,7 @@
                     style="background-color:teal">
                     <b>Order History</b></td>
             </tr>
+           
             <tr style="background-color:lightgrey;">
                 <td><b>Product Name</b></td>
                 <td><b>Product Category</b></td>
@@ -36,23 +37,24 @@
                 <td><b>View Product</b></td>
                 <td><b>Action</b></td>
            </tr>
- <c:forEach items="${OrderList}" var="Productlist" varStatus="j">
+ 	<c:forEach items="${Orders}" var="ProductList" varStatus="i">
            <tr>
            		<td><c:out value="${Productlist.getProductName()}"/></td>
            		<td><c:out value="${Productlist.getProductCategoryIndex()}"/></td>
            		<td><c:out value="${Productlist.getPrice()}"/></td>
            		<td><img src="${Productlist.getProductThumbnail()}" alt="${Productlist.ProductName}" style="width:35px;height:35px;"></td>
-           		<%-- <td>${Productlist.getProductCategory()}</td>
+           		 <td>${Productlist.getProductCategory()}</td>
                 <td>${Productlist.getSellerId()}</td>
                 <td><img src="${Productlist.getProductThumbnail()}" alt="${list.getProductName()}" style="width:35px;height:35px;"></td>
                 <td>${Productlist.getSellerId()}</td>
                 <td>${Productlist.getAvailableQuantity()}</td>
                 <td> ${Productlist.getPrice()}</td>
-                <td>${Productlist.getEstimatedDeliveryDays()}</td>--%>
+                <td>${Productlist.getEstimatedDeliveryDays()}</td>
                 </tr>
            </c:forEach>
+       
            </table><br>
-           </c:forEach>
+             </c:forEach>
            </form>
            
 <br>
