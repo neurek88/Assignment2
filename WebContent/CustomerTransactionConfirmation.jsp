@@ -25,7 +25,7 @@
             <tr>
                 <td colspan=8 align="center"
                     style="background-color:teal">
-                    <b>Confirmation Order Number: ${orderItems.getOrderId()} </b></td>
+                    <b>Confirmation Order Number:<c:out value="${orderItems.getOrderId()}"/> </b></td>
             </tr>
             <tr style="background-color:lightgrey;">
             	<td><b>First Name</b></td>

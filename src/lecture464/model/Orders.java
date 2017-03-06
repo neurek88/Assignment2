@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 //import javax.xml.ws.Response;
+import lecture464.model.DBAccessClass;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -27,8 +29,8 @@ public class Orders {
 	private int ShippingStatus;
 	private int ShippingRefNo;
 	private int Status;
-	
-	
+	private ArrayList<Integer> ArrayOrderId = new ArrayList<Integer>();
+	private ArrayList<ArrayList<Orders>> ArrayListOrders = new ArrayList<ArrayList<Orders>>();
 	public int getUserId() {
 		return CustomerId;
 	}
@@ -107,6 +109,24 @@ public class Orders {
 		Status = status;
 	}
 	
+	public void setArrayOrderIdforUser(int userId) {
+		DBAccessClass db = new DBAccessClass();
+		db.connectMeIn();
+		db.findOrdersById(userId);
+		ArrayOrderId = db.getOrderbyId();
+	}
+public ArrayList<Integer> getArrayOrderIdfromUser() {
+	return ArrayOrderId;
+}
+	/*public void findProductsbyOrderId(ArrayList<Integer> ArrayOrderId) {
+		DBAccessClass db = new DBAccessClass();
+		db.connectMeIn();
+		db.findProductsOrderedByOrderID(ArrayOrderId);
+		ArrayListOrders = db.getCompleteOrderList();
+	}
+	public ArrayList<ArrayList<Orders>> getProductsbyOrderId() {
+		return ArrayListOrders;
+	}*/
 }
 	
 

@@ -19,7 +19,7 @@ public class DBAccessClass {
 	private ArrayList<ArrayList<Products>> completeOrderProducts = new ArrayList<ArrayList<Products>>();
 	private ArrayList<Integer> orderList = new ArrayList<Integer>();
 	private ArrayList<Orders> orderProductList = new ArrayList<Orders>();
-	private ArrayList<ArrayList<Orders>> completeOrderArray = new ArrayList<ArrayList<Orders>>();
+	private ArrayList<Orders> completeOrderArray = new ArrayList<Orders>();
 	private Orders OrderBean;
 	private Products OrderProductBean;
 	private Products ProductBean;
@@ -271,7 +271,6 @@ public class DBAccessClass {
 		        ps.setInt(1, thisID);
 		        
 		        ResultSet rs = ps.executeQuery();
-		        System.out.println("query " + query);
 		        
 		        
 				  while(rs.next()){ 
@@ -349,7 +348,7 @@ public class DBAccessClass {
 	    } 
 	}
 	
-	public void findProductsOrderedByOrderID(ArrayList<Integer> orderArray){
+/*	public void findProductsOrderedByOrderID(ArrayList<Integer> orderArray){
 	    String query = "SELECT ProductId, OrderId FROM OrderItems WHERE OrderId LIKE ?";
 	    int k = 0;
 	    
@@ -367,13 +366,14 @@ public class DBAccessClass {
 					 int orderID = rs.getInt("OrderId");
 					 int productID = rs.getInt("ProductId");
 					 objt = new Orders(productID, orderID);
-				  }
 				  if (objt!=null) {
 					 orderProductList.add(objt);
 				  }
+				  }
+				  
 					 System.out.println("Objt: " + objt);
 				  System.out.println("OrderProductorderProductList: " + orderProductList);
-				 // completeOrderArray.get(i).add(orderProductList);
+				 completeOrderArray.add(k, orderProductList);
 				  
 				  k = k+1;
 		    } catch (Exception e) {
@@ -385,13 +385,50 @@ public class DBAccessClass {
 	    //System.out.println(completeOrderArray);
 	    
 	    
-	}
+	}*/
+
+	public void findProductsOrderedByOrderID(int orderArray){
+	     String query = "SELECT ProductId, OrderId FROM OrderItems WHERE OrderId LIKE ?";
+	     
+	     ArrayList<Orders> orderProductList = new ArrayList<Orders>();
+	     
+	      try {
+	          ps = conn.prepareStatement(query);
+	          ps.setInt(1, orderArray );
+	          ResultSet rs = ps.executeQuery();
+	          Orders objt = null;
+	      while(rs.next()){
+	      int orderID = rs.getInt("OrderId");
+	      int productID = rs.getInt("ProductId");
+	      objt = new Orders(productID, orderID);
+	      if (objt!=null) {
+		      orderProductList.add(objt);
+		      }
+	      }
+	      System.out.println("Objt: " + objt);
+	      System.out.println("OrderProductorderProductList: " + orderProductList);
+	      
+	     // completeOrderArray.get(i).add(orderProductList);
+	      //completeOrderArray.add(k, orderProductList);
+	      } catch (Exception e) {
+	          e.printStackTrace();
+	      } 
+		  completeOrderArray.addAll(orderProductList);
+		     System.out.println("This OrdersProducts: " + completeOrderArray);
+		     orderProductList.clear();
+	     }
+	    
 	
 	public ArrayList<Orders> getCompleteOrderList() {
-		return orderProductList;
+		return completeOrderArray;
 	}
+
+	public void clearOrderProductLists() {
+		completeOrderArray.clear();
+	}
+
 	
-	public ArrayList getOrderbyId() {
+	public ArrayList<Integer> getOrderbyId() {
 		return orderList;
 	}
 	public Object getProduct() {
