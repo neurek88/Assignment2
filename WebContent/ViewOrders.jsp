@@ -26,7 +26,7 @@
             <tr>
                 <td colspan=7 align="center"
                     style="background-color:teal">
-                    <b>Order History :<c:out value="${Order.getOrderId()}"/></b></td>
+                    <b>Order History :<c:out value="${OrderIDList[i.index]}"/></b></td>
             </tr>
            
             <tr style="background-color:lightgrey;">
