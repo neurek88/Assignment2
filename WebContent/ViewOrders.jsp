@@ -26,7 +26,7 @@
             <tr>
                 <td colspan=7 align="center"
                     style="background-color:teal">
-                    <b>Order History</b></td>
+                    <b>Order History :<c:out value="${Order.getOrderId()}"/></b></td>
             </tr>
            
             <tr style="background-color:lightgrey;">
@@ -39,12 +39,12 @@
            </tr>
  	<c:forEach items="${Orders}" var="ProductList" varStatus="i">
            <tr>
-           		<td>${Productlist.getProductName()}</td>
-           		<td><c:out value="${Productlist[i].getProductCategoryIndex()}"/></td>
-           		<td><c:out value="${Productlist.getPrice()}"/></td>
-           		<td><img src="${Productlist.getProductThumbnail()}" alt="${Productlist.ProductName}" style="width:35px;height:35px;"></td>
-           		 <td>${Productlist.getProductCategory()}</td>
-                <td>${Productlist.getSellerId()}</td>
+           		<td>${ProductList.getProductName()}</td>
+           		<td><c:out value="${ProductList.getProductCategoryIndex()}"/></td>
+           		<td><c:out value="${ProductList.getPrice()}"/></td>
+           		<td><img src="${ProductList.getProductThumbnail()}" alt="${Productlist.ProductName}" style="width:35px;height:35px;"></td>
+           		<td><form action=ProductSearchResults method="post"><button name="order" type="submit" value="${ProductList.getProductName()}">view product</button></form></td>
+                <td><form action=ManageOrders method="post"><button name="manage" type="submit" value="${ProductList.getProductId()}">Manage</button></form></td>
 
                 </tr>
            </c:forEach>
