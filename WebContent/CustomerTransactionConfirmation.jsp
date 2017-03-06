@@ -43,7 +43,7 @@
                 <td>${orderUser.getShippingAddress()}</td>
                 <td>${orderUser.getBillAddress()}</td>
                 <td>${newCreditCard.getCreditCardNumber()}</td>
-                <td>AMEX</td>
+                <td>${newCreditCard.getCardType()}</td>
                 <td>${newCreditCard.getCVV()}</td>
                 <td>${newCreditCard.getExpirationDate()}</td>
              </tr>

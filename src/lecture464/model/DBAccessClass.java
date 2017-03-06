@@ -233,7 +233,6 @@ public class DBAccessClass {
 	        ps.setInt(1, pid);
 	        
 	        ResultSet rs = ps.executeQuery();
-	        System.out.println("query " + query);
 	        
 	        
 			  while(rs.next()){
@@ -258,34 +257,6 @@ public class DBAccessClass {
 	    } 
 	}
 	
-	public void findNewestOrderIdById(int customerID){
-	     String query = "SELECT Id, CustomerId FROM Orders WHERE CustomerId LIKE ?";
-	     
-	     int recentOrderID = 0;
-	     try {
-	      
-	         ps = conn.prepareStatement(query);
-	         ps.setInt(1, customerID);
-	         
-	         ResultSet rs = ps.executeQuery();
-	         System.out.println("query " + query);
-	         
-	     while(rs.next()){
-	      
-	     
-	     orderId = rs.getInt("Id");
-	     if (orderId > recentOrderID) {
-	      recentOrderID = orderId;
-	     }
-	     }
-	    
-	    System.out.println(recentOrderID);
-	             
-	     } catch (Exception e) {
-	         e.printStackTrace();
-	     } 
-	 }
-	
 	public int getNewestOrderId() {
 		return orderId;
 	}
@@ -303,7 +274,18 @@ public class DBAccessClass {
 		        System.out.println("query " + query);
 		        
 		        
-				  while(rs.next()){   }
+				  while(rs.next()){ 
+				  int Id = rs.getInt("Id");
+				  String ProductName = rs.getString("ProductName");
+				  int ProductCategoryIndex = rs.getInt("ProducCategoryIndex");
+				  String ProductDescription = rs.getString("ProductDescription");
+				  double Price = rs.getInt("Price");
+				  int AvailableQuantity = rs.getInt("AvailableQuantity");
+				  int EstimatedDeliveryDays = rs.getInt("EstimatedDeliveryDays");
+				  int SellerId = rs.getInt("SellerId");
+				  String ProductPhotosLinks = rs.getString("ProductPhotosLinks");
+				  String ProductThumbnail = rs.getString("ProductThumbnail");
+				  OrderProductBean = new Products(Id, ProductName, ProductCategoryIndex, ProductDescription, Price, AvailableQuantity, EstimatedDeliveryDays, SellerId, ProductPhotosLinks, ProductThumbnail);  }
 		            
 		    } catch (Exception e) {
 		        e.printStackTrace();
@@ -394,7 +376,6 @@ public class DBAccessClass {
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    } 	
-	    	orderProductList.clear();
 	    	
 	    }
 	    //System.out.println(orderProductList);
@@ -403,7 +384,7 @@ public class DBAccessClass {
 	    
 	}
 	
-	public ArrayList getCompleteOrderList() {
+	public ArrayList<ArrayList<Orders>> getCompleteOrderList() {
 		return completeOrderArray;
 	}
 	

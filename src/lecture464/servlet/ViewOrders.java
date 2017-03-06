@@ -59,7 +59,8 @@ public class ViewOrders extends HttpServlet {
 		orderIDList =db.getOrderbyId();
 		db.findProductsOrderedByOrderID(orderIDList);
 		completeOrderArray = db.getCompleteOrderList();
-		
+		System.out.println("Entire Array"+completeOrderArray);
+		System.out.println("Array:" + completeOrderArray.get(0).get(0).getProductId() + "," + completeOrderArray.get(0).get(0).getOrderId());
 		for (int i = 0; i < completeOrderArray.size(); i++) {
 			ArrayList<Products> orderProducts = new ArrayList<Products>();
 			
@@ -69,10 +70,11 @@ public class ViewOrders extends HttpServlet {
 				orderProducts.add(opd);
 			}
 			completeOrderProducts.add(i, orderProducts);
-			
+			System.out.println("Entire Products Array"+completeOrderProducts);
+			System.out.println("Products:"+completeOrderProducts.get(0).get(0).getProductName());
 		}
 		
-		System.out.println(completeOrderArray);
+		System.out.println(completeOrderProducts);
 		
 		db.closeConnection();
 		System.out.println(userId);
