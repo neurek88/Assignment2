@@ -58,6 +58,9 @@ public class ViewOrders extends HttpServlet {
 		
 		db.findOrdersById(userId);
 		orderIDList =db.getOrderbyId();
+		
+		session.setAttribute("OrderIDList", orderIDList);
+		
 		System.out.println("OrderIDList:" + orderIDList);
 		for (int k = 0; k < orderIDList.size(); k++) {
 			db.findProductsOrderedByOrderID(orderIDList.get(k));
