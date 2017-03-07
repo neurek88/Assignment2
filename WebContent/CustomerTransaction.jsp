@@ -57,8 +57,8 @@
             document.getElementById('countit').innerHTML += '<tr><td></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><input type="hidden" name="total" value="'+ sum +'"></tr>';
         </script>	
 <br>
-First Name:<input type=text name=firstName value="${aUser.getFirstName()}"><br>
-Last Name:<input type=text name=lastName value="${aUser.getLastName()}"><br>
+First Name:<input type=text name=firstName value="${userBean.getFirstName()}"><br>
+Last Name:<input type=text name=lastName value="${userBean.getLastName()}"><br>
 Shipping Address:<input type=text name=shippingAddress><br>
 Billing Address:<input type=text name=billAddress><br>
  <select name="creditBrand">
