@@ -60,7 +60,7 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		Users orderUser = new Users();
 		Transactions newCreditCard = new Transactions();
 		Object successBean = new Object();
-		if (firstName !=null || lastName !=null || shippingAddress != null || shippingAddress != null || request.getParameter("creditNumber") != null || request.getParameter("creditBrand") != null || request.getParameter("CVV") !=null || request.getParameter("expirationDate") !=null) {
+		if (firstName !=null && lastName !=null && shippingAddress != null && shippingAddress != null && request.getParameter("creditNumber") != null && request.getParameter("creditBrand") != null && request.getParameter("CVV") !=null && request.getParameter("expirationDate") !=null) {
 			orderUser.setFirstName(firstName);
 			orderUser.setLastName(lastName);
 			orderUser.setShippingAddress(shippingAddress);

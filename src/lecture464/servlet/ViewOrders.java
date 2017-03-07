@@ -44,7 +44,6 @@ public class ViewOrders extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		
 		Users profile = getProfile(request);
 		int userId = profile.getUserId();
 		ArrayList<Integer> orderIDList = new ArrayList<Integer>();
