@@ -50,7 +50,6 @@ public class UpdateShoppingCart extends HttpServlet {
           session.setAttribute("cart", shoppingCart);
         } 
         shoppingCart.add((Products)db.getProduct());
-        session.setAttribute("cart", shoppingCart);
         }
         else if (request.getParameter("cart") == null) {
         	int delete = Integer.parseInt(request.getParameter("delete"));

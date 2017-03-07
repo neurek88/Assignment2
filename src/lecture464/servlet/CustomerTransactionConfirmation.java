@@ -3,7 +3,6 @@ package lecture464.servlet;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
@@ -32,12 +31,6 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 	     return profile;
 	}
 	
-	private ArrayList<Products> getCart(HttpServletRequest request) {
-	     HttpSession session = request.getSession();
-	     ArrayList<Products> cart = (ArrayList<Products>) session.getAttribute("cart");
-	     return cart;
-	}
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -51,15 +44,16 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Users profile = getProfile(request);
-		ArrayList<Products> shoppingCart = getCart(request);
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		int userId = profile.getUserId();
+		int productId = Integer.parseInt(request.getParameter("productId"));
 		int sum = Integer.parseInt(request.getParameter("total"));
 		double balance = 32.00;
 		String shippingAddress = request.getParameter("shippingAddress");
 		String billAddress = request.getParameter("billAddress");
 		System.out.println(sum);
+		System.out.println(productId);
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
 		HttpSession session = request.getSession();
@@ -89,11 +83,7 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 					db.insertOrderData( userId, balance , shippingAddress, billAddress, creditNumber);
 					db.findNewestOrderIdById(userId);
 					int neworderId = db.getNewestOrderId();
-					for (int i=0; i<shoppingCart.size();i++){
-					int productId = shoppingCart.get(i).getProductId();
 					db.insertOrderItemInfo(neworderId, productId, sum, 1, 1, 1);
-					}
-					int productId = Integer.parseInt(request.getParameter("productId"));
 					Orders orderInfo = new Orders(productId, neworderId);
 					session.setAttribute("OrderItems", orderInfo);
 					successBean = "Success!";
