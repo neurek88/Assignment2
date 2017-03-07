@@ -13,12 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-<<<<<<< HEAD
 import lecture464.model.DBAccessClass;
 import lecture464.model.Orders;
-=======
->>>>>>> branch 'NickWork3_6' of https://github.com/neurek88/Assignment2
 import lecture464.model.Products;
 import lecture464.model.Users;
 
@@ -48,7 +44,6 @@ public class ManageOrders extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-<<<<<<< HEAD
 		ArrayList<Orders> completeOrderArray = new ArrayList<Orders>();
 		ArrayList<Products> orderProducts = new ArrayList<Products>();
 	
@@ -69,9 +64,7 @@ public class ManageOrders extends HttpServlet {
 		System.out.println("final Order List: " + orderProducts);
 
 		RequestDispatcher view = request.getRequestDispatcher("ManageOrder.jsp");
-=======
-		RequestDispatcher view = request.getRequestDispatcher("CancelOrders.jsp");
->>>>>>> branch 'NickWork3_6' of https://github.com/neurek88/Assignment2
+
         view.forward(request, response);
 	}
 
