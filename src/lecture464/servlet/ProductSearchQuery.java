@@ -58,8 +58,6 @@ public class ProductSearchQuery extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(session.getAttribute("piList"));
-        System.out.println(ListName.get(0).getProductName());
     }
 
 	/**

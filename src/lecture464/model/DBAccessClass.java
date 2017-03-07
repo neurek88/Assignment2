@@ -47,19 +47,7 @@ public class DBAccessClass {
 				"VALUES ("+ userName +","+ creditNumber + "," + creditBrand +","+ ccLimit +"," + userId +"," + CVV +","+expirationDate+ ")";
 
 		stmt.executeUpdate(sql);
-
-
-/*			      PreparedStatement ps = conn.prepareStatement(sql);
-			        ps.setString(2, userName);
-			        ps.setInt(3, creditNumber);
-			        ps.setString(5, creditBrand);
-			        ps.setInt(6, userId);
-			        ps.setInt(7, CVV);
-			        ps.setInt(8, expirationDate);
-			        
-			        ps.executeQuery();
-			        System.out.println(ps);
-			       */
+		
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -72,18 +60,6 @@ public class DBAccessClass {
 		String sql = "INSERT INTO Orders ( `CustomerId`, `TotalCost`, `OrderDate`, `ShippingAddress`, `BillingAddress`, `CreditCardNumber`)" +
 				"VALUES (" + customerId + ", " + totalCost + ", CURRENT_DATE(), '" + shippingAddress + "', '" + billAddress + "', '" + creditNumber +"' )";
 		stmt.executeUpdate(sql);
-
-/*			      PreparedStatement ps = conn.prepareStatement(sql);
-			        ps.setString(2, userName);
-			        ps.setInt(3, creditNumber);
-			        ps.setString(5, creditBrand);
-			        ps.setInt(6, userId);
-			        ps.setInt(7, CVV);
-			        ps.setInt(8, expirationDate);
-			        
-			        ps.executeQuery();
-			        System.out.println(ps);
-			       */
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -207,7 +183,6 @@ public class DBAccessClass {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(userId);
 		return userId;
 	}
 	
@@ -251,8 +226,6 @@ public class DBAccessClass {
 				  String ProductThumbnail = rs.getString("ProductThumbnail");
 				  ProductBean = new Products(Id, ProductName, ProductCategoryIndex, ProductDescription, Price, AvailableQuantity, EstimatedDeliveryDays, SellerId, ProductPhotosLinks, ProductThumbnail);
 			  }
-			  
-			  System.out.println(ProductBean.getProductName());
 	            
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -321,7 +294,6 @@ public class DBAccessClass {
 	        ps.setInt(1, customerID);
 	        
 	        ResultSet rs = ps.executeQuery();
-	        System.out.println("query " + query);
 	        
 			  while(rs.next()){
 				  
@@ -331,8 +303,6 @@ public class DBAccessClass {
 					 recentOrderID = NewestOrderID;
 				 }
 				 }
-			 
-			 System.out.println("recentOrderID:"+NewestOrderID);
 	            
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -340,7 +310,6 @@ public class DBAccessClass {
 	}
 	
 	public int getNewestOrderId() {
-		System.out.println("NewestOrderId: "+ NewestOrderID);
 		return NewestOrderID;
 		
 	}
@@ -354,14 +323,11 @@ public class DBAccessClass {
 	        ps.setInt(1, customerID);
 	        
 	        ResultSet rs = ps.executeQuery();
-	        System.out.println("query " + query);
 	        
 			  while(rs.next()){
 				 int orderID = rs.getInt("Id");
 				 orderList.add(orderID);
 				 }
-			 
-			 System.out.println(orderList);
 	            
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -387,14 +353,11 @@ public class DBAccessClass {
 		      orderProductList.add(objt);
 		      }
 	      }
-	      System.out.println("Objt: " + objt);
-	      System.out.println("OrderProductorderProductList: " + orderProductList);
 	      
 	      } catch (Exception e) {
 	          e.printStackTrace();
 	      } 
 		  completeOrderArray.addAll(orderProductList);
-		     System.out.println("This OrdersProducts: " + completeOrderArray);
 		     orderProductList.clear();
 	     }
 	
@@ -415,14 +378,11 @@ public class DBAccessClass {
 	      objt = new Orders(productID, orderID);
 	      objt.setShippingStatus(ShippingStatus);
 	      }
-	      System.out.println("Objt: " + objt);
-	      System.out.println("OrderProductorderProductList: " + orderProductList);
 	      
 	      } catch (Exception e) {
 	          e.printStackTrace();
 	      } 
 		  completeOrderArray.addAll(orderProductList);
-		     System.out.println("This OrdersProducts: " + completeOrderArray);
 		     orderProductList.clear();
 	     }
 	public ArrayList<Orders> getCompleteOrderInfo() {
@@ -485,8 +445,6 @@ public class DBAccessClass {
         ps.setString(1, "%" + pid + "%");
         
         ResultSet rs = ps.executeQuery();
-        System.out.println("query " + query);
-        
         
 		  while(rs.next()){
 			    //Retrieve by column name
@@ -504,8 +462,6 @@ public class DBAccessClass {
 			  //store Data
 			  list.add(ProductBean);
 		  }
-		  
-		  System.out.println(list.get(0).getProductName());
             
     } catch (Exception e) {
         e.printStackTrace();

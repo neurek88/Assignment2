@@ -37,7 +37,6 @@ public class ManageOrders extends HttpServlet {
      */
     public ManageOrders() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -46,7 +45,6 @@ public class ManageOrders extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Orders> completeOrderArray = new ArrayList<Orders>();
 		ArrayList<Products> orderProducts = new ArrayList<Products>();
-		//ArrayList<Integer> ShipppingStatus = new ArrayList<Integer>();
 	
 		Integer pid = Integer.parseInt(request.getParameter("manage"));
 		DBAccessClass db = new DBAccessClass();
@@ -60,8 +58,6 @@ public class ManageOrders extends HttpServlet {
 		for (int j = 0; j < completeOrderArray.size(); j++) {
 			db.SearchOrderProducts(completeOrderArray.get(j));
 			Products opd = db.getOrderProduct();
-			System.out.println("is this working?");
-			//System.out.println(opd);
 			orderProducts.add(opd);
 		}
 		//get shipping info
@@ -69,12 +65,9 @@ public class ManageOrders extends HttpServlet {
 		 int shippingId = db.searchShippingStatus(completeOrderArray.get(i).getOrderId());
 		 completeOrderArray.get(i).setShippingStatus(shippingId);
 		}
-		System.out.println(completeOrderArray.get(0).getShippingStatus());
 		request.setAttribute("singleOrderInfo", completeOrderArray);
 		
-		System.out.println("Complete Order Array:" + completeOrderArray.get(0).getShippingStatus());
 		request.setAttribute("singleOrder", orderProducts);
-		System.out.println("final Order List: " + orderProducts);
 
 		RequestDispatcher view = request.getRequestDispatcher("ManageOrder.jsp");
 

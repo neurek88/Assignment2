@@ -41,14 +41,11 @@ public class ProductSearchResults extends HttpServlet {
 		ListName = db.getProductList();
         try {
         	session.setAttribute("itemList", ListName);
-            System.out.println(ListName.get(0).getProductName());
             RequestDispatcher view = request.getRequestDispatcher("ViewProductDetails.jsp");
             view.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(session.getAttribute("itemList"));
-		
 	}
 
 	/**

@@ -29,7 +29,6 @@ public class Login extends HttpServlet {
      */
     public Login() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -42,16 +41,6 @@ public class Login extends HttpServlet {
 		DBAccessClass db = new DBAccessClass();
 		
 		db.connectMeIn();
-		
-		/* The users.properties file is stored in the "WEB-INF" folder.
-		   To access this file, you will need its absolute path. */
-		
-		/*
-		 * Note: the content of the properties file may not be visible
-		 */
-		 
-		/* Following two statements are used to obtain the absolute path 
-		   of the users.properies file from its relative path. */
 		
 		boolean userExists = false;
 		boolean userPasswordMatches = false;
@@ -78,9 +67,6 @@ public class Login extends HttpServlet {
 		    session.setAttribute("userBean", aUser);
 		    session.setAttribute("userName", userName);
 		    
-		    System.out.println(userID);
-		    System.out.println(aUser.getFirstName());
-		    
 		    String address = "CustomerHomePage.jsp";
 		    RequestDispatcher dispatcher =
 		      request.getRequestDispatcher(address);
@@ -91,12 +77,6 @@ public class Login extends HttpServlet {
 			response.sendRedirect("Registration.jsp");
 			db.closeConnection();
 		}
-		
-		/*
-		 * Instead using servlet methods (above) for user login,
-		 * instantiate a Users object and 
-		 * use appropriate method for user login from the Users class.
-		 */
 
 	}
 
