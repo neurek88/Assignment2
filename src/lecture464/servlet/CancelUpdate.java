@@ -42,8 +42,6 @@ public class CancelUpdate extends HttpServlet {
 			
 		int pid = Integer.parseInt(request.getParameter("cancelPID"));
 		int oid = Integer.parseInt(request.getParameter("cancelOID"));
-		System.out.println(pid);
-		System.out.println(oid);
 		
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();

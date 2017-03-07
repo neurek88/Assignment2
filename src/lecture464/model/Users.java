@@ -156,24 +156,18 @@ public class Users {
 	        ArrayList al = null;
 	        ArrayList pid_list = new ArrayList();
 	        String query = "select * from Products where ProductName='" + pid + "' ";
-
-	        System.out.println("query " + query);
+	        
 	        st = conn.createStatement();
 	        ResultSet rs = st.executeQuery(query);
 
 	        while (rs.next()) {
 	            al = new ArrayList();
-
-//	            out.println(rs.getString(1));
-//	            out.println(rs.getString(2));
-//	            out.println(rs.getString(3));
-//	            out.println(rs.getString(4));
+	            
 	            al.add(rs.getString(1));
 	            al.add(rs.getString(2));
 	            al.add(rs.getString(3));
 	            al.add(rs.getString(4));
 	            
-
 	            System.out.println("al :: " + al);
 	            pid_list.add(al);
 	        }

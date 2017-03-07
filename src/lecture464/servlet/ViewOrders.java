@@ -64,7 +64,6 @@ public class ViewOrders extends HttpServlet {
 			completeOrderArray = db.getCompleteOrderList();
 			finalListOfOrderedProducts.add(new ArrayList<Orders>());
 			finalListOfOrderedProducts.get(k).addAll(completeOrderArray);
-			System.out.println("This Order List: " + completeOrderArray);
 			db.clearOrderProductLists();
 			completeOrderArray.clear();
 		}	

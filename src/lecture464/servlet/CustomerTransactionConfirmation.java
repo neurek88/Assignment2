@@ -59,7 +59,7 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		double balance = 32.00;
 		String shippingAddress = request.getParameter("shippingAddress");
 		String billAddress = request.getParameter("billAddress");
-		System.out.println(sum);
+	
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
 		HttpSession session = request.getSession();
