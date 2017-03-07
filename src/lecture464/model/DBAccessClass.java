@@ -297,8 +297,8 @@ public class DBAccessClass {
 		try{
 			stmt = conn.createStatement();
 			
-		String sql = "INSERT INTO OrderItems ( `OrderId`, `ProductId`, `ProductPrice`, `Quantity`, 'ShippingStatus', 'Status')" +
-				"VALUES ('" + OrderId + "', '" + ProductId + "', '" + ProductPrice +"' , '" + Quantity +"', '" + ShippingStatus +"', '" + Status + "')";
+		String sql = "INSERT INTO OrderItems ( OrderId, ProductId, ProductPrice, Quantity, ShippingStatus, Status)" +
+				"VALUES ('" + OrderId + "', '" + ProductId + "', '" + ProductPrice +"', '" + Quantity +"', '" + ShippingStatus +"', '" + Status + "')";
 		stmt.executeUpdate(sql);
 
 

@@ -60,9 +60,6 @@ public class ViewOrders extends HttpServlet {
 		orderIDList =db.getOrderbyId();
 		
 		session.setAttribute("OrderIDList", orderIDList);
-		
-		System.out.println("OrderIDList:" + orderIDList);
-		session.setAttribute("orderIdList", orderIDList);
 		for (int k = 0; k < orderIDList.size(); k++) {
 			db.findProductsOrderedByOrderID(orderIDList.get(k));
 			completeOrderArray = db.getCompleteOrderList();
@@ -71,12 +68,7 @@ public class ViewOrders extends HttpServlet {
 			System.out.println("This Order List: " + completeOrderArray);
 			db.clearOrderProductLists();
 			completeOrderArray.clear();
-		}
-		
-		System.out.println("final Order List: " + finalListOfOrderedProducts);
-		
-		//System.out.println("Order 0 ID: " + completeOrderArray.get(0).get(0).getOrderId() +"Product 0 ID: " + completeOrderArray.get(0).get(0).getProductId() );
-		//System.out.println("completeOrderArray: " + completeOrderArray);
+		}	
 		
 		for (int i = 0; i < finalListOfOrderedProducts.size(); i++) {
 			ArrayList<Products> orderProducts = new ArrayList<Products>();
@@ -84,45 +76,14 @@ public class ViewOrders extends HttpServlet {
 			for (int j = 0; j < finalListOfOrderedProducts.get(i).size(); j++) {
 				db.SearchOrderProducts(finalListOfOrderedProducts.get(i).get(j));
 				Products opd = db.getOrderProduct();
-				//System.out.println("is this working?");
-				//System.out.println(opd);
 				orderProducts.add(opd);
 			}
 			completeOrderProducts.add(new ArrayList<Products>());
 			completeOrderProducts.get(i).addAll(orderProducts);
 		}
 		
-		System.out.println(completeOrderProducts);
 		
-	/*	DBAccessClass db = new DBAccessClass();
-		db.connectMeIn();
-		
-		db.findOrdersById(userId);
-		orderIDList =db.getOrderbyId();
-		db.findProductsOrderedByOrderID(orderIDList);
-	
-		completeOrderArray = db.getCompleteOrderList();
-		System.out.println("Entire Array"+completeOrderArray);
-		System.out.println("Entire Array size"+completeOrderArray.size());
-		System.out.println("Array:" + completeOrderArray.get(1).getProductId() + "," + completeOrderArray.get(1).getOrderId() + "," + completeOrderArray.get(0).getProductId());
-		ArrayList<Products> orderProducts = new ArrayList<Products>();
-		Products opd = null;
-		for (int i = 0; i < completeOrderArray.size(); i++) {
-			
-				db.SearchOrderProducts(completeOrderArray.get(i));
-				opd = db.getOrderProduct();
-				orderProducts.add(opd);
-		}
-		
-			System.out.println("Product Array size"+orderProducts.size());
-			//System.out.println("Entire Products Array"+completeOrderProducts);
-			//System.out.println("Products:"+completeOrderProducts.get(0).get(0).getProductName());
-			System.out.println("completeOrderArray.get(0).get(0)"+ orderProducts.get(0).getProductName());
-		
-		System.out.println(completeOrderProducts);
-		*/
 		db.closeConnection();
-		System.out.println("Final Big List: " +completeOrderProducts.get(0).get(0).getProductName());
 		
 		session.setAttribute("OrderArray", completeOrderProducts);
 		

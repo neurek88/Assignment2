@@ -25,12 +25,13 @@
             <tr>
                 <td colspan=7 align="center"
                     style="background-color:teal">
-                    <b>Order History :<c:out value="${OrderIDList[i.index]}"/></b></td>
+                    <b>Order History :<c:out value="${singleOrderInfo.get(0).getOrderId()}"/></b></td>
             </tr>
            
             <tr style="background-color:lightgrey;">
                 <td><b>Product Name</b></td>
                 <td><b>Product Category</b></td>
+                <td><b>Seller ID</b></td>
                 <td><b>Price</b></td>
                 <td><b>Product Thumbnail</b></td>
                 <td><b>Track Order</b></td>
@@ -44,7 +45,7 @@
            		<td>${ProductList.getSellerId()}</td>
            		<td><c:out value="${ProductList.getPrice()}"/></td>
            		<td><img src="${ProductList.getProductThumbnail()}" alt="${Productlist.ProductName}" style="width:35px;height:35px;"></td>
-           		<td>${ProductList.getProductName()}</td>
+           		<td>${singleOrderInfo.get(0).getShippingStatus()}</td>
                 <td><form action=CancelOrders method="post"><button name="cancel" type="submit" value="${ProductList.getProductId()}">Cancel</button></form></td>
 
                 </tr>
