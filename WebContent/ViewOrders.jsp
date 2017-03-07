@@ -24,7 +24,7 @@
             <tr>
                 <td colspan=7 align="center"
                     style="background-color:teal">
-                    <b>Order History :<c:out value="${OrderIDList.get(i.index)}"/></b><form action=ManageOrders method="post"><button name="manage" type="submit" value="${orderIdList.get(i.index)}">Manage</button></form></td>
+                    <b>Order History :<c:out value="${OrderIDList.get(i.index)}"/></b><form action=ManageOrders method="post"><button name="manage" type="submit" value="${OrderIDList.get(i.index)}">Manage</button></form></td>
 
             </tr>
             <tr style="background-color:lightgrey;">
