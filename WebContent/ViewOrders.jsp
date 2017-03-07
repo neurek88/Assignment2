@@ -24,7 +24,12 @@
             <tr>
                 <td colspan=7 align="center"
                     style="background-color:teal">
+<<<<<<< HEAD
                     <b>Order History :<c:out value="${orderIdList.get(i.index)}"/></b><form action=ManageOrders method="post"><button name="manage" type="submit" value="${orderIdList.get(i.index)}">Manage</button></form></td>
+=======
+
+                    <b>Order History :<c:out value="${orderIdList.get(i.index)}"/></b></td>
+>>>>>>> branch 'NickWork3_6' of https://github.com/neurek88/Assignment2
             </tr>
             <tr style="background-color:lightgrey;">
                 <td><b>Product Name</b></td>
