@@ -46,21 +46,12 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		Users profile = getProfile(request);
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		int creditNumber = Integer.parseInt(request.getParameter("creditNumber"));
-		String creditBrand = request.getParameter("creditBrand");
 		int userId = profile.getUserId();
 		int productId = Integer.parseInt(request.getParameter("productId"));
 		int sum = Integer.parseInt(request.getParameter("total"));
 		double balance = 32.00;
-		int CVV = Integer.parseInt(request.getParameter("CVV"));
-		int expirationDate = Integer.parseInt(request.getParameter("expirationDate"));
 		String shippingAddress = request.getParameter("shippingAddress");
 		String billAddress = request.getParameter("billAddress");
-		System.out.println(creditBrand);
-		System.out.println(firstName);
-		System.out.println(creditNumber);
-		System.out.println(userId);
-		System.out.println(CVV);
 		System.out.println(sum);
 		System.out.println(productId);
 		DBAccessClass db = new DBAccessClass();
@@ -77,6 +68,10 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 			session.setAttribute("orderUser", orderUser);
 			successBean = "Success!";
 			session.setAttribute("SuccessBean", successBean);
+			int creditNumber = Integer.parseInt(request.getParameter("creditNumber"));
+			String creditBrand = request.getParameter("creditBrand");
+			int CVV = Integer.parseInt(request.getParameter("CVV"));
+			int expirationDate = Integer.parseInt(request.getParameter("expirationDate"));
 				if (db.checkCreditCard(creditNumber, creditBrand, CVV)) {
 					newCreditCard.setCardType(creditBrand);
 					newCreditCard.setCVV(CVV);

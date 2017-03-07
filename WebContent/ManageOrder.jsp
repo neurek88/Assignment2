@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,12 +13,12 @@
 <li><a href="#">${sessionScope.userName}</a></li>
 <li><a href="CustomerHomePage.jsp"> Home Page </a></li>
 <li><a href="Login.jsp"> Login out </a></li>
-<li><a href="ManageOrder.jsp"> Manage Orders </a></li>
+<li><form action = ViewOrders method = "post"><input type=submit name="submit" value="View Orders"></form></li>
 </ul> </div>
 
 <h1> World's Best Shopping Website</h1><br>
 <h2>Manage Your Orders</h2><br>
-<h3>You may Cancel, Re-Order, or Track your orders.</h3>
+<h3>You may Cancel or Track your orders.</h3>
 
 <form action="CancelOrder">
  <c:forEach items="${OrderArray}" var="Orders" varStatus="i">
@@ -34,13 +35,36 @@
                 <td><b>Product Category</b></td>
                 <td><b>Price</b></td>
                 <td><b>Product Thumbnail</b></td>
+<<<<<<< HEAD
+                <td><b>Track Order</b></td>
+                <td><b>Cancel Order</b></td>
+=======
                 <td><b>View Product</b></td>
                 <td><b>Action</b></td>
+>>>>>>> branch 'NickWork3_6' of https://github.com/neurek88/Assignment2
            </tr>
+<<<<<<< HEAD
+ 	<c:forEach items="${singleOrder}" var="ProductList" varStatus="i">
+=======
  	<c:forEach items="${Orders}" var="ProductList" varStatus="i">
+>>>>>>> branch 'NickWork3_6' of https://github.com/neurek88/Assignment2
            <tr>
            		<td>${ProductList.getProductName()}</td>
            		<td><c:out value="${ProductList.getProductCategoryIndex()}"/></td>
+<<<<<<< HEAD
+           		<td>${ProductList.getSellerId()}</td>
+           		<td><c:out value="${ProductList.getPrice()}"/></td>
+           		<td><img src="${ProductList.getProductThumbnail()}" alt="${Productlist.ProductName}" style="width:35px;height:35px;"></td>
+           		<td>${ProductList.getProductName()}</td>
+                <td><form action=CancelOrders method="post"><button name="cancel" type="submit" value="${ProductList.getProductId()}">Cancel</button></form></td>
+
+                </tr>
+           </c:forEach>
+           </table>
+
+           </form>
+           <br>
+=======
            		<td><c:out value="${ProductList.getPrice()}"/></td>
            		<td><img src="${ProductList.getProductThumbnail()}" alt="${Productlist.ProductName}" style="width:35px;height:35px;"></td>
            		<td><form action=ProductSearchResults method="post"><button name="order" type="submit" value="${ProductList.getProductName()}">view product</button></form></td>
@@ -91,5 +115,6 @@
            </form>--%>
 <br>
 <br
+>>>>>>> branch 'NickWork3_6' of https://github.com/neurek88/Assignment2
 </body>
 </html>

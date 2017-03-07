@@ -258,9 +258,8 @@ public class DBAccessClass {
 	    } 
 	}
 	
+	//public void SearchShippingS
 
-	
-	//public void SearchOrderProducts(ArrayList<ArrayList<Orders>> orderList){
 	public void SearchOrderProducts(Orders aOrder){
 	    String query = "SELECT * FROM Products WHERE Id LIKE ?";
 	    
@@ -368,44 +367,6 @@ public class DBAccessClass {
 	    } 
 	}
 	
-/*	public void findProductsOrderedByOrderID(ArrayList<Integer> orderArray){
-	    String query = "SELECT ProductId, OrderId FROM OrderItems WHERE OrderId LIKE ?";
-	    int k = 0;
-	    
-	    while( k < orderArray.size()){                                   
-	    	
-	    	try {
-		    	
-		        ps = conn.prepareStatement(query);
-		        ps.setInt(1, orderArray.get(k) );
-		        
-		        ResultSet rs = ps.executeQuery();
-		        Orders objt = null;
-				  while(rs.next()){
-					 
-					 int orderID = rs.getInt("OrderId");
-					 int productID = rs.getInt("ProductId");
-					 objt = new Orders(productID, orderID);
-				  if (objt!=null) {
-					 orderProductList.add(objt);
-				  }
-				  }
-				  
-					 System.out.println("Objt: " + objt);
-				  System.out.println("OrderProductorderProductList: " + orderProductList);
-				 completeOrderArray.add(k, orderProductList);
-				  
-				  k = k+1;
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		    } 	
-	    	
-	    }
-	    //System.out.println(orderProductList);
-	    //System.out.println(completeOrderArray);
-	    
-	    
-	}*/
 
 	public void findProductsOrderedByOrderID(int orderArray){
 	     String query = "SELECT ProductId, OrderId FROM OrderItems WHERE OrderId LIKE ?";
@@ -428,8 +389,6 @@ public class DBAccessClass {
 	      System.out.println("Objt: " + objt);
 	      System.out.println("OrderProductorderProductList: " + orderProductList);
 	      
-	     // completeOrderArray.get(i).add(orderProductList);
-	      //completeOrderArray.add(k, orderProductList);
 	      } catch (Exception e) {
 	          e.printStackTrace();
 	      } 
