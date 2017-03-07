@@ -17,7 +17,6 @@
 <h1> World's Best Shopping Website</h1>
 <h2>Are you sure you want to cancel the purchase of such a wonderful product?</h2><br><br>
 <br>
-<form action="CancelOrder">
 <table width="700px"
                style="border:1px solid #000000;">
             <tr>
@@ -37,17 +36,16 @@
            </tr>
            <tr>
            		<tr>
-           		<td>${singleOrderCancellation.getProductName()}</td>
-           		<td><c:out value="${singleOrderCancellation.getProductCategoryIndex()}"/></td>
-           		<td>${singleOrderCancellation.getSellerId()}</td>
-           		<td><c:out value="${singleOrderCancellation.getPrice()}"/></td>
-           		<td><img src="${singleOrderCancellation.getProductThumbnail()}" alt="${Productlist.ProductName}" style="width:35px;height:35px;"></td>
+           		<td>${SingleProduct.getProductName()}</td>
+           		<td>${SingleProduct.getProductCategoryIndex()}</td>
+           		<td>${SingleProduct.getSellerId()}</td>
+           		<td>${SingleProduct.getPrice()}</td>
+           		<td><img src="${SingleProduct.getProductThumbnail()}" alt="${SingleProduct.getProductName()}" style="width:35px;height:35px;"></td>
                 <td><form action=CancelUpdate method="post"><input type=hidden name=cancelOID value="${singleOrderCancellation.getOrderId()}"></input><button name="cancelPID" type="submit" value="${singleOrderCancellation.getProductId()}">Yes</button></form></td>
 				<td><form action=ViewOrders method="post"><button type=submit>No</button></form></td>
                 </tr>
            </tr>
            </table>
-           </form>
 
 <br>
 

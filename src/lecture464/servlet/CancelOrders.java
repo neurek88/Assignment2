@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import lecture464.model.DBAccessClass;
+import lecture464.model.Orders;
 import lecture464.model.Products;
 import lecture464.model.Users;
 
@@ -43,9 +45,16 @@ public class CancelOrders extends HttpServlet {
 		HttpSession session = request.getSession();
 		Users profile = getProfile(request);
 		int userId = profile.getUserId();
-		
-		Products tpd = (Products) request.getAttribute("cancelProduct");
+		int produductId = Integer.parseInt(request.getParameter("cancelProduct"));
+		int orderId = Integer.parseInt(request.getParameter("cancelOrder"));
+		Orders tpd = new Orders(produductId, orderId);
 		request.setAttribute("singleOrderCancellation", tpd);
+		DBAccessClass db = new DBAccessClass();
+		db.connectMeIn();
+		db.SearchProduct(produductId);
+		Products itemName;
+		itemName = (Products)db.getProduct();
+		session.setAttribute("SingleProduct", itemName);
 		
 		RequestDispatcher view = request.getRequestDispatcher("CancelOrder.jsp");
         view.forward(request, response);

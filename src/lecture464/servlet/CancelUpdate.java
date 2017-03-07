@@ -20,9 +20,9 @@ import lecture464.model.Users;
 public class CancelUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private Users getProfile(HttpServletRequest request) {
+	private Orders getOrders(HttpServletRequest request) {
 	     HttpSession session = request.getSession();
-	     Users profile = (Users) session.getAttribute("userBean");
+	     Orders profile = (Orders) session.getAttribute("singleOrderCancellation");
 	     return profile;
 	}
     /**
@@ -38,17 +38,16 @@ public class CancelUpdate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Users profile = getProfile(request);
-		int userId = profile.getUserId();
+		Orders profile = getOrders(request);
 			
-		Integer pid = Integer.parseInt(request.getParameter("cancelPID"));
-		Integer oid = Integer.parseInt(request.getParameter("cancelOID"));
+		int pid = Integer.parseInt(request.getParameter("cancelPID"));
+		int oid = Integer.parseInt(request.getParameter("cancelOID"));
 		System.out.println(pid);
 		System.out.println(oid);
 		
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
-		db.changeShippingStatus(oid, pid);
+		db.changeShippingStatus(pid, oid);
 		db.closeConnection();
 		
 		RequestDispatcher view = request.getRequestDispatcher("CancellationConfirmation.jsp");

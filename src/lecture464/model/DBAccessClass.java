@@ -438,13 +438,31 @@ public class DBAccessClass {
 		completeOrderArray.clear();
 	}
 
-	public void changeShippingStatus(int order, int product){
+	public int searchShippingStatus(int order) {
+		int ShippingStatus = 0;
+		try {
+			Statement stat = conn.createStatement();
+			String query = "SELECT ProductId, OrderId, ShippingStatus FROM OrderItems WHERE OrderId = " +order; 
+			ResultSet rs = stat.executeQuery(query);
+			
+			while (rs.next()){
+				 ShippingStatus =rs.getInt("ShippingStatus");
+			}  
+		}
+	     
+	      catch (Exception e) {
+	          e.printStackTrace();
+	      } 
+		return ShippingStatus;
+	     }
+	
+	public void changeShippingStatus(int product, int order){
 		
-	      try {
-	    	  stmt = conn.createStatement();
+		try{
+	    	  Statement stat = conn.createStatement();
 	    	  String query = "UPDATE OrderItems SET ShippingStatus = 2 WHERE OrderId = " +order+" AND ProductId = "+product; 
-	    	  stmt.executeUpdate(query);
-	      }
+	    	  stat.executeUpdate(query);
+		}
 	      
 	      catch (Exception e) {
 	          e.printStackTrace();
