@@ -14,6 +14,7 @@
 <li><a href="CustomerHomePage.jsp"> Home Page </a></li>
 <li><a href="Login.jsp"> Login out </a></li>
 <li><a href="View&CheckoutShoppingCart.jsp"> Add to Cart </a></li>
+<li><form action = ViewOrders method = "post"><input type=submit name="submit" value="View Orders"></form></li>
 </ul> </div>
 
 <h1> World's Best Shopping Website</h1><br>

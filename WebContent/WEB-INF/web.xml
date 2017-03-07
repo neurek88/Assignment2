@@ -87,4 +87,14 @@
     <servlet-name>ViewOrders</servlet-name>
     <url-pattern>/ViewOrders</url-pattern>
   </servlet-mapping>
+     <servlet>
+    <description></description>
+    <display-name>ManageOrders</display-name>
+    <servlet-name>ManageOrders</servlet-name>
+    <servlet-class>lecture464.servlet.ManageOrders</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManageOrders</servlet-name>
+    <url-pattern>/ManageOrders</url-pattern>
+  </servlet-mapping>
 </web-app>

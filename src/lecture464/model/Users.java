@@ -1,6 +1,7 @@
 package lecture464.model;
 
 import javax.servlet.ServletContext;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
+
+
 
 public class Users {
 	

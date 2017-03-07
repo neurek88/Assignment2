@@ -26,7 +26,7 @@ public class Orders {
 	private int ProductId;
 	private int ProductPrice;
 	private int Quantity;
-	private int ShippingStatus;
+	private String ShippingStatus;
 	private int ShippingRefNo;
 	private int Status;
 	private ArrayList<Integer> ArrayOrderId = new ArrayList<Integer>();
@@ -90,11 +90,16 @@ public class Orders {
 	public void setProductPrice(int productPrice) {
 		ProductPrice = productPrice;
 	}
-	public int getShippingStatus() {
+	public String getShippingStatus() {
 		return ShippingStatus;
 	}
 	public void setShippingStatus(int shippingStatus) {
-		ShippingStatus = shippingStatus;
+		if (shippingStatus == 1) {
+		ShippingStatus = "Shipping";
+		}
+		if (shippingStatus == 2) {
+			ShippingStatus = "Canceled";
+		}
 	}
 	public int getShippingRefNo() {
 		return ShippingRefNo;
@@ -119,21 +124,6 @@ public ArrayList<Integer> getArrayOrderIdfromUser() {
 	return ArrayOrderId;
 }
 
-/*public void insertOrderItemInfo(){
-	DBAccessClass db = new DBAccessClass();
-	db.connectMeIn();
-	db.insertOrderItemInfo(OrderId, ProductId, OrderCost, Quantity);
-	db.closeConnection();
-}*/
-	/*public void findProductsbyOrderId(ArrayList<Integer> ArrayOrderId) {
-		DBAccessClass db = new DBAccessClass();
-		db.connectMeIn();
-		db.findProductsOrderedByOrderID(ArrayOrderId);
-		ArrayListOrders = db.getCompleteOrderList();
-	}
-	public ArrayList<ArrayList<Orders>> getProductsbyOrderId() {
-		return ArrayListOrders;
-	}*/
 }
 	
 
