@@ -23,7 +23,7 @@
             <tr>
                 <td colspan=8 align="center"
                     style="background-color:teal">
-                    <b>Order to be Cancelled</b></td>
+                    <b>Product from Order:<c:out value="${singleOrderCancellation.getOrderId()}"/> to be Cancelled</b></td>
             </tr>
             <tr style="background-color:lightgrey;">
                 <td><b>Product Name</b></td>
@@ -36,14 +36,15 @@
 
            </tr>
            <tr>
-           		<td>Virtual Toast</td>
-           		<td>food</td>
-           		<td>ebay</td>
-            	<td>$10</td>
-            	<td><img src="VirtualToast.jpg" alt="VirtualToast" style="width:25px;height:25px;"></td>
-            	<td><a href="ManageOrder.jsp"> No </a></td>
-            	<td><a href="CancellationConfirmation.jsp"> Yes </a></td>
-
+           		<tr>
+           		<td>${singleOrderCancellation.getProductName()}</td>
+           		<td><c:out value="${singleOrderCancellation.getProductCategoryIndex()}"/></td>
+           		<td>${singleOrderCancellation.getSellerId()}</td>
+           		<td><c:out value="${singleOrderCancellation.getPrice()}"/></td>
+           		<td><img src="${singleOrderCancellation.getProductThumbnail()}" alt="${Productlist.ProductName}" style="width:35px;height:35px;"></td>
+                <td><form action=CancelUpdate method="post"><input type=hidden name=cancelOID value="${singleOrderCancellation.getOrderId()}"></input><button name="cancelPID" type="submit" value="${singleOrderCancellation.getProductId()}">Yes</button></form></td>
+				<td><form action=ViewOrders method="post"><button type=submit>No</button></form></td>
+                </tr>
            </tr>
            </table>
            </form>
