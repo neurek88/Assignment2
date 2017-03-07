@@ -46,7 +46,9 @@
            		<td><c:out value="${ProductList.getPrice()}"/></td>
            		<td><img src="${ProductList.getProductThumbnail()}" alt="${Productlist.ProductName}" style="width:35px;height:35px;"></td>
            		<td>${singleOrderInfo.get(0).getShippingStatus()}</td>
-                <td><form action=CancelOrders method="post"><button name="cancel" type="submit" value="${ProductList.getProductId()}">Cancel</button></form></td>
+                <td><form action=CancelOrders method="post"><button name="cancelProduct" type="submit" value="${singleOrderInfo.get(i)}">Cancel</button></form></td>
+
+
 
                 </tr>
            </c:forEach>

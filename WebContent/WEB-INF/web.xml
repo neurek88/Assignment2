@@ -67,7 +67,7 @@
     <servlet-name>ProductSearchQuery</servlet-name>
     <url-pattern>/ProductSearchQuery</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>ProductSearchResults</display-name>
     <servlet-name>ProductSearchResults</servlet-name>
@@ -77,7 +77,7 @@
     <servlet-name>ProductSearchResults</servlet-name>
     <url-pattern>/ProductSearchResults</url-pattern>
   </servlet-mapping>
-      <servlet>
+  <servlet>
     <description></description>
     <display-name>ViewOrders</display-name>
     <servlet-name>ViewOrders</servlet-name>
@@ -87,7 +87,7 @@
     <servlet-name>ViewOrders</servlet-name>
     <url-pattern>/ViewOrders</url-pattern>
   </servlet-mapping>
-     <servlet>
+  <servlet>
     <description></description>
     <display-name>ManageOrders</display-name>
     <servlet-name>ManageOrders</servlet-name>
@@ -97,8 +97,7 @@
     <servlet-name>ManageOrders</servlet-name>
     <url-pattern>/ManageOrders</url-pattern>
   </servlet-mapping>
-  
-     <servlet>
+  <servlet>
     <description></description>
     <display-name>CancelOrders</display-name>
     <servlet-name>CancelOrders</servlet-name>
@@ -107,5 +106,15 @@
   <servlet-mapping>
     <servlet-name>CancelOrders</servlet-name>
     <url-pattern>/CancelOrders</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CancelUpdate</display-name>
+    <servlet-name>CancelUpdate</servlet-name>
+    <servlet-class>lecture464.servlet.CancelUpdate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CancelUpdate</servlet-name>
+    <url-pattern>/CancelUpdate</url-pattern>
   </servlet-mapping>
 </web-app>

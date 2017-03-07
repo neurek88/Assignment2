@@ -406,6 +406,18 @@ public class DBAccessClass {
 		completeOrderArray.clear();
 	}
 
+	public void changeShippingStatus(int order, int product){
+		
+	      try {
+	    	  stmt = conn.createStatement();
+	    	  String query = "UPDATE OrderItems SET ShippingStatus = 2 WHERE OrderId = " +order+" AND ProductId = "+product; 
+	    	  stmt.executeUpdate(query);
+	      }
+	      
+	      catch (Exception e) {
+	          e.printStackTrace();
+	      } 
+	     }
 	
 	public ArrayList<Integer> getOrderbyId() {
 		return orderList;
