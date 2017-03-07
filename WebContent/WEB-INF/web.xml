@@ -97,4 +97,15 @@
     <servlet-name>ManageOrders</servlet-name>
     <url-pattern>/ManageOrders</url-pattern>
   </servlet-mapping>
+  
+     <servlet>
+    <description></description>
+    <display-name>CancelOrders</display-name>
+    <servlet-name>CancelOrders</servlet-name>
+    <servlet-class>lecture464.servlet.CancelOrders</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CancelOrders</servlet-name>
+    <url-pattern>/CancelOrders</url-pattern>
+  </servlet-mapping>
 </web-app>
