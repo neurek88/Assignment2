@@ -53,6 +53,7 @@ public class ManageOrders extends HttpServlet {
 		
 		db.findProductsOrderedByOrderID(pid);
 		completeOrderArray = db.getCompleteOrderList();
+
 		request.setAttribute("singleOrderInfo", completeOrderArray);
 		for (int j = 0; j < completeOrderArray.size(); j++) {
 			db.SearchOrderProducts(completeOrderArray.get(j));

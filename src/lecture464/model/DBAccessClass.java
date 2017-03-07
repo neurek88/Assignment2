@@ -20,6 +20,7 @@ public class DBAccessClass {
 	private ArrayList<Integer> orderList = new ArrayList<Integer>();
 	private ArrayList<Orders> orderProductList = new ArrayList<Orders>();
 	private ArrayList<Orders> completeOrderArray = new ArrayList<Orders>();
+	private ArrayList<Orders> completeOrderInfo = new ArrayList<Orders>();
 	private Orders OrderBean;
 	private Products OrderProductBean;
 	private Products ProductBean;
@@ -396,7 +397,38 @@ public class DBAccessClass {
 		     System.out.println("This OrdersProducts: " + completeOrderArray);
 		     orderProductList.clear();
 	     }
-	    
+	
+	public void findOrderedInfoByOrderID(int orderArray){
+	     String query = "SELECT ProductId, OrderId, ShippingStatus FROM OrderItems WHERE OrderId LIKE ?";
+	     
+	     ArrayList<Orders> orderProductList = new ArrayList<Orders>();
+	     
+	      try {
+	          ps = conn.prepareStatement(query);
+	          ps.setInt(1, orderArray );
+	          ResultSet rs = ps.executeQuery();
+	          Orders objt = null;
+	      while(rs.next()){
+	      int orderID = rs.getInt("OrderId");
+	      int productID = rs.getInt("ProductId");
+	      int ShippingStatus =rs.getInt("ShippingStatus");
+	      objt = new Orders(productID, orderID);
+	      objt.setShippingStatus(ShippingStatus);
+	      }
+	      System.out.println("Objt: " + objt);
+	      System.out.println("OrderProductorderProductList: " + orderProductList);
+	      
+	      } catch (Exception e) {
+	          e.printStackTrace();
+	      } 
+		  completeOrderArray.addAll(orderProductList);
+		     System.out.println("This OrdersProducts: " + completeOrderArray);
+		     orderProductList.clear();
+	     }
+	public ArrayList<Orders> getCompleteOrderInfo() {
+		return completeOrderInfo;
+	}
+	
 	
 	public ArrayList<Orders> getCompleteOrderList() {
 		return completeOrderArray;
