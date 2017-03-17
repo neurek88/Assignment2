@@ -117,4 +117,14 @@
     <servlet-name>CancelUpdate</servlet-name>
     <url-pattern>/CancelUpdate</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CustomerQA</display-name>
+    <servlet-name>CustomerQA</servlet-name>
+    <servlet-class>lecture464.servlet.CustomerQA</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerQA</servlet-name>
+    <url-pattern>/CustomerQA</url-pattern>
+  </servlet-mapping>
 </web-app>

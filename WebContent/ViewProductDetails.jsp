@@ -7,6 +7,31 @@
 <link rel="stylesheet" type="text/css" href="CSS/Style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>W.B.S.W.</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+		</script>
+		<script>
+			function getReview() {
+				var cName = $("#Name").val();
+				var cRating  = $("#Rating").val();
+				var cReview  = $("#Review").val();
+			
+			   
+				  $.post("CustomerReviews", {Name:cName, Rating:cRating, Review:cReview }, function(data,status) {
+				    
+					  location.reload(true);
+			    			
+			    });
+			  }
+			function getQuestion() {
+				var cQuestion = $("#Question").val();
+			   	var product = $(itemList[0].getProductId()).val();
+				  $.post("CustomerQA", {Question:cQuestion, pid:product}, function(data,status) {
+				    
+					  location.reload(true);
+			    			
+			    });
+			  }
+		</script>
 </head>
 <body>
 <div id=navigation><ul>
@@ -52,10 +77,31 @@
                 </tr>
             
 </table>
-<h3>Customer Questions and Answers</h3><br>
-<b>Question</b> <p> How does it taste?</p><br>
-<b>Answer</b> <p>delicious</p><br>
 <br>
+<table width="700px" align="center"
+               style="border:1px solid #000000;">
+            <tr>
+                <td colspan=7 align="center"
+                    style="background-color:teal">
+                    <b>Questions and Answers</b></td>
+            </tr>
+            <tr style="background-color:lightgrey;">
+                <td><b>Question</b></td>
+                <td><b>Answer</b></td>
+              </tr>
+              <c:forEach items="${questionList}" var="qlist">
+              <tr>
+              	<td>${qList}</td>
+              	<td>${qList}</td>
+              </tr>
+              </c:forEach>
+            <tr>
+            	<td></td>
+            	<td><input type="button" value="Submit" onClick="getQuestion()"></td>
+            </tr>
+          </table>
+<br>
+
 <h3>Customer Reviews</h3><br>
 <b>Overall Rating</b><br>
 <table width="700px" align="center"
@@ -71,16 +117,19 @@
                 <td><b>Rating out of 5 stars</b></td>
                 <td><b>Customer Review</b></td>
             </tr>
-        <c:forEach items="${itemList}" var="list">
+        <c:forEach items="${reviewList}" var="rlist">
             <tr>
-            	<td>Fred</td>
-            	<td>8/8/2004</td>
-            	<td>4.5</td>
-            	<td>This toast is awesome. Tastes great but not filling</td>
+            	<td>${rList}Fred</td>
+            	<td>${rList}8/8/2004</td>
+            	<td>${rList}4.5</td>
+            	<td>${rList}This toast is awesome. Tastes great but not filling</td>
             </tr>
             </c:forEach>
+ 
 </table>
-<br>
-
+	Name: 	<input type="text" id="Name" value="">	<br>
+	Rating: 	<input type="text" id="Rating" value="">	<br>
+	Your Review: 	<input type="text" id="Review" value="">	<br>
+<input type="button" value="Submit" onClick="getReview()">
 </body>
 </html>

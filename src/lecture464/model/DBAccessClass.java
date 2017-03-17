@@ -66,6 +66,34 @@ public class DBAccessClass {
 		}
 	}
 	
+	public void insertQuestionData (int productId, int customerId, String question) {
+		try{
+			stmt = conn.createStatement();
+			
+		String sql = "INSERT INTO ProductQA ( `ProductId`, `CustomerId`, `Question`)" +
+				"VALUES (" + productId + ", " + customerId + ",'" + question + "')";
+		stmt.executeUpdate(sql);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void insertReviewData (int productId, int customerId, String review, int reviewRating) {
+		try{
+			stmt = conn.createStatement();
+			
+		String sql = "INSERT INTO ProductQA ( `ProductId`, `CustomerId`, `ReviewDate`, `Rating`, `Review`)" +
+				"VALUES (" + productId + ", " + customerId + ", CURRENT_DATE(), '" + reviewRating + "', '" + review +"' )";
+		stmt.executeUpdate(sql);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 	public void addSingleUser(Users aUser) {
 		  
 		try {
