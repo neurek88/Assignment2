@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import lecture464.model.DBAccessClass;
 import lecture464.model.Products;
+import lecture464.model.Users;
 
 /**
  * Servlet implementation class ProductSearchQuery
@@ -19,6 +20,11 @@ import lecture464.model.Products;
 public class ProductSearchResults extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private Products getProfile(HttpServletRequest request) {
+	     HttpSession session = request.getSession();
+	     Products profile = (Products) session.getAttribute("itemList");
+	     return profile;
+	}
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,9 +40,18 @@ public class ProductSearchResults extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String pid = request.getParameter("order");	
+		Products productProfile = getProfile(request);
+		int productId = Integer.parseInt(request.getParameter("productId"));	
+		System.out.println(productId);
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
 		db.SearchProductInfo(pid);
+		db.searchReviewData(productId);
+		db.searchQuestionData(productId);
+		Products ReviewData = db.getReviewInto();
+		Products QuestionData = db.getQuestionData();
+		request.setAttribute("questionList", QuestionData);
+		request.setAttribute("reviewList", ReviewData);
 		ArrayList<Products> ListName = (ArrayList<Products>)session.getAttribute("itemList");
 		ListName = db.getProductList();
         try {

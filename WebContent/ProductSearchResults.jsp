@@ -43,7 +43,7 @@
                 <td>${list.getSellerId()}</td>
                 <td>${list.getPrice()}</td>
                 <td><img src="${list.getProductThumbnail()}" alt="${list.getProductName()}" style="width:35px;height:35px;"></td>
-                <td><form action=ProductSearchResults method="post"><button name="order" type="submit" value="${list.getProductName()}">view product</button></form></td>
+                <td><form action=ProductSearchResults method="post"><input type="hidden" name="productId" value="${list.getProductId()}"><button name="order" type="submit" value="${list.getProductName()}">view product</button></form></td>
                 <td><form action=UpdateShoppingCart method="post"><button name="cart" type="submit" value="${list.getProductId()}">add to cart</button></form></td>
                 </tr>
            </c:forEach> 
