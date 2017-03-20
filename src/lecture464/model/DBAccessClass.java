@@ -24,12 +24,15 @@ public class DBAccessClass {
 	private Orders OrderBean;
 	private Products OrderProductBean;
 	private Products ProductBean;
+	private Products ReviewBean;
+	private Products QuestionBean;
     private int userId;
     private int orderId;
     private int NewestOrderID;
 	// JDBC driver name and database URL
-	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	final String DB_URL = "jdbc:mysql://cse.unl.edu:3306/rhooper";
+	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
+	//final String DB_URL = "jdbc:mysql://cse.unl.edu:3306/rhooper";
+	final String DB_URL = "jdbc:mysql://cse.unl.edu:3306/rhooper?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	
 	
 
@@ -54,6 +57,7 @@ public class DBAccessClass {
 		}
 	}
 	public void insertOrderData ( int customerId, double totalCost, String shippingAddress, String billAddress, int creditNumber) {
+		if(conn !=null) {
 		try{
 			stmt = conn.createStatement();
 			
@@ -63,6 +67,7 @@ public class DBAccessClass {
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
+		}
 		}
 	}
 	
@@ -92,6 +97,69 @@ public class DBAccessClass {
 			e.printStackTrace();
 		}
 
+	}
+	public void searchReviewData (int productId) {
+		 String query = "SELECT * FROM CustomerReviews WHERE ProductId LIKE ?";
+		    
+		    try {
+		    	
+		        ps = conn.prepareStatement(query);
+		        ps.setInt(1, productId);
+		        
+		        ResultSet rs = ps.executeQuery();
+		        
+		        
+				  while(rs.next()){
+					    //Retrieve by column name
+					  int Id = rs.getInt("Id");
+					  int CustomerId = rs.getInt("CustomerId");
+					  String Review = rs.getString("Review");
+					  int Rating = rs.getInt("Rating");
+					  Date ReviewDate = rs.getDate("ReviewDate");
+					  ReviewBean.setRating(Rating);
+					  ReviewBean.setReview(Review);
+					  ReviewBean.setReviewDate(ReviewDate);
+					  ReviewBean.setReviewCustomerID(CustomerId);
+				  }
+		            
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+
+	}
+	public Products getReviewInto() {
+		return ReviewBean;
+	}
+	
+	public void searchQuestionData (int productId) {
+		 String query = "SELECT * FROM ProductQA WHERE ProductId LIKE ?";
+		    
+		    try {
+		    	
+		        ps = conn.prepareStatement(query);
+		        ps.setInt(1, productId);
+		        
+		        ResultSet rs = ps.executeQuery();
+		        
+		        
+				  while(rs.next()){
+					    //Retrieve by column name
+					  int Id = rs.getInt("Id");
+					  int CustomerId = rs.getInt("CustomerId");
+					  String productQuestion = rs.getString("Question");
+					  String productAnswer = rs.getString("Answer");
+					  QuestionBean.setProductQuestion(productQuestion);
+					  QuestionBean.setProductAnswer(productAnswer);
+					  QuestionBean.setReviewCustomerID(CustomerId);
+				  }
+		            
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+
+	}
+	public Products getQuestionData() {
+		return QuestionBean;
 	}
 	
 	public void addSingleUser(Users aUser) {
@@ -141,6 +209,7 @@ public class DBAccessClass {
 		
 		return userExists;
 	}
+	
 	public boolean findUserByPassword(String password) {
 		boolean passwordMatches = false;
 		String SQL = "SELECT * from Users";
@@ -217,7 +286,7 @@ public class DBAccessClass {
 	public void connectMeIn() {
 		try{
 			//Register the JDBC driver
-			Class.forName("com.mysql.jdbc.Driver");			
+			Class.forName(JDBC_DRIVER);			
 		}catch(ClassNotFoundException e){
 			System.err.println(e);
 			System.exit (-1);

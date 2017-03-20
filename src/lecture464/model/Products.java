@@ -1,5 +1,7 @@
 package lecture464.model;
 
+import java.sql.*;
+
 public class Products {
 	
 	private int Id;
@@ -14,8 +16,49 @@ public class Products {
 	private String ProductCategory;
 	//private String ProductVideosLinks;
 	private String ProductThumbnail;
+	private String Review;
+	private int Rating;
+	private Date ReviewDate;
+	private int ReviewCustomerID;
+	private String ProductQuestion;
+	private String ProductAnswer;
 	
-	
+	public String getProductQuestion() {
+		return ProductQuestion;
+	}
+	public void setProductQuestion(String productQuestion) {
+		ProductQuestion = productQuestion;
+	}
+	public String getProductAnswer() {
+		return ProductAnswer;
+	}
+	public void setProductAnswer(String productAnswer) {
+		ProductAnswer = productAnswer;
+	}
+	public int getReviewCustomerID() {
+		return ReviewCustomerID;
+	}
+	public void setReviewCustomerID(int reviewCustomerID) {
+		ReviewCustomerID = reviewCustomerID;
+	}
+	public String getReview() {
+		return Review;
+	}
+	public void setReview(String review) {
+		Review = review;
+	}
+	public int getRating() {
+		return Rating;
+	}
+	public void setRating(int rating) {
+		Rating = rating;
+	}
+	public Date getReviewDate() {
+		return ReviewDate;
+	}
+	public void setReviewDate(Date reviewDate) {
+		ReviewDate = reviewDate;
+	}
 	public int getProductId() {
 		return Id;
 	}

@@ -39,7 +39,7 @@ public class CustomerQA extends HttpServlet {
 		Users profile = getProfile(request);
 		int customerId = profile.getUserId();
 		int productId = Integer.parseInt(request.getParameter("pid"));
-		
+		System.out.println(productId);
 			DBAccessClass db = new DBAccessClass();
 			db.connectMeIn();
 			db.insertQuestionData(productId, customerId, cQuestion);
