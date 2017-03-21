@@ -18,8 +18,7 @@ import lecture464.model.Users;
  * Servlet implementation class ProductSearchQuery
  */
 public class ProductSearchResults extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-    private int myNumber = 66;   
+	private static final long serialVersionUID = 1L;   
 	private Products getProfile(HttpServletRequest request) {
 	     HttpSession session = request.getSession();
 	     Products profile = (Products) session.getAttribute("itemList");
@@ -40,19 +39,22 @@ public class ProductSearchResults extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		Products profile = getProfile(request);
+		Products ProductBean;
 		ArrayList<Products> ReviewData = new ArrayList<Products>();
 		ArrayList<Products> QuestionData = new ArrayList<Products>();
+		int productId;
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
-		int productId = -1;
-		if(myNumber==88){
+		if(session.getAttribute("itemList") != null) {
 			productId = profile.getProductId();
-		} else {
+			ProductBean = (Products) session.getAttribute("itemList");
+	}
+		 else {
 			productId = Integer.parseInt(request.getParameter("productId"));
+			ProductBean = new Products(0,null,0,null,0,0,0,0,null,null);
+			db.SearchProduct(productId);
+			ProductBean = db.getProduct();
 		}
-		db.SearchProduct(productId);
-		Products ProductBean = (Products) session.getAttribute("itemList");
-		ProductBean = db.getProduct();
 		System.out.println(productId);
 		db.searchReviewData(productId);
 		db.searchQuestionData(productId);
@@ -62,7 +64,6 @@ public class ProductSearchResults extends HttpServlet {
 		request.setAttribute("reviewList", ReviewData);
         try {
         	session.setAttribute("itemList", ProductBean);
-        	myNumber = 88;
             RequestDispatcher view = request.getRequestDispatcher("ViewProductDetails.jsp");
             view.forward(request, response);
         } catch (Exception e) {
