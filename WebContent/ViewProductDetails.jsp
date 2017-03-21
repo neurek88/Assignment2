@@ -14,20 +14,21 @@
 				var cName = $("#Name").val();
 				var cRating  = $("#Rating").val();
 				var cReview  = $("#Review").val();
-			
+				var product = ${itemList[0].getProductId()}.val();
+			console.log(cName);
 			   
-				  $.post("CustomerReviews", {Name:cName, Rating:cRating, Review:cReview }, function(data,status) {
+				  $.post("CustomerReviews", {Name:cName, Rating:cRating, Review:cReview, pid:product }, function(data,status) {
 				    
-					  location.reload(false);
+					  alert("Review Added");
 			    			
 			    });
 			  }
 			function getQuestion() {
 				var cQuestion = $("#Question").val();
-			   	var product = $(itemList[0].getProductId()).val();
+			   	var product = ${itemList[0].getProductId()}.val();
 				  $.post("CustomerQA", {Question:cQuestion, pid:product}, function(data,status) {
 				    
-					  location.reload(true);
+					  alert("Question Added");
 			    			
 			    });
 			  }
@@ -96,8 +97,9 @@
               </tr>
               </c:forEach>
           </table>
+          <form name="question" method="post" onsubmit="return getQuestion();">
           Question: 	<input type="text" id="Question" value="">
-          <input type="button" value="Submit" onClick="getQuestion()">
+          <input type="submit" name="submit" value="Submit"></form>
 <br>
 
 <h3>Customer Reviews</h3><br>
@@ -125,9 +127,10 @@
             </c:forEach>
  
 </table>
+<form name="review" method="post" onsubmit="return getReview();">
 	Name: 	<input type="text" id="Name" value="">	<br>
 	Rating: 	<input type="text" id="Rating" value="">	<br>
 	Your Review: 	<input type="text" id="Review" value="">	<br>
-<input type="button" value="Submit" onClick="getReview()">
+<input type="submit" name="submit" value="Submit"></form>
 </body>
 </html>

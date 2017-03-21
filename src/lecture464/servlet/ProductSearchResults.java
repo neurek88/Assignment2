@@ -37,19 +37,20 @@ public class ProductSearchResults extends HttpServlet {
 		String pid = request.getParameter("order");
 		ArrayList<Products> ReviewData = new ArrayList<Products>();
 		ArrayList<Products> QuestionData = new ArrayList<Products>();
-		int productId = Integer.parseInt(request.getParameter("productId"));	
-		System.out.println(productId);
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
 		db.SearchProductInfo(pid);
+		int productId = Integer.parseInt(request.getParameter("productId"));	
+		ArrayList<Products> ListName = (ArrayList<Products>)session.getAttribute("itemList");
+		ListName = db.getProductList();
+		//int productId = ListName.get(0).getProductId();
+		System.out.println(productId);
 		db.searchReviewData(productId);
 		db.searchQuestionData(productId);
 		ReviewData = db.getReviewInfo();
 		QuestionData = db.getQuestionData();
 		request.setAttribute("questionList", QuestionData);
 		request.setAttribute("reviewList", ReviewData);
-		ArrayList<Products> ListName = (ArrayList<Products>)session.getAttribute("itemList");
-		ListName = db.getProductList();
         try {
         	session.setAttribute("itemList", ListName);
             RequestDispatcher view = request.getRequestDispatcher("ViewProductDetails.jsp");
