@@ -19,7 +19,12 @@ import lecture464.model.Users;
  */
 public class ProductSearchResults extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private int myNumber = 66;   
+	private ArrayList<Products> getProfile(HttpServletRequest request) {
+	     HttpSession session = request.getSession();
+	     ArrayList<Products> profile = (ArrayList<Products>) session.getAttribute("itemList");
+	     return profile;
+	}
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,15 +40,20 @@ public class ProductSearchResults extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String pid = request.getParameter("order");
+		ArrayList<Products> profile = getProfile(request);
 		ArrayList<Products> ReviewData = new ArrayList<Products>();
 		ArrayList<Products> QuestionData = new ArrayList<Products>();
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
 		db.SearchProductInfo(pid);
-		int productId = Integer.parseInt(request.getParameter("productId"));	
+		int productId = -1;
+		if(myNumber==88){
+			productId = profile.get(0).getProductId();
+		} else {
+			productId = Integer.parseInt(request.getParameter("productId"));
+		}
 		ArrayList<Products> ListName = (ArrayList<Products>)session.getAttribute("itemList");
 		ListName = db.getProductList();
-		//int productId = ListName.get(0).getProductId();
 		System.out.println(productId);
 		db.searchReviewData(productId);
 		db.searchQuestionData(productId);
@@ -53,6 +63,7 @@ public class ProductSearchResults extends HttpServlet {
 		request.setAttribute("reviewList", ReviewData);
         try {
         	session.setAttribute("itemList", ListName);
+        	myNumber = 88;
             RequestDispatcher view = request.getRequestDispatcher("ViewProductDetails.jsp");
             view.forward(request, response);
         } catch (Exception e) {
