@@ -24,8 +24,8 @@ public class DBAccessClass {
 	private Orders OrderBean;
 	private Products OrderProductBean;
 	private Products ProductBean;
-	private Products ReviewBean;
-	private Products QuestionBean;
+	private ArrayList<Products> ReviewList = new ArrayList<Products>();
+	private ArrayList<Products> QuestionList = new ArrayList<Products>();
     private int userId;
     private int orderId;
     private int NewestOrderID;
@@ -89,7 +89,7 @@ public class DBAccessClass {
 		try{
 			stmt = conn.createStatement();
 			
-		String sql = "INSERT INTO ProductQA ( `ProductId`, `CustomerId`, `ReviewDate`, `Rating`, `Review`)" +
+		String sql = "INSERT INTO CustomerReviews ( `ProductId`, `CustomerId`, `ReviewDate`, `Rating`, `Review`)" +
 				"VALUES (" + productId + ", " + customerId + ", CURRENT_DATE(), '" + reviewRating + "', '" + review +"' )";
 		stmt.executeUpdate(sql);
 		}
@@ -113,13 +113,16 @@ public class DBAccessClass {
 					    //Retrieve by column name
 					  int Id = rs.getInt("Id");
 					  int CustomerId = rs.getInt("CustomerId");
+					  Date ReviewDate = rs.getDate("ReviewDate");
 					  String Review = rs.getString("Review");
 					  int Rating = rs.getInt("Rating");
-					  Date ReviewDate = rs.getDate("ReviewDate");
-					  ReviewBean.setRating(Rating);
-					  ReviewBean.setReview(Review);
-					  ReviewBean.setReviewDate(ReviewDate);
+					  System.out.println(CustomerId);
+					  Products ReviewBean = new Products(Id,null,0,null,0,0,0,0,null,null);
 					  ReviewBean.setReviewCustomerID(CustomerId);
+					  ReviewBean.setReview(Review);
+					  ReviewBean.setRating(Rating);
+					  ReviewBean.setReviewDate(ReviewDate);
+					 ReviewList.add(ReviewBean); 
 				  }
 		            
 		    } catch (Exception e) {
@@ -127,8 +130,8 @@ public class DBAccessClass {
 		    }
 
 	}
-	public Products getReviewInto() {
-		return ReviewBean;
+	public ArrayList<Products> getReviewInfo() {
+		return ReviewList;
 	}
 	
 	public void searchQuestionData (int productId) {
@@ -148,9 +151,11 @@ public class DBAccessClass {
 					  int CustomerId = rs.getInt("CustomerId");
 					  String productQuestion = rs.getString("Question");
 					  String productAnswer = rs.getString("Answer");
+					  Products QuestionBean = new Products(Id,null,0,null,0,0,0,0,null,null);
+					  QuestionBean.setReviewCustomerID(CustomerId);
 					  QuestionBean.setProductQuestion(productQuestion);
 					  QuestionBean.setProductAnswer(productAnswer);
-					  QuestionBean.setReviewCustomerID(CustomerId);
+					 QuestionList.add(QuestionBean);
 				  }
 		            
 		    } catch (Exception e) {
@@ -158,8 +163,8 @@ public class DBAccessClass {
 		    }
 
 	}
-	public Products getQuestionData() {
-		return QuestionBean;
+	public ArrayList<Products> getQuestionData() {
+		return QuestionList;
 	}
 	
 	public void addSingleUser(Users aUser) {

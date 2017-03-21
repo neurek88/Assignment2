@@ -18,7 +18,7 @@
 			   
 				  $.post("CustomerReviews", {Name:cName, Rating:cRating, Review:cReview }, function(data,status) {
 				    
-					  location.reload(true);
+					  location.reload(false);
 			    			
 			    });
 			  }
@@ -89,17 +89,15 @@
                 <td><b>Question</b></td>
                 <td><b>Answer</b></td>
               </tr>
-              <c:forEach items="${questionList}" var="qlist">
+              <c:forEach items="${questionList}" var="qList">
               <tr>
-              	<td>${qList}</td>
-              	<td>${qList}</td>
+              	<td>${qList.getProductQuestion()}</td>
+              	<td>${qList.getProductAnswer()}</td>
               </tr>
               </c:forEach>
-            <tr>
-            	<td></td>
-            	<td><input type="button" value="Submit" onClick="getQuestion()"></td>
-            </tr>
           </table>
+          Question: 	<input type="text" id="Question" value="">
+          <input type="button" value="Submit" onClick="getQuestion()">
 <br>
 
 <h3>Customer Reviews</h3><br>
@@ -117,12 +115,12 @@
                 <td><b>Rating out of 5 stars</b></td>
                 <td><b>Customer Review</b></td>
             </tr>
-        <c:forEach items="${reviewList}" var="rlist">
+        <c:forEach items="${reviewList}" var="rList">
             <tr>
-            	<td>${rList}Fred</td>
-            	<td>${rList}8/8/2004</td>
-            	<td>${rList}4.5</td>
-            	<td>${rList}This toast is awesome. Tastes great but not filling</td>
+            	<td>${rList.getReviewCustomerID()}</td>
+            	<td>${rList.getReviewDate()}</td>
+            	<td>${rList.getRating()}</td>
+            	<td>${rList.getReview()}</td>
             </tr>
             </c:forEach>
  

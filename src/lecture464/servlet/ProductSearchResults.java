@@ -20,11 +20,6 @@ import lecture464.model.Users;
 public class ProductSearchResults extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private Products getProfile(HttpServletRequest request) {
-	     HttpSession session = request.getSession();
-	     Products profile = (Products) session.getAttribute("itemList");
-	     return profile;
-	}
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,8 +34,9 @@ public class ProductSearchResults extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		String pid = request.getParameter("order");	
-		Products productProfile = getProfile(request);
+		String pid = request.getParameter("order");
+		ArrayList<Products> ReviewData = new ArrayList<Products>();
+		ArrayList<Products> QuestionData = new ArrayList<Products>();
 		int productId = Integer.parseInt(request.getParameter("productId"));	
 		System.out.println(productId);
 		DBAccessClass db = new DBAccessClass();
@@ -48,8 +44,8 @@ public class ProductSearchResults extends HttpServlet {
 		db.SearchProductInfo(pid);
 		db.searchReviewData(productId);
 		db.searchQuestionData(productId);
-		Products ReviewData = db.getReviewInto();
-		Products QuestionData = db.getQuestionData();
+		ReviewData = db.getReviewInfo();
+		QuestionData = db.getQuestionData();
 		request.setAttribute("questionList", QuestionData);
 		request.setAttribute("reviewList", ReviewData);
 		ArrayList<Products> ListName = (ArrayList<Products>)session.getAttribute("itemList");
