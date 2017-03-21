@@ -534,7 +534,7 @@ public class DBAccessClass {
 	public ArrayList<Integer> getOrderbyId() {
 		return orderList;
 	}
-	public Object getProduct() {
+	public Products getProduct() {
 		return ProductBean;
 	}
 	

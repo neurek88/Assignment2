@@ -11,13 +11,12 @@
 		</script>
 		<script>
 			function getReview() {
-				var cName = $("#Name").val();
 				var cRating  = $("#Rating").val();
 				var cReview  = $("#Review").val();
-				var product = ${itemList[0].getProductId()}.val();
+				var product = ${itemList.getProductId()};
 			console.log(cName);
 			   
-				  $.post("CustomerReviews", {Name:cName, Rating:cRating, Review:cReview, pid:product }, function(data,status) {
+				  $.post("CustomerReviews", {Rating:cRating, Review:cReview, pid:product}, function(data,status) {
 				    
 					  alert("Review Added");
 			    			
@@ -25,7 +24,7 @@
 			  }
 			function getQuestion() {
 				var cQuestion = $("#Question").val();
-			   	var product = ${itemList[0].getProductId()}.val();
+			   	var product = ${itemList.getProductId()};
 				  $.post("CustomerQA", {Question:cQuestion, pid:product}, function(data,status) {
 				    
 					  alert("Question Added");
@@ -47,7 +46,7 @@
 <h2>This product is available for purchase and use</h2>
 <h3>details</h3>
 <br>
-<form action=UpdateShoppingCart method="post"><input type=text name="quantity"> Quantity Requested  <button name="cart" type="submit" value="${itemList[0].getProductId()}">add to cart</button></form> <br>
+<form action=UpdateShoppingCart method="post"><input type=text name="quantity"> Quantity Requested  <button name="cart" type="submit" value="${itemList.getProductId()}">add to cart</button></form> <br>
 <br>
 <table width="700px" align="center"
                style="border:1px solid #000000;">
@@ -68,13 +67,13 @@
             <tr>
 		
            <tr>
-                <td>${itemList[0].getProductName()}</td>
-                <td>${itemList[0].getPrice()}</td>
-                <td>${itemList[0].getSellerId()}</td>
-                <td>${itemList[0].getAvailableQuantity()}</td>
-                <td>${itemList[0].getEstimatedDeliveryDays()}</td>
-                <td><img src="${itemList[0].getProductThumbnail()}" alt="${itemList[0].getProductName()}" style="width:100px;height:100px;"></td>
-                <td>${itemList[0].getProductDescription()}</td>
+                <td>${itemList.getProductName()}</td>
+                <td>${itemList.getPrice()}</td>
+                <td>${itemList.getSellerId()}</td>
+                <td>${itemList.getAvailableQuantity()}</td>
+                <td>${itemList.getEstimatedDeliveryDays()}</td>
+                <td><img src="${itemList.getProductThumbnail()}" alt="${itemList.getProductName()}" style="width:100px;height:100px;"></td>
+                <td>${itemList.getProductDescription()}</td>
                 </tr>
             
 </table>
@@ -128,7 +127,6 @@
  
 </table>
 <form name="review" method="post" onsubmit="return getReview();">
-	Name: 	<input type="text" id="Name" value="">	<br>
 	Rating: 	<input type="text" id="Rating" value="">	<br>
 	Your Review: 	<input type="text" id="Review" value="">	<br>
 <input type="submit" name="submit" value="Submit"></form>

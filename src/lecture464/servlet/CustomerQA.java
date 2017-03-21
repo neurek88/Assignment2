@@ -43,6 +43,7 @@ public class CustomerQA extends HttpServlet {
 			DBAccessClass db = new DBAccessClass();
 			db.connectMeIn();
 			db.insertQuestionData(productId, customerId, cQuestion);
+			db.closeConnection();
 	}
 
 	/**

@@ -36,7 +36,6 @@ public class CustomerReviews extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cReview = request.getParameter("Review");
-		String cName = request.getParameter("Name");
 		int cRating = Integer.parseInt(request.getParameter("Rating"));
 		Users profile = getProfile(request);
 		int customerId = profile.getUserId();
@@ -44,6 +43,7 @@ public class CustomerReviews extends HttpServlet {
 			DBAccessClass db = new DBAccessClass();
 			db.connectMeIn();
 			db.insertReviewData(productId, customerId, cReview, cRating);
+			db.closeConnection();
 	}
 
 	/**
