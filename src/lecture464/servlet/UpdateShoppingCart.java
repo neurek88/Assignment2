@@ -47,10 +47,12 @@ public class UpdateShoppingCart extends HttpServlet {
         HttpSession session = request.getSession();
         Users profile = getProfile(request);
         int customerId = profile.getUserId();
-        int pQuantity = Integer.parseInt(request.getParameter("pQuantity"));
+        String pQuantity = request.getParameter("Quantity");
+        //System.out.println("Product amount String: " + pQuantity.length());
+        Integer quantity = Integer.parseInt(pQuantity);
 		int productId = Integer.parseInt(request.getParameter("pid"));
 		
-		System.out.println("Product Quantity: " + pQuantity);
+		System.out.println("Product amount: " + quantity);
 		
         DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();		

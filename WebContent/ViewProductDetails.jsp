@@ -33,7 +33,8 @@
 			  }
 			function addedToCart() {
 				var product = ${itemList.getProductId()};
-				var pQuantity = $("#Question").value;
+				var pQuantity = $("#pQuantity").val();
+				var cart = ${itemList.getProductId()};
 					//parseInt($("#pQuantity").text(), 10);
 	
 				console.log("product: " + product);
@@ -45,8 +46,8 @@
 				 }
 				 else
 				 {
-					 var pQuantity = $("#pQuantity").val();
-						$.post("UpdateShoppingCart", {pid:product, pQuantity:pQuantity}, function(data,status) {
+					// var pQuantity = $("#pQuantity").val();
+						$.post("UpdateShoppingCart", {pid:product, Quantity:pQuantity, cart:cart}, function(data,status) {
 							alert("Added to Cart!");
 						})
 				 }
@@ -67,7 +68,7 @@
 <h2>This product is available for purchase and use</h2>
 <h3>details</h3>
 <br>
-<form action=UpdateShoppingCart method="post"><input type="text" name="quantity" id="pQuantiyt"> Quantity Requested  <button name="cart" type="submit" value="${itemList.getProductId()}" onClick="addedToCart()">add to cart</button></form> <br>
+<form action=UpdateShoppingCart method="post"><input type="text" name="quantity" id="pQuantity"> Quantity Requested  <button name="cart" type="submit" value="${itemList.getProductId()}" onClick="addedToCart()">add to cart</button></form> <br>
 <br>
 <table width="700px" align="center"
                style="border:1px solid #000000;">
