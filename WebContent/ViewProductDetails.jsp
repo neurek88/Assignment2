@@ -31,6 +31,27 @@
 			    			
 			    });
 			  }
+			function addedToCart() {
+				var product = ${itemList.getProductId()};
+				var pQuantity = $("#Question").value;
+					//parseInt($("#pQuantity").text(), 10);
+	
+				console.log("product: " + product);
+				console.log("quantity: " + pQuantity);
+				
+				if ($("#pQuantity").val()== null)
+				 {
+				 alert("Please fill in a quantity");
+				 }
+				 else
+				 {
+					 var pQuantity = $("#pQuantity").val();
+						$.post("UpdateShoppingCart", {pid:product, pQuantity:pQuantity}, function(data,status) {
+							alert("Added to Cart!");
+						})
+				 }
+				
+			}
 		</script>
 </head>
 <body>
@@ -46,7 +67,7 @@
 <h2>This product is available for purchase and use</h2>
 <h3>details</h3>
 <br>
-<form action=UpdateShoppingCart method="post"><input type=text name="quantity"> Quantity Requested  <button name="cart" type="submit" value="${itemList.getProductId()}">add to cart</button></form> <br>
+<form action=UpdateShoppingCart method="post"><input type="text" name="quantity" id="pQuantiyt"> Quantity Requested  <button name="cart" type="submit" value="${itemList.getProductId()}" onClick="addedToCart()">add to cart</button></form> <br>
 <br>
 <table width="700px" align="center"
                style="border:1px solid #000000;">
@@ -98,7 +119,7 @@
           </table>
           <form name="question" method="post" onsubmit="return getQuestion();">
           Question: 	<input type="text" id="Question" value="">
-          <input type="submit" name="submit" value="Submit"></form>
+          <input type="submit" name="submit" value="Submit Question"></form>
 <br>
 
 <h3>Customer Reviews</h3><br>
@@ -129,6 +150,6 @@
 <form name="review" method="post" onsubmit="return getReview();">
 	Rating: 	<input type="text" id="Rating" value="">	<br>
 	Your Review: 	<input type="text" id="Review" value="">	<br>
-<input type="submit" name="submit" value="Submit"></form>
+<input type="submit" name="submit" value="Submit Review"></form>
 </body>
 </html>
