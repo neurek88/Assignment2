@@ -47,18 +47,18 @@ public class UpdateShoppingCart extends HttpServlet {
         HttpSession session = request.getSession();
         Users profile = getProfile(request);
         int customerId = profile.getUserId();
-        String pQuantity = request.getParameter("Quantity");
-        //System.out.println("Product amount String: " + pQuantity.length());
-        Integer quantity = Integer.parseInt(pQuantity);
-		int productId = Integer.parseInt(request.getParameter("pid"));
-		
-		System.out.println("Product amount: " + quantity);
 		
         DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();		
         ArrayList<Products> shoppingCart = (ArrayList<Products>)session.getAttribute("cart");
         if (request.getParameter("cart") != null) {
         	Integer pid = Integer.parseInt(request.getParameter("cart"));
+          if(request.getParameter("pQuantity") != null) {
+        	  int pQuantity = Integer.parseInt(request.getParameter("pQuantity"));
+              //System.out.println("Product amount String: " + pQuantity.length());
+      		System.out.println("Product amount: " + pQuantity);
+          }
+
         	db.SearchProduct(pid);
         if(shoppingCart == null){
           shoppingCart = new ArrayList<Products>();

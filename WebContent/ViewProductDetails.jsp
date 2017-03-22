@@ -32,12 +32,11 @@
 			    });
 			  }
 			function addedToCart() {
-				var product = ${itemList.getProductId()};
 				var pQuantity = $("#pQuantity").val();
 				var cart = ${itemList.getProductId()};
 					//parseInt($("#pQuantity").text(), 10);
 	
-				console.log("product: " + product);
+				console.log("cart: " + cart);
 				console.log("quantity: " + pQuantity);
 				
 				if ($("#pQuantity").val()== null)
@@ -47,7 +46,7 @@
 				 else
 				 {
 					// var pQuantity = $("#pQuantity").val();
-						$.post("UpdateShoppingCart", {pid:product, Quantity:pQuantity, cart:cart}, function(data,status) {
+						$.post("UpdateShoppingCart", {pQuantity:pQuantity, cart:cart}, function(data,status) {
 							alert("Added to Cart!");
 						})
 				 }
