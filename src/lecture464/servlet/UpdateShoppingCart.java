@@ -26,6 +26,12 @@ public class UpdateShoppingCart extends HttpServlet {
 	     Products cart = (Products) session.getAttribute("cart");
 	     return cart;
 	}
+	
+	private Users getProfile(HttpServletRequest request) {
+	     HttpSession session = request.getSession();
+	     Users profile = (Users) session.getAttribute("userBean");
+	     return profile;
+	}
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,6 +45,13 @@ public class UpdateShoppingCart extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        Users profile = getProfile(request);
+        int customerId = profile.getUserId();
+        int pQuantity = Integer.parseInt(request.getParameter("pQuantity"));
+		int productId = Integer.parseInt(request.getParameter("pid"));
+		
+		System.out.println("Product Quantity: " + pQuantity);
+		
         DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();		
         ArrayList<Products> shoppingCart = (ArrayList<Products>)session.getAttribute("cart");
@@ -59,8 +72,7 @@ public class UpdateShoppingCart extends HttpServlet {
         //} else if (request.getParameter("cart") != null && request.getParameter("quantity") != null) {
         	
         }
-        	
-        
+           
     	RequestDispatcher view = request.getRequestDispatcher("View&CheckoutShoppingCart.jsp");
         view.forward(request, response);
 	}
