@@ -14,9 +14,9 @@
 				var cRating  = $("#Rating").val();
 				var cReview  = $("#Review").val();
 				var product = ${itemList.getProductId()};
-			console.log(cName);
+			console.log(cRating);
 			   
-				  $.post("CustomerReviews", {Rating:cRating, Review:cReview, pid:product}, function(data,status) {
+				  $.post("CustomerReviews", {cRating:cRating, cReview:cReview, product:product}, function(data,status) {
 				    
 					  alert("Review Added");
 			    			

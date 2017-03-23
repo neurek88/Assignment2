@@ -4,6 +4,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script>
+			function confirm_function() {
+				var firstName = $("firstName").val();
+				var lastName = $("lastName").val();
+				var sum = $("total").val();
+				var shippingAddress = $("shippingAddress").val();
+				var billAddress = $("billAddress").val();
+				var creditNumber = $("creditNumber").val();
+				var creditBrand = $("creditBrand").val();
+				var CVV = $("CVV").val();
+				var expirationDate = $("expirationDate").val();
+			
+			   
+				  $.post("../WBWS_FixedTables/Bank", {firstName:firstName, lastName:lastName, sum:sum, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber, CVV:CVV, expirationDate:expirationDate }, function(data,status) {
+				    
+			    		
+			    	 // Following data values are received from the "FormjQueryResponse" app
+			    		if(data == 00) {	    			
+			    			alert("FROM BANKING APP: Your credit card does not have enough balance or invalid");
+			    		}
+			    		
+			    		if(data == 11) {	
+					        $("#CartOrder").load("OrderSuccess.txt");
+					        $("#response").html(status);
+					}
+			    	
+			    			
+			    });
+			  }
+			function place_order_function (){
+				 $.post("../WBWS_FixedTables/PlaceOrder", {Name:cardName, cNumber:cardNumber, cDate:cardDate }, function(data,status) {
+			}
+		</script>
 <link rel="stylesheet" type="text/css" href="CSS/Style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>W.B.S.W.</title>
@@ -19,7 +52,8 @@
 <h1> World's Best Shopping Website</h1><br>
 <h2>Your Shopping Cart</h2>
 <h2>Here are the items in your cart:</h2>
-<form action=CustomerTransactionConfirmation method=post>
+<form name=credit onsubmit="return confirm_function();">
+<div id="cartOrder">
 <table width="700px" align="center" id='countit'
                style="border:1px solid #000000;" >
             <tr>
@@ -54,8 +88,10 @@
                     sum += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
                 }
             }
-            document.getElementById('countit').innerHTML += '<tr><td></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><input type="hidden" name="total" value="'+ sum +'"></tr>';
-        </script>	
+            document.getElementById('countit').innerHTML += '<tr><td></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><input type="hidden" name="total" value="""'+ sum +'"></tr>';
+        </script>
+        <div id="response"></div>	
+        </div>
 <br>
 First Name:<input type=text name=firstName value="${userBean.getFirstName()}"><br>
 Last Name:<input type=text name=lastName value="${userBean.getLastName()}"><br>

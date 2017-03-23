@@ -3,6 +3,7 @@ package lecture464.servlet;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -63,30 +64,30 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
 		HttpSession session = request.getSession();
-		Users orderUser = new Users();
-		Transactions newCreditCard = new Transactions();
-		Object successBean = new Object();
+		int transactionStatus = 0;
 		if (firstName !=null && lastName !=null && shippingAddress != null && shippingAddress != null && request.getParameter("creditNumber") != null && request.getParameter("creditBrand") != null && request.getParameter("CVV") !=null && request.getParameter("expirationDate") !=null) {
-			orderUser.setFirstName(firstName);
+		/*	orderUser.setFirstName(firstName);
 			orderUser.setLastName(lastName);
 			orderUser.setShippingAddress(shippingAddress);
 			orderUser.setBillAddress(billAddress);
 			session.setAttribute("orderUser", orderUser);
 			successBean = "Success!";
-			session.setAttribute("SuccessBean", successBean);
+			session.setAttribute("SuccessBean", successBean); */
 			int creditNumber = Integer.parseInt(request.getParameter("creditNumber"));
 			String creditBrand = request.getParameter("creditBrand");
 			int CVV = Integer.parseInt(request.getParameter("CVV"));
 			int expirationDate = Integer.parseInt(request.getParameter("expirationDate"));
-				if (db.checkCreditCard(creditNumber, creditBrand, CVV)) {
-					newCreditCard.setCardType(creditBrand);
-					newCreditCard.setCVV(CVV);
-					newCreditCard.setCreditCardNumber(creditNumber);
-					newCreditCard.setExpirationDate(expirationDate);
-					newCreditCard.setNewBalance(sum);
-					session.setAttribute("newCreditCard", newCreditCard);
-					session.removeAttribute("cart");
-					db.insertOrderData( userId, balance , shippingAddress, billAddress, creditNumber);
+			int success = 0;
+				if(db.checkCreditCard(creditNumber, creditBrand, CVV)) {
+					success = 88; 
+				}
+			
+			if(success == 88) {
+				transactionStatus = 11;
+			} else {
+				transactionStatus = 00;
+			}
+			/*		db.insertOrderData( userId, balance , shippingAddress, billAddress, creditNumber);
 					db.findNewestOrderIdById(userId);
 					int neworderId = db.getNewestOrderId();
 					for (int i=0; i<shoppingCart.size();i++){
@@ -111,10 +112,14 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 			session.setAttribute("orderUser", orderUser);
 			successBean = "Transaction Failed";
 			session.setAttribute("SuccessBean", successBean);
+		} */
 		}
 		db.closeConnection();
-        RequestDispatcher view = request.getRequestDispatcher("CustomerTransactionConfirmation.jsp");
-        view.forward(request, response);
+
+		
+		PrintWriter out = response.getWriter(); 
+		out.println(transactionStatus);
+
 		
 	}
 

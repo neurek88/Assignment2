@@ -35,11 +35,13 @@ public class CustomerReviews extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String cReview = request.getParameter("Review");
-		int cRating = Integer.parseInt(request.getParameter("Rating"));
+		String cReview = request.getParameter("cReview");
+		int cRating = Integer.parseInt(request.getParameter("cRating"));
+		System.out.println(cRating);
 		Users profile = getProfile(request);
 		int customerId = profile.getUserId();
-		int productId = Integer.parseInt(request.getParameter("pid"));
+		int productId = Integer.parseInt(request.getParameter("product"));
+		System.out.println(cRating + customerId + productId + cReview);
 			DBAccessClass db = new DBAccessClass();
 			db.connectMeIn();
 			db.insertReviewData(productId, customerId, cReview, cRating);

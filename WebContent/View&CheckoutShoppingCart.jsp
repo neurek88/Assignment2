@@ -60,7 +60,7 @@
                     sum += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
                 }
             }
-            document.getElementById('countit').innerHTML += '<tr><td><a href="CustomerTransaction.jsp"> Check Out </a></td><td colspan=3></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><td colspan=2></td></tr>';
+            document.getElementById('countit').innerHTML += '<tr><td><a href="ConfirmOrder.jsp"> Check Out </a></td><td colspan=3></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><td colspan=2></td></tr>';
         </script>	
 
 <br>

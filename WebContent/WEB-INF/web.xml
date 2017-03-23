@@ -10,18 +10,18 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-   <context-param>
+  <context-param>
     <param-name>WebsiteName</param-name>
     <param-value>The World's Best Website</param-value>
-   </context-param>
-   <error-page>
-   <error-code>404</error-code>
-   <location>/error.jsp</location>
-   </error-page>
-   <error-page>
-   <exception-type>java.lang.Throwable</exception-type>
-   <location>/javaerror.jsp</location>
-   </error-page>
+  </context-param>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/javaerror.jsp</location>
+  </error-page>
   <servlet>
     <description></description>
     <display-name>Login</display-name>
@@ -134,27 +134,37 @@
     <display-name>CustomerQA</display-name>
     <servlet-name>CustomerQA</servlet-name>
     <servlet-class>lecture464.servlet.CustomerQA</servlet-class>
-       <init-param>
-    <param-name>myNumber</param-name>
-    <param-value>88</param-value>
-   </init-param>
+    <init-param>
+      <param-name>myNumber</param-name>
+      <param-value>88</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>CustomerQA</servlet-name>
     <url-pattern>/CustomerQA</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>CustomerReviews</display-name>
     <servlet-name>CustomerReviews</servlet-name>
     <servlet-class>lecture464.servlet.CustomerReviews</servlet-class>
-       <init-param>
-    <param-name>myNumber</param-name>
-    <param-value>88</param-value>
-   </init-param>
+    <init-param>
+      <param-name>myNumber</param-name>
+      <param-value>88</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>CustomerReviews</servlet-name>
     <url-pattern>/CustomerReviews</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PlaceOrder</display-name>
+    <servlet-name>PlaceOrder</servlet-name>
+    <servlet-class>lecture464.model.PlaceOrder</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PlaceOrder</servlet-name>
+    <url-pattern>/PlaceOrder</url-pattern>
   </servlet-mapping>
 </web-app>
