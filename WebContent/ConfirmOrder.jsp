@@ -4,20 +4,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script>
-			function confirm_function() {
+<link rel="stylesheet" type="text/css" href="CSS/Style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>W.B.S.W.</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script language="javascript" type="text/javascript">
+
+			function confirmFunction() {
 				var firstName = $("firstName").val();
+				console.log("firstName: "+ firstName);
 				var lastName = $("lastName").val();
-				var sum = $("total").val();
+				var total = $("total").val();
 				var shippingAddress = $("shippingAddress").val();
 				var billAddress = $("billAddress").val();
 				var creditNumber = $("creditNumber").val();
 				var creditBrand = $("creditBrand").val();
 				var CVV = $("CVV").val();
 				var expirationDate = $("expirationDate").val();
-			
-			   
-				  $.post("../WBWS_FixedTables/Bank", {firstName:firstName, lastName:lastName, sum:sum, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber, CVV:CVV, expirationDate:expirationDate }, function(data,status) {
+				console.log("total: "+ sum);
+				
+				$.post("CustomerTransactionConfirmation", {firstName:firstName, lastName:lastName, total:total, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber, CVV:CVV, expirationDate:expirationDate }, function(data,status) {
 				    
 			    		
 			    	 // Following data values are received from the "FormjQueryResponse" app
@@ -28,18 +35,17 @@
 			    		if(data == 11) {	
 					        $("#CartOrder").load("OrderSuccess.txt");
 					        $("#response").html(status);
+					        function place_order_function (){
+								 $.post("PlaceOrder", {firstName:firstName, lastName:lastName, sum:sum, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber }, function(data,status) {
+									 alert("Order Processed!");
+								 });
+								}
 					}
 			    	
 			    			
 			    });
 			  }
-			function place_order_function (){
-				 $.post("../WBWS_FixedTables/PlaceOrder", {Name:cardName, cNumber:cardNumber, cDate:cardDate }, function(data,status) {
-			}
 		</script>
-<link rel="stylesheet" type="text/css" href="CSS/Style.css">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>W.B.S.W.</title>
 </head>
 <body>
 <div id=navigation><ul>
@@ -52,7 +58,7 @@
 <h1> World's Best Shopping Website</h1><br>
 <h2>Your Shopping Cart</h2>
 <h2>Here are the items in your cart:</h2>
-<form name=credit onsubmit="return confirm_function();">
+<form name=credit method="post" onsubmit="return confirmFunction();">
 <div id="cartOrder">
 <table width="700px" align="center" id='countit'
                style="border:1px solid #000000;" >
@@ -69,7 +75,6 @@
             </tr>
       
  <c:forEach items="${cart}" var="list">
-           <input type="hidden" name="productId" value="${cart[0].getProductId()}">
            <tr>
                 <td>${list.getProductName()}</td>
                 <td>${list.getSellerId()}</td>
@@ -104,22 +109,10 @@ Billing Address:<input type=text name=billAddress><br>
   </select>
 Card Number: <input type=text name=creditNumber><br>
 Security Code: <input type=text name=CVV><br>
-Expiration Date: <select name="expirationDate">
-   <%
-   int number = 1;
-   for(int i=0;i<13;i++)
- {
-out.println("<option value=" +(number+i)+ ">" + (number+i) + "</option> ");
- } %>
-  </select>
-  <select>
-  <%
-   int year = 2017;
-   for(int i=0;i<12;i++)
- {
-out.println("<option value=" + (year + i) + ">" + (year+i) + "</option> ");
- } %></select>
-<input type=submit value="Submit"> <br> 
+Expiration Date: <input type=text name="expirationDate">
+<br>
+<br>
+<input type="submit" name="submit" value="Submit"> <br> 
 </form>
 <form action=CancelOrders method="post"><button type="submit" value="cancel">Cancel</button>
 </form>

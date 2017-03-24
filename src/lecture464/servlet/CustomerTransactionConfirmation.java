@@ -56,7 +56,7 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		int userId = profile.getUserId();
-		int sum = Integer.parseInt(request.getParameter("total"));
+		//int sum = Integer.parseInt(request.getParameter("total"));
 		double balance = 32.00;
 		String shippingAddress = request.getParameter("shippingAddress");
 		String billAddress = request.getParameter("billAddress");
