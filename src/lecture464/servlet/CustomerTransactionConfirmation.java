@@ -81,7 +81,8 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 				if(db.checkCreditCard(creditNumber, creditBrand, CVV)) {
 					success = 88; 
 				}
-			
+				System.out.println(expirationDate);
+			System.out.println(success);
 			if(success == 88) {
 				transactionStatus = 11;
 			} else {

@@ -24,7 +24,7 @@
 				var expirationDate = $("expirationDate").val();
 				console.log("total: "+ sum);
 				
-				$.post("CustomerTransactionConfirmation", {firstName:firstName, lastName:lastName, total:total, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber, CVV:CVV, expirationDate:expirationDate }, function(data,status) {
+				$.post("CustomerTransactionConfirmation", {firstName:firstName, lastName:lastName, total:total, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber, creditBrand:creditBrand, CVV:CVV, expirationDate:expirationDate }, function(data,status) {
 				    
 			    		
 			    	 // Following data values are received from the "FormjQueryResponse" app
