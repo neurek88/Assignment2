@@ -17,7 +17,7 @@
 <li><form action = ViewOrders method = "post"><input type=submit name="submit" value="View Orders"></form></li>
 </ul> </div>
 
-<h1> World's Best Shopping Website</h1><br>
+<h1>${initParam['WebsiteName']}</h1><br>
 <h2>Your search results are:</h2><br><br>
 <h3>Virtual Toast</h3>
 <table width="700px"

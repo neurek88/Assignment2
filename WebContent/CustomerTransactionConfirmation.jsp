@@ -15,7 +15,7 @@
 <li><a href="Login.jsp"> Login out </a></li>
 <li><form action = ViewOrders method = "post"><input type=submit name="submit" value="View Orders"></form></li>
 </ul> </div>
-<h1> World's Best Shopping Website</h1><br>
+<h1>${initParam['WebsiteName']}</h1><br>
 
 <h2>Your order Status: <c:out value="${SuccessBean}"/></h2>
 <h2>Thanks for shopping on the World's Best Shopping Website!</h2>

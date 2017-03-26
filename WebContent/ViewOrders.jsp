@@ -15,7 +15,7 @@
 <li><a href="Login.jsp"> Login out </a></li>
 </ul> </div>
 
-<h1> World's Best Shopping Website</h1><br>
+<h1>${initParam['WebsiteName']}</h1><br>
 <h2>Here are your previous orders</h2><br><br>
 
  <c:forEach items="${OrderArray}" var="Orders" varStatus="i">

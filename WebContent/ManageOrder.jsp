@@ -16,7 +16,7 @@
 <li><form action = ViewOrders method = "post"><input type=submit name="submit" value="View Orders"></form></li>
 </ul> </div>
 
-<h1> World's Best Shopping Website</h1><br>
+<h1>${initParam['WebsiteName']}</h1><br>
 <h2>Manage Your Orders</h2><br>
 <h3>You may Cancel or Track your orders.</h3>
 
