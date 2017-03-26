@@ -161,7 +161,7 @@
     <description></description>
     <display-name>PlaceOrder</display-name>
     <servlet-name>PlaceOrder</servlet-name>
-    <servlet-class>lecture464.model.PlaceOrder</servlet-class>
+    <servlet-class>lecture464.servlet.PlaceOrder</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>PlaceOrder</servlet-name>

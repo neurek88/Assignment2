@@ -27,24 +27,19 @@
 				var CVV = $("#CVV").val();
 				var expirationDate = $("#expirationDate").val();
 				
-				$.post("CustomerTransactionConfirmation", {firstName:firstName, lastName:lastName, total:total, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber, creditBrand:creditBrand, CVV:CVV, expirationDate:expirationDate })
-				.done(function(data) {
-					var test = data;
-			    	 // Following data values are received from the "Order" app
-			    		if(data == 00) {	    			
-			    			alert("FROM BANKING APP: Your credit card does not have enough balance or invalid");
-			    		}
-			    		
-			    		if(data == 11) {
-			    			
-					        $("#CartOrder").load("OrderSuccess.txt");
-					        $("#response").html(status);
-					        place_order_function();
-					}
-				}); 	
-			  }
+				$.ajax({
+					  method: "POST",
+					  url: "CustomerTransactionConfirmation",
+					  data: {firstName:firstName, lastName:lastName, total:total, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber, creditBrand:creditBrand, CVV:CVV, expirationDate:expirationDate }
+					}).done(function(data,status) {
+						creditCardConfirmed(data,status);
+				}).fail(function()  {
+				    alert("Sorry. Server unavailable. ");
+				}); 
+				alert("Order is Processing...")
+			}
 			
-			function creditCardConfirmed(data) {
+			function creditCardConfirmed(data,status) {
 			    
 	    		var test = data;
 	    	 // Following data values are received from the "Order" app
@@ -54,8 +49,9 @@
 	    		
 	    		if(data == 11) {
 	    			
-			        $("#CartOrder").load("OrderSuccess.txt");
+			        $("#cartOrder").load("OrderSuccess.txt");
 			        $("#response").html(status);
+			        alert("credit card looks good")
 			        place_order_function();
 						}
 			}
@@ -67,10 +63,8 @@
 				var shippingAddress = $("#shippingAddress").val();
 				var billAddress = $("#billAddress").val();
 				var creditNumber = $("#creditNumber").val();
-				var creditBrand = $("#creditBrand").val();
-				var CVV = $("#CVV").val();
-				var expirationDate = $("#expirationDate").val();
-					 $.post("PlaceOrder", {firstName:firstName, lastName:lastName, sum:sum, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber }, function(data,status) {
+
+					 $.post("PlaceOrder", {firstName:firstName, lastName:lastName, total:total, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber }, function(data,status) {
 						 alert("Order Processed!");
 					 });
 					}
