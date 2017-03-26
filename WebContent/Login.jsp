@@ -30,7 +30,7 @@ function validate(form)
 <div id=navigation><ul>
 <li><a href="Registration.jsp"> Register </a></li>
 </ul> </div>
-<h1>The World's Best Shopping Website</h1>
+<h1>${initParam['WebsiteName']}</h1>
 <h2> Login here</h2>
 
 <form action=Login method="post">

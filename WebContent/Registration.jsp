@@ -12,7 +12,7 @@
 <li><a href="Login.jsp"> Login </a></li>
 </ul> </div>
 
-<h1> World's Best Shopping Website</h1>
+<h1>${initParam['WebsiteName']}</h1>
 <h2> Register here</h2>
 
 <form action=Register method="post">

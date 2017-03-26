@@ -26,6 +26,7 @@ public class DBAccessClass {
 	private Products ProductBean;
 	private ArrayList<Products> ReviewList = new ArrayList<Products>();
 	private ArrayList<Products> QuestionList = new ArrayList<Products>();
+	private int cardBalance;
     private int userId;
     private int orderId;
     private int NewestOrderID;
@@ -593,6 +594,41 @@ public class DBAccessClass {
 			e.printStackTrace();
 		}
 		return cardMatches;
+	}
+	
+	public void setCreditBalance(int creditNumber) {
+		String SQL = "SELECT * from CreditCards WHERE CreditCardNumber LIKE ?";
+		try {
+			ps = conn.prepareStatement(SQL);
+	          ps.setInt(1, creditNumber );
+	          ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()){	
+				int CardNumber = rs.getInt(3);
+				cardBalance = rs.getInt(4);
+				}
+			}
+			catch (Exception e) {
+        e.printStackTrace();
+    } 
+		        
+	}
+	public int getCreditBalance() {
+		return cardBalance; 
+	}
+	
+	public void updateCreditBalance (int creditNumber, double balance) {
+			
+			try{
+		    	  Statement stat = conn.createStatement();
+		    	  String query = "UPDATE CreditCards SET Balance ="+balance+" WHERE CreditCardNumber = " +creditNumber; 
+		    	  stat.executeUpdate(query);
+			}
+		      
+		      catch (Exception e) {
+		          e.printStackTrace();
+		      } 
+
 	}
 	
 	public void closeConnection(){

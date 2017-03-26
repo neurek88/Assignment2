@@ -7,45 +7,73 @@
 <link rel="stylesheet" type="text/css" href="CSS/Style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>W.B.S.W.</title>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
-	</script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script>
-		$(document).ready(function () {
-			
+			 $( function() {
+				    $( "#expirationDate" ).datepicker();
+				  } );
+			 
 			function confirmFunction() {
-				var firstName = $("firstName").val();
-				var lastName = $("lastName").val();
-				var total = $("total").val();
-				var shippingAddress = $("shippingAddress").val();
-				var billAddress = $("billAddress").val();
-				var creditNumber = $("creditNumber").val();
-				var creditBrand = $("creditBrand").val();
-				var CVV = $("CVV").val();
-				console.log(total);
-				var expirationDate = $("expirationDate").val();
 				
-				$.post("CustomerTransactionConfirmation", {firstName:$("firstName").val(), lastName:$("lastName").val(), total:total, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber, creditBrand:creditBrand, CVV:CVV, expirationDate:expirationDate }, function(data,status) {
-				    
-			    		
-			    	 // Following data values are received from the "FormjQueryResponse" app
+				var firstName = $("#firstName").val();
+				var lastName = $("#lastName").val();
+				var total = $("#total").val();
+				var shippingAddress = $("#shippingAddress").val();
+				var billAddress = $("#billAddress").val();
+				var creditNumber = $("#creditNumber").val();
+				var creditBrand = $("#creditBrand").val();
+				var CVV = $("#CVV").val();
+				var expirationDate = $("#expirationDate").val();
+				
+				$.post("CustomerTransactionConfirmation", {firstName:firstName, lastName:lastName, total:total, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber, creditBrand:creditBrand, CVV:CVV, expirationDate:expirationDate })
+				.done(function(data) {
+					var test = data;
+			    	 // Following data values are received from the "Order" app
 			    		if(data == 00) {	    			
 			    			alert("FROM BANKING APP: Your credit card does not have enough balance or invalid");
 			    		}
 			    		
-			    		if(data == 11) {	
+			    		if(data == 11) {
+			    			
 					        $("#CartOrder").load("OrderSuccess.txt");
 					        $("#response").html(status);
-					        function place_order_function (){
-								 $.post("PlaceOrder", {firstName:firstName, lastName:lastName, sum:sum, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber }, function(data,status) {
-									 alert("Order Processed!");
-								 });
-								}
+					        place_order_function();
 					}
-			    	
-			    			
-			    });
+				}); 	
 			  }
-		});
+			
+			function creditCardConfirmed(data) {
+			    
+	    		var test = data;
+	    	 // Following data values are received from the "Order" app
+	    		if(data == 00) {	    			
+	    			alert("FROM BANKING APP: Your credit card does not have enough balance or invalid");
+	    		}
+	    		
+	    		if(data == 11) {
+	    			
+			        $("#CartOrder").load("OrderSuccess.txt");
+			        $("#response").html(status);
+			        place_order_function();
+						}
+			}
+			
+			function place_order_function (){
+				var firstName = $("#firstName").val();
+				var lastName = $("#lastName").val();
+				var total = $("#total").val();
+				var shippingAddress = $("#shippingAddress").val();
+				var billAddress = $("#billAddress").val();
+				var creditNumber = $("#creditNumber").val();
+				var creditBrand = $("#creditBrand").val();
+				var CVV = $("#CVV").val();
+				var expirationDate = $("#expirationDate").val();
+					 $.post("PlaceOrder", {firstName:firstName, lastName:lastName, sum:sum, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber }, function(data,status) {
+						 alert("Order Processed!");
+					 });
+					}
 		</script>
 </head>
 <body>
@@ -56,7 +84,7 @@
 <li><form action = ViewOrders method = "post"><input type=submit name="submit" value="View Orders"></form></li>
 </ul> </div>
 
-<h1> World's Best Shopping Website</h1><br>
+<h1>${initParam['WebsiteName']}</h1><br>
 <h2>Your Shopping Cart</h2>
 <h2>Here are the items in your cart:</h2>
 <div id="cartOrder">
@@ -84,7 +112,7 @@
             </tr>
            </c:forEach> 
            </table>
- 
+ <form name="creditCheck" method="post" onsubmit="return confirmFunction();">
            <script language="javascript" type="text/javascript">
             var tds = document.getElementById('countit').getElementsByTagName('td');
             var sum = 0;
@@ -93,13 +121,12 @@
                     sum += isNaN(tds[i].innerHTML) ? 0 : parseInt(tds[i].innerHTML);
                 }
             }
-            document.getElementById('countit').innerHTML += '<tr><td></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><input type="hidden" id="total" name="total" value="""'+ sum +'"></tr>';
+            document.getElementById('countit').innerHTML += '<tr><td></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><input type="hidden" id="total" name="total" value="'+ sum +'"></tr>';
         </script>
          </div>
         <div id="response"></div>	
        
 <br>
-<form name=creditCheck method="post" onsubmit="return confirmFunction();">
 First Name:<input type=text id="firstName" value="${userBean.getFirstName()}"><br>
 Last Name:<input type=text id="lastName" value="${userBean.getLastName()}"><br>
 Shipping Address:<input type=text id="shippingAddress" value=""><br>
@@ -111,7 +138,7 @@ Billing Address:<input type=text id="billAddress" value=""><br>
   </select>
 Card Number: <input type=text id="creditNumber" value=""><br>
 Security Code: <input type=text id="CVV" value=""><br>
-Expiration Date: <input type=text id="expirationDate" value="">
+Expiration Date: <input type=text id="expirationDate">
 <br>
 <input type="submit" name="submit" value="Submit Order"> <br> 
 </form>

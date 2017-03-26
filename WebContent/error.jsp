@@ -15,7 +15,7 @@
 <li><form action = ViewOrders method = "post"><input type=submit name="submit" value="View Orders"></form></li>
 </ul> </div>
 
-<h1> World's Best Shopping Website</h1><br>
+<h1> ${initParam['WebsiteName']}</h1><br>
 
 <h2> The page you are looking for has vanished!</h2>
 <p>get back to safety</p>

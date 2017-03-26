@@ -14,7 +14,7 @@
 <li><a href="Login.jsp"> Login out </a></li>
 <li><a href="ManageOrder.jsp"> Manage Orders </a></li>
 </ul> </div>
-<h1> World's Best Shopping Website</h1>
+<h1> ${initParam['WebsiteName']}</h1>
 <h2>Are you sure you want to cancel the purchase of such a wonderful product?</h2><br><br>
 <br>
 <table width="700px"
