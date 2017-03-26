@@ -53,15 +53,20 @@ public class PlaceOrder extends HttpServlet {
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
 		int userId = profile.getUserId();
-		int sum = Integer.parseInt(request.getParameter("total"));
+		int sum = 0;
+		if(request.getParameter("total")!= null){
+			sum = Integer.parseInt(request.getParameter("total"));
+		}
 		String shippingAddress = request.getParameter("shippingAddress");
 		String billAddress = request.getParameter("billAddress");
+		System.out.println(shippingAddress);
 		db.insertOrderData( userId, sum , shippingAddress, billAddress, creditNumber);
 		db.findNewestOrderIdById(userId);
 		int neworderId = db.getNewestOrderId();
 		for (int i=0; i<shoppingCart.size();i++){
 		int productId = shoppingCart.get(i).getProductId();
 		db.insertOrderItemInfo(neworderId, productId, sum, quantity, 1, 1);
+		System.out.println(userId);
 		}
 		session.removeAttribute("cart");
 	}
