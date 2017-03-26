@@ -57,15 +57,17 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		String lastName = request.getParameter("lastName");
 		int userId = profile.getUserId();
 		//int sum = Integer.parseInt(request.getParameter("total"));
-		double balance = 32.00;
 		String shippingAddress = request.getParameter("shippingAddress");
 		String billAddress = request.getParameter("billAddress");
-	
+		System.out.println(firstName);
+		System.out.println(lastName);
+		System.out.println(userId);
+		System.out.println(shippingAddress);
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
 		HttpSession session = request.getSession();
 		int transactionStatus = 0;
-		if (firstName !=null && lastName !=null && shippingAddress != null && shippingAddress != null && request.getParameter("creditNumber") != null && request.getParameter("creditBrand") != null && request.getParameter("CVV") !=null && request.getParameter("expirationDate") !=null) {
+	//	if (firstName !=null && lastName !=null && shippingAddress != null && shippingAddress != null && request.getParameter("creditNumber") != null && request.getParameter("creditBrand") != null && request.getParameter("CVV") !=null && request.getParameter("expirationDate") !=null) {
 		/*	orderUser.setFirstName(firstName);
 			orderUser.setLastName(lastName);
 			orderUser.setShippingAddress(shippingAddress);
@@ -73,7 +75,10 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 			session.setAttribute("orderUser", orderUser);
 			successBean = "Success!";
 			session.setAttribute("SuccessBean", successBean); */
-			int creditNumber = Integer.parseInt(request.getParameter("creditNumber"));
+		int creditNumber = 0;
+			if(request.getParameter("creditNumber")!=null) {
+				creditNumber = Integer.parseInt(request.getParameter("creditNumber"));
+			}
 			String creditBrand = request.getParameter("creditBrand");
 			int CVV = Integer.parseInt(request.getParameter("CVV"));
 			int expirationDate = Integer.parseInt(request.getParameter("expirationDate"));
@@ -114,7 +119,7 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 			successBean = "Transaction Failed";
 			session.setAttribute("SuccessBean", successBean);
 		} */
-		}
+	//	}
 		db.closeConnection();
 
 		
