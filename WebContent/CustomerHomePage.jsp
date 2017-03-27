@@ -41,6 +41,7 @@ Your Query: <input type=text name=search><input type=submit value="search"> <br>
 <br>
 <br>
 
+<%@ include file="/WEB-INF/Footer.jsp" %>  
 
 </body>
 </html>
