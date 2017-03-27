@@ -53,6 +53,7 @@ public class UpdateShoppingCart extends HttpServlet {
         ArrayList<Products> shoppingCart = (ArrayList<Products>)session.getAttribute("cart");
         if (request.getParameter("cart") != null) {
         	Integer pid = Integer.parseInt(request.getParameter("cart"));
+        	System.out.println("Cart: " + pid);
           if(request.getParameter("pQuantity") != null) {
         	  int pQuantity = Integer.parseInt(request.getParameter("pQuantity"));
               //System.out.println("Product amount String: " + pQuantity.length());

@@ -33,10 +33,10 @@
 			  }
 			function addedToCart() {
 				var pQuantity = $("#pQuantity").val();
-				var cart = ${itemList.getProductId()};
+				var pcart = ${itemList.getProductId()};
 					//parseInt($("#pQuantity").text(), 10);
 	
-				console.log("cart: " + cart);
+				console.log("pcart: " + pcart);
 				console.log("quantity: " + pQuantity);
 				
 				if ($("#pQuantity").val()== null)
@@ -46,7 +46,7 @@
 				 else
 				 {
 					// var pQuantity = $("#pQuantity").val();
-						$.post("UpdateShoppingCart", {pQuantity:pQuantity, cart:cart}, function(data,status) {
+						$.post("UpdateShoppingCart", {pQuantity:pQuantity, pcart:pcart}, function(data,status) {
 							alert("Added to Cart!");
 						})
 				 }
