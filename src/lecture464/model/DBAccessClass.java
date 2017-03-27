@@ -574,16 +574,20 @@ public class DBAccessClass {
 		return list;
 	}
 	
-	public boolean checkCreditCard(int creditNumber, String creditBrand, int CVV) {
+	public boolean checkCreditCard(int creditNumber, String creditBrand, int CVV, java.sql.Date expirationDate) {
 		boolean cardMatches = false;
 		String SQL = "SELECT * from CreditCards";
 	    Statement stat;
+	    System.out.println(expirationDate.getTime());
 		try {
 			stat = conn.createStatement();
 			ResultSet rs = stat.executeQuery(SQL);
 			
 			while (rs.next()){	
-				if(creditNumber == ( rs.getDouble(3)) && creditBrand.equals(rs.getString(5)) && CVV == (rs.getInt(7))) {
+				//adjust for differnt time zone
+				long DBdate = rs.getDate(8).getTime() + 18000000;
+				System.out.println(DBdate);
+				if(creditNumber == ( rs.getDouble(3)) && creditBrand.equals(rs.getString(5)) && CVV == (rs.getInt(7)) && expirationDate.getTime() == DBdate) {
 					cardMatches = true;
 				}
 			}
