@@ -58,28 +58,16 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Users profile = getProfile(request);
-		//ArrayList<Products> shoppingCart = getCart(request);
+
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		//int userId = profile.getUserId();
 		int total = Integer.parseInt(request.getParameter("total"));
 		String shippingAddress = request.getParameter("shippingAddress");
 		String billAddress = request.getParameter("billAddress");
 		System.out.println(firstName);
-		System.out.println(lastName);
-		//System.out.println(userId);
 		System.out.println(shippingAddress);
 		HttpSession session = request.getSession();
 		int transactionStatus = 0;
-	//	if (firstName !=null && lastName !=null && shippingAddress != null && shippingAddress != null && request.getParameter("creditNumber") != null && request.getParameter("creditBrand") != null && request.getParameter("CVV") !=null && request.getParameter("expirationDate") !=null) {
-		/*	orderUser.setFirstName(firstName);
-			orderUser.setLastName(lastName);
-			orderUser.setShippingAddress(shippingAddress);
-			orderUser.setBillAddress(billAddress);
-			session.setAttribute("orderUser", orderUser);
-			successBean = "Success!";
-			session.setAttribute("SuccessBean", successBean); */
 		int creditNumber = 0;
 			if(request.getParameter("creditNumber")!=null) {
 				creditNumber = Integer.parseInt(request.getParameter("creditNumber"));
@@ -106,7 +94,7 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 			DBAccessClass db = new DBAccessClass();
 			db.connectMeIn();
 			int success = 0;
-				if(db.checkCreditCard(creditNumber, creditBrand, CVV) && balance.checkDBbalance(total)) {
+				if(db.checkCreditCard(creditNumber, creditBrand, CVV, expirationDate) && balance.checkDBbalance(total)) {
 					success = 88; 
 				}
 			System.out.println(success);
@@ -116,33 +104,7 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 			} else {
 				transactionStatus = 00;
 			}
-			/*		db.insertOrderData( userId, balance , shippingAddress, billAddress, creditNumber);
-					db.findNewestOrderIdById(userId);
-					int neworderId = db.getNewestOrderId();
-					for (int i=0; i<shoppingCart.size();i++){
-					int productId = shoppingCart.get(i).getProductId();
-					db.insertOrderItemInfo(neworderId, productId, sum, 1, 1, 1);
-					}
-					int productId = Integer.parseInt(request.getParameter("productId"));
-					Orders orderInfo = new Orders(productId, neworderId);
-					session.setAttribute("OrderItems", orderInfo);
-					successBean = "Success!";
-					session.setAttribute("SuccessBean", successBean);
-			} else {
-				newCreditCard.setCardType("Incorrect Credit Card Information");
-				session.setAttribute("newCreditCard", newCreditCard);
-				successBean = "Transaction Failed";
-				session.setAttribute("SuccessBean", successBean);
-			}
-			
 
-		} else {
-			orderUser.setFirstName("Missing User Info");
-			session.setAttribute("orderUser", orderUser);
-			successBean = "Transaction Failed";
-			session.setAttribute("SuccessBean", successBean);
-		} */
-	//	}
 		System.out.println(transactionStatus);
 		
 		PrintWriter out = response.getWriter(); 

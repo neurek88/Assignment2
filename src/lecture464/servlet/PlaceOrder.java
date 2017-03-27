@@ -1,6 +1,7 @@
 package lecture464.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -68,6 +69,8 @@ public class PlaceOrder extends HttpServlet {
 		db.insertOrderItemInfo(neworderId, productId, sum, quantity, 1, 1);
 		System.out.println(userId);
 		}
+		PrintWriter out = response.getWriter(); 
+		out.println("Order # "+neworderId+" creditCard: "+creditNumber+" total cost: "+sum+" quantity: "+quantity);
 		session.removeAttribute("cart");
 	}
 

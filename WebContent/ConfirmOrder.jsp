@@ -15,7 +15,8 @@
 				    $( "#expirationDate" ).datepicker();
 				  } );
 			 
-			function confirmFunction() {
+			 $(function() {
+					$('#creditFormSubmit').on('submit', function (e) {
 				
 				var firstName = $("#firstName").val();
 				var lastName = $("#lastName").val();
@@ -37,7 +38,9 @@
 				    alert("Sorry. Server unavailable. ");
 				}); 
 				alert("Order is Processing...")
-			}
+				e.preventDefault();
+			});
+		});
 			
 			function creditCardConfirmed(data,status) {
 			    
@@ -65,9 +68,14 @@
 				var creditNumber = $("#creditNumber").val();
 
 					 $.post("PlaceOrder", {firstName:firstName, lastName:lastName, total:total, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber }, function(data,status) {
-						 alert("Order Processed!");
+						 $("#cartOrder").html('<input type="button" value="Print for your records" onClick="window.print()"/><br><br>'+data);
+						 $("#response").html(status);
 					 });
 					}
+			function printButton(){
+			    var $input = $('<input type="button" value="new button" onClick="window.print()"/>');
+			    $input.appendTo($("#cartOrder"));
+			}
 		</script>
 </head>
 <body>
@@ -81,7 +89,8 @@
 <h1>${initParam['WebsiteName']}</h1><br>
 <h2>Your Shopping Cart</h2>
 <h2>Here are the items in your cart:</h2>
-<div id="cartOrder">
+<div id="cartOrder"></div><br>
+ <div id="response"></div><br>	
 <table width="700px" align="center" id='countit'
                style="border:1px solid #000000;" >
             <tr>
@@ -106,7 +115,7 @@
             </tr>
            </c:forEach> 
            </table>
- <form name="creditCheck" method="post" onsubmit="return confirmFunction();">
+ <form name="creditCheck" method="post" id="creditFormSubmit">
            <script language="javascript" type="text/javascript">
             var tds = document.getElementById('countit').getElementsByTagName('td');
             var sum = 0;
@@ -117,8 +126,6 @@
             }
             document.getElementById('countit').innerHTML += '<tr><td></td><td colspan=2>Total Cost:</td><td>' + sum + '</td><input type="hidden" id="total" name="total" value="'+ sum +'"></tr>';
         </script>
-         </div>
-        <div id="response"></div>	
        
 <br>
 First Name:<input type=text id="firstName" value="${userBean.getFirstName()}"><br>

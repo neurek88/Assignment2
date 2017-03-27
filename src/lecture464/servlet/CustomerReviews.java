@@ -46,6 +46,8 @@ public class CustomerReviews extends HttpServlet {
 			db.connectMeIn();
 			db.insertReviewData(productId, customerId, cReview, cRating);
 			db.closeConnection();
+			PrintWriter out = response.getWriter(); 
+			out.println("<tr><td>"+customerId+"</td><td>Just Now</td><td>"+cRating+"</td><td>"+cReview+"</td></tr>");
 	}
 
 	/**

@@ -44,6 +44,8 @@ public class CustomerQA extends HttpServlet {
 			db.connectMeIn();
 			db.insertQuestionData(productId, customerId, cQuestion);
 			db.closeConnection();
+			PrintWriter out = response.getWriter(); 
+			out.println(cQuestion);
 	}
 
 	/**

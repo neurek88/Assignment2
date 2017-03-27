@@ -10,27 +10,34 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
 		</script>
 		<script>
-			function getReview() {
+		$(function() {
+			$('#submitReview').on('submit', function (e) {
 				var cRating  = $("#Rating").val();
 				var cReview  = $("#Review").val();
 				var product = ${itemList.getProductId()};
-			console.log(cRating);
 			   
 				  $.post("CustomerReviews", {cRating:cRating, cReview:cReview, product:product}, function(data,status) {
-				    
+					  $('#reviewTable').append(data);
 					  alert("Review Added");
 			    			
 			    });
-			  }
-			function getQuestion() {
+				  e.preventDefault();
+			  });
+		});
+		
+		$(function() {
+			$('#submitQuestion').on('submit', function (e) {
 				var cQuestion = $("#Question").val();
 			   	var product = ${itemList.getProductId()};
 				  $.post("CustomerQA", {Question:cQuestion, pid:product}, function(data,status) {
-				    
+					  $('#questionTable').append('<tr><td>'+data+'</td><td></td></tr>');
 					  alert("Question Added");
 			    			
-			    });
-			  }
+				  });
+				  e.preventDefault();
+			  });
+		});
+		
 			function addedToCart() {
 				var pQuantity = $("#pQuantity").val();
 				var pcart = ${itemList.getProductId()};
@@ -99,7 +106,7 @@
             
 </table>
 <br>
-<table width="700px" align="center"
+<table width="700px" align="center" id="questionTable"
                style="border:1px solid #000000;">
             <tr>
                 <td colspan=7 align="center"
@@ -117,14 +124,14 @@
               </tr>
               </c:forEach>
           </table>
-          <form name="question" method="post" onsubmit="return getQuestion();">
+          <form name="question" id="submitQuestion" method="post">
           Question: 	<input type="text" id="Question" value="">
           <input type="submit" name="submit" value="Submit Question"></form>
 <br>
 
 <h3>Customer Reviews</h3><br>
 <b>Overall Rating</b><br>
-<table width="700px" align="center"
+<table width="700px" align="center" id="reviewTable"
                style="border:1px solid #000000;">
             <tr>
                 <td colspan=4 align="center"
@@ -147,9 +154,9 @@
             </c:forEach>
  
 </table>
-<form name="review" method="post" onsubmit="return getReview();">
+<form name="review" id="submitReview" method="post">
 	Rating: 	<input type="text" id="Rating" value="">	<br>
 	Your Review: 	<input type="text" id="Review" value="">	<br>
-<input type="submit" name="submit" value="Submit Review"></form>
+<input type="submit" name="submitReview" value="Submit Review"></form>
 </body>
 </html>
