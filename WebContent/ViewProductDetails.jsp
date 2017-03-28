@@ -38,13 +38,11 @@
 			  });
 		});
 		
-			function addedToCart() {
-				var pQuantity = $("#pQuantity").val();
-				var pcart = ${itemList.getProductId()};
+		$(function() {
+			$('#addCart').on('submit', function (e) {
+				var pQuantity = $('#pQuantity').val();
+				var cart = ${itemList.getProductId()};
 					//parseInt($("#pQuantity").text(), 10);
-	
-				console.log("pcart: " + pcart);
-				console.log("quantity: " + pQuantity);
 				
 				if ($("#pQuantity").val()== null)
 				 {
@@ -53,12 +51,14 @@
 				 else
 				 {
 					// var pQuantity = $("#pQuantity").val();
-						$.post("UpdateShoppingCart", {pQuantity:pQuantity, pcart:pcart}, function(data,status) {
+						$.post("UpdateShoppingCart", {pQuantity:pQuantity, cart:cart}, function(data,status) {
 							alert("Added to Cart!");
 						})
 				 }
-				
-			}
+				e.preventDefault();
+			});
+		});
+			
 		</script>
 </head>
 <body>
@@ -66,7 +66,8 @@
 <li><a href="#">${sessionScope.userName}</a></li>
 <li><a href="CustomerHomePage.jsp"> Home Page </a></li>
 <li><a href="Login.jsp"> Login out </a></li>
-<li><a href="View&CheckoutShoppingCart.jsp"> Add to Cart </a></li>
+<li><a href="ProductSearchResults.jsp"> Back to Search Results </a></li>
+<li><a href="View&CheckoutShoppingCart.jsp"> View Shopping Cart </a></li>
 <li><form action = ViewOrders method = "post"><input type=submit name="submit" value="View Orders"></form></li>
 </ul> </div>
 
@@ -74,7 +75,7 @@
 <h2>This product is available for purchase and use</h2>
 <h3>details</h3>
 <br>
-<form action=UpdateShoppingCart method="post"><input type="text" name="quantity" id="pQuantity"> Quantity Requested  <button name="cart" type="submit" value="${itemList.getProductId()}" onClick="addedToCart()">add to cart</button></form> <br>
+<form method="post" id="addCart"><input type="text" name="pQuantity" id="pQuantity" value="0"> Quantity Requested  <button name="cart" type="submit" value="${itemList.getProductId()}">add to cart</button></form> <br>
 <br>
 <table width="700px" align="center"
                style="border:1px solid #000000;">
@@ -158,5 +159,7 @@
 	Rating: 	<input type="text" id="Rating" value="">	<br>
 	Your Review: 	<input type="text" id="Review" value="">	<br>
 <input type="submit" name="submitReview" value="Submit Review"></form>
+<br>
+<a href="View&CheckoutShoppingCart.jsp"> View Shopping Cart </a>
 </body>
 </html>

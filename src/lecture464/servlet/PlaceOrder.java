@@ -66,6 +66,7 @@ public class PlaceOrder extends HttpServlet {
 		int neworderId = db.getNewestOrderId();
 		for (int i=0; i<shoppingCart.size();i++){
 		int productId = shoppingCart.get(i).getProductId();
+		quantity = shoppingCart.get(i).getCartQuantity();
 		db.insertOrderItemInfo(neworderId, productId, sum, quantity, 1, 1);
 		System.out.println(userId);
 		}

@@ -45,16 +45,10 @@ public class ProductSearchResults extends HttpServlet {
 		int productId;
 		DBAccessClass db = new DBAccessClass();
 		db.connectMeIn();
-		if(session.getAttribute("itemList") != null) {
-			productId = profile.getProductId();
-			ProductBean = (Products) session.getAttribute("itemList");
-	}
-		 else {
 			productId = Integer.parseInt(request.getParameter("productId"));
 			ProductBean = new Products(0,null,0,null,0,0,0,0,null,null);
 			db.SearchProduct(productId);
 			ProductBean = db.getProduct();
-		}
 		System.out.println(productId);
 		db.searchReviewData(productId);
 		db.searchQuestionData(productId);

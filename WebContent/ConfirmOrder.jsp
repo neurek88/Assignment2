@@ -109,7 +109,7 @@
            <tr>
                 <td>${list.getProductName()}</td>
                 <td>${list.getSellerId()}</td>
-                <td>${list.getAvailableQuantity()}</td>
+                <td>${list.getCartQuantity()}</td>
                 <td class="count-me"> ${list.getPrice()}</td>
                 
             </tr>

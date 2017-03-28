@@ -22,9 +22,16 @@ public class Products {
 	private int ReviewCustomerID;
 	private String ProductQuestion;
 	private String ProductAnswer;
+	private int cartQuantity;
 	
 	public String getProductQuestion() {
 		return ProductQuestion;
+	}
+	public int getCartQuantity() {
+		return cartQuantity;
+	}
+	public void setCartQuantity(int cartQuantity) {
+		this.cartQuantity = cartQuantity;
 	}
 	public void setProductQuestion(String productQuestion) {
 		ProductQuestion = productQuestion;

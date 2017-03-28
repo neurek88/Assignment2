@@ -54,19 +54,20 @@ public class UpdateShoppingCart extends HttpServlet {
         if (request.getParameter("cart") != null) {
         	Integer pid = Integer.parseInt(request.getParameter("cart"));
         	System.out.println("Cart: " + pid);
+        	db.SearchProduct(pid);
+        	Products newProduct = (Products)db.getProduct();
           if(request.getParameter("pQuantity") != null) {
         	  int pQuantity = Integer.parseInt(request.getParameter("pQuantity"));
-              //System.out.println("Product amount String: " + pQuantity.length());
       		System.out.println("Product amount: " + pQuantity);
+      		newProduct.setCartQuantity(pQuantity);
           }
-
-        	db.SearchProduct(pid);
         if(shoppingCart == null){
           shoppingCart = new ArrayList<Products>();
           session.setAttribute("cart", shoppingCart);
         } 
-        shoppingCart.add((Products)db.getProduct());
+        shoppingCart.add(newProduct);
         session.setAttribute("cart", shoppingCart);
+        System.out.println("item quantity "+newProduct.getCartQuantity());
         }
         else if (request.getParameter("cart") == null) {
         	int delete = Integer.parseInt(request.getParameter("delete"));
