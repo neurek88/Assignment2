@@ -75,7 +75,7 @@
 <h2>This product is available for purchase and use</h2>
 <h3>details</h3>
 <br>
-<form method="post" id="addCart"><input type="text" name="pQuantity" id="pQuantity" value="0"> Quantity Requested  <button name="cart" type="submit" value="${itemList.getProductId()}">add to cart</button></form> <br>
+<form method="post" id="addCart"><input type="text" name="pQuantity" id="pQuantity" value="1"> Quantity Requested  <button name="cart" type="submit" value="${itemList.getProductId()}">add to cart</button></form> <br>
 <br>
 <table width="700px" align="center"
                style="border:1px solid #000000;">

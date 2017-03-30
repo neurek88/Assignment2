@@ -30,13 +30,15 @@
 				
 				$.ajax({
 					  method: "POST",
-					  url: "CustomerTransactionConfirmation",
+					  url: "http://localhost:8080/Banking/BankServlet",
+					  crossDomain: true,
 					  data: {firstName:firstName, lastName:lastName, total:total, shippingAddress:shippingAddress, billAddress:billAddress, creditNumber:creditNumber, creditBrand:creditBrand, CVV:CVV, expirationDate:expirationDate }
-					}).done(function(data,status) {
+					}).done(function(data,status,jqXHR) {
 						creditCardConfirmed(data,status);
 				}).fail(function()  {
 				    alert("Sorry. Server unavailable. ");
-				}); 
+				});
+				error: 
 				alert("Order is Processing...")
 				e.preventDefault();
 			});
