@@ -44,7 +44,7 @@
                 <td>${list.getPrice()}</td>
                 <td><img src="${list.getProductThumbnail()}" alt="${list.getProductName()}" style="width:35px;height:35px;"></td>
                 <td><form action=ProductSearchResults method="post"><button name="productId" type="submit" value="${list.getProductId()}">view product</button></form></td>
-                <td><form action=UpdateShoppingCart method="post"><button name="cart" type="submit" value="${list.getProductId()}">add to cart</button></form></td>
+                <td><form action=UpdateShoppingCart method="post"><input type="hidden" name="pQuantity" value="1"/><button name="cart" type="submit" value="${list.getProductId()}">to cart</button></form></td>
                 </tr>
            </c:forEach> 
    </table> 
